@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
       },
     ] : [];
 
-    const response = await client.messages.create({
+    const params = {
       model:      "claude-sonnet-4-6",
       max_tokens: 1024,
       system:     systemBlocks,
@@ -95,14 +95,30 @@ export async function POST(request: NextRequest) {
           return { role: m.role as "user" | "assistant", content: m.content };
         }),
       ],
-    });
+    };
+
+    // Attempt the API call; retry once after 3s if Anthropic is overloaded (529)
+    let response;
+    try {
+      response = await client.messages.create(params);
+    } catch (err) {
+      if (err instanceof Anthropic.APIError && (err.status === 529 || err.status === 503)) {
+        await new Promise(r => setTimeout(r, 3000));
+        response = await client.messages.create(params);
+      } else {
+        throw err;
+      }
+    }
 
     const block = response.content[0];
-    const text  = block.type === "text" ? block.text : "";
+    const text  = block?.type === "text" ? block.text : "";
     return NextResponse.json({ content: text });
 
   } catch (err) {
-    console.error("Chat API error:", err);
+    const detail = err instanceof Anthropic.APIError
+      ? `Anthropic ${err.status}: ${err.message}`
+      : String(err);
+    console.error("Chat API error:", detail);
     return NextResponse.json({ error: "Failed to get a response" }, { status: 500 });
   }
 }
