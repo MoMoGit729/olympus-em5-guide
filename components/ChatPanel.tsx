@@ -14,11 +14,13 @@ export default function ChatPanel() {
   const [messages, setMessages]         = useState<Message[]>([]);
   const [input, setInput]               = useState("");
   const [isLoading, setIsLoading]       = useState(false);
-  const [pendingImage, setPendingImage] = useState<{
+  const [pendingImage, setPendingImage]   = useState<{
     base64: string; mediaType: string; previewUrl: string;
   } | null>(null);
-  const bottomRef   = useRef<HTMLDivElement>(null);
+  const [showUploadMenu, setShowUploadMenu] = useState(false);
+  const bottomRef    = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -85,11 +87,19 @@ export default function ChatPanel() {
 
   return (
     <>
-      {/* Hidden file input */}
+      {/* Hidden file inputs — gallery and camera */}
       <input
         ref={fileInputRef}
         type="file"
         accept="image/*"
+        style={{ display: "none" }}
+        onChange={handleFileSelect}
+      />
+      <input
+        ref={cameraInputRef}
+        type="file"
+        accept="image/*"
+        capture="environment"
         style={{ display: "none" }}
         onChange={handleFileSelect}
       />
@@ -267,28 +277,82 @@ export default function ChatPanel() {
             backgroundColor: "#112824",
             display: "flex", gap: "8px", alignItems: "center",
           }}>
-            {/* Image upload button */}
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              title="Upload a photo"
-              style={{
-                width: "36px", height: "36px",
-                backgroundColor: pendingImage ? "#6ee7b7" : "transparent",
-                border: `1px solid ${pendingImage ? "#6ee7b7" : "#1a3530"}`,
-                borderRadius: "10px",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer",
-                flexShrink: 0,
-                transition: "background 0.15s, border 0.15s",
-              }}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke={pendingImage ? "#0e2420" : "#5a9e8e"} strokeWidth="2">
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-              </svg>
-            </button>
+            {/* Image upload button + menu */}
+            <div style={{ position: "relative", flexShrink: 0 }}>
+              {showUploadMenu && (
+                <>
+                  <div
+                    onClick={() => setShowUploadMenu(false)}
+                    style={{ position: "fixed", inset: 0, zIndex: 9 }}
+                  />
+                  <div style={{
+                    position: "absolute", bottom: "calc(100% + 6px)", left: 0,
+                    backgroundColor: "#112824",
+                    border: "1px solid #1a3530",
+                    borderRadius: "10px",
+                    overflow: "hidden",
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
+                    minWidth: "170px",
+                    zIndex: 10,
+                  }}>
+                    <button
+                      onClick={() => { cameraInputRef.current?.click(); setShowUploadMenu(false); }}
+                      style={{
+                        width: "100%", padding: "11px 14px",
+                        background: "none", border: "none",
+                        borderBottom: "1px solid #1a3530",
+                        color: "#a8d4c4", fontSize: "13px",
+                        textAlign: "left", cursor: "pointer",
+                        display: "flex", alignItems: "center", gap: "10px",
+                      }}
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a9e8e" strokeWidth="2">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                      </svg>
+                      Take photo
+                    </button>
+                    <button
+                      onClick={() => { fileInputRef.current?.click(); setShowUploadMenu(false); }}
+                      style={{
+                        width: "100%", padding: "11px 14px",
+                        background: "none", border: "none",
+                        color: "#a8d4c4", fontSize: "13px",
+                        textAlign: "left", cursor: "pointer",
+                        display: "flex", alignItems: "center", gap: "10px",
+                      }}
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a9e8e" strokeWidth="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                      </svg>
+                      Photo library
+                    </button>
+                  </div>
+                </>
+              )}
+              <button
+                onClick={() => setShowUploadMenu(o => !o)}
+                title="Upload a photo"
+                style={{
+                  width: "36px", height: "36px",
+                  backgroundColor: pendingImage ? "#6ee7b7" : "transparent",
+                  border: `1px solid ${pendingImage ? "#6ee7b7" : "#1a3530"}`,
+                  borderRadius: "10px",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer",
+                  transition: "background 0.15s, border 0.15s",
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke={pendingImage ? "#0e2420" : "#5a9e8e"} strokeWidth="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </button>
+            </div>
 
             <input
               value={input}
