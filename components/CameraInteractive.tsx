@@ -436,7 +436,7 @@ export default function CameraInteractive() {
 
       {/* Dropdown label */}
       <p style={{
-        color:         "#737373",
+        color:         "#4a6b4a",
         fontSize:      "11px",
         margin:        "0 0 8px 0",
         textTransform: "uppercase",
@@ -455,10 +455,10 @@ export default function CameraInteractive() {
           style={{
             width:           "100%",
             padding:         "14px 16px",
-            backgroundColor: isOpen ? "#242424" : "#1c1c1c",
-            border:          isOpen ? "1px solid #f59e0b" : "1px solid #2e2e2e",
+            backgroundColor: isOpen ? "#162016" : "#111a11",
+            border:          isOpen ? "1px solid #6ee7b7" : "1px solid #1a2a1a",
             borderRadius:    isOpen ? "10px 10px 0 0" : "10px",
-            color:           selected ? "#f5f5f5" : "#525252",
+            color:           selected ? "#f5f5f5" : "#3a5a3a",
             fontSize:        "15px",
             fontFamily:      "system-ui",
             display:         "flex",
@@ -473,7 +473,7 @@ export default function CameraInteractive() {
           <span style={{
             display:    "inline-block",
             fontSize:   "18px",
-            color:      isOpen ? "#f59e0b" : "#525252",
+            color:      isOpen ? "#6ee7b7" : "#3a5a3a",
             transform:  isOpen ? "rotate(180deg)" : "rotate(0deg)",
             transition: "transform 0.2s ease, color 0.15s",
             marginLeft: "8px",
@@ -490,9 +490,9 @@ export default function CameraInteractive() {
             top:             "100%",
             left:            0,
             right:           0,
-            backgroundColor: "#1c1c1c",
-            border:          "1px solid #f59e0b",
-            borderTop:       "1px solid #2e2e2e",
+            backgroundColor: "#111a11",
+            border:          "1px solid #6ee7b7",
+            borderTop:       "1px solid #1a2a1a",
             borderRadius:    "0 0 10px 10px",
             zIndex:          200,
             maxHeight:       "320px",
@@ -509,11 +509,11 @@ export default function CameraInteractive() {
                   style={{
                     width:           "100%",
                     padding:         "13px 16px",
-                    backgroundColor: isSelected ? "rgba(245,158,11,0.12)" : "transparent",
+                    backgroundColor: isSelected ? "rgba(110,231,183,0.12)" : "transparent",
                     border:          "none",
-                    borderBottom:    isLast ? "none" : "1px solid #242424",
+                    borderBottom:    isLast ? "none" : "1px solid #162016",
                     borderRadius:    isLast ? "0 0 10px 10px" : 0,
-                    color:           isSelected ? "#f59e0b" : "#d4d4d4",
+                    color:           isSelected ? "#6ee7b7" : "#d4d4c8",
                     fontSize:        "14px",
                     fontFamily:      "system-ui",
                     fontWeight:      isSelected ? 600 : 400,
@@ -527,7 +527,7 @@ export default function CameraInteractive() {
                 >
                   {part.title}
                   {isSelected && (
-                    <span style={{ color: "#f59e0b", fontSize: "16px", flexShrink: 0 }}>✓</span>
+                    <span style={{ color: "#6ee7b7", fontSize: "16px", flexShrink: 0 }}>✓</span>
                   )}
                 </button>
               );
@@ -550,16 +550,16 @@ export default function CameraInteractive() {
           key={selected.id}
           style={{
             marginTop:       "16px",
-            backgroundColor: "#1c1c1c",
-            border:          "1px solid #2a2a2a",
-            borderLeft:      "3px solid #f59e0b",
+            backgroundColor: "#111a11",
+            border:          "1px solid #1a2a1a",
+            borderLeft:      "3px solid #6ee7b7",
             borderRadius:    "10px",
             padding:         "20px",
             animation:       "fadeIn 0.2s ease",
           }}
         >
           <h2 style={{
-            color:      "#f59e0b",
+            color:      "#6ee7b7",
             fontSize:   "16px",
             fontWeight: 700,
             margin:     "0 0 10px 0",
@@ -568,7 +568,7 @@ export default function CameraInteractive() {
             {selected.title}
           </h2>
           <p style={{
-            color:      "#d4d4d4",
+            color:      "#d4d4c8",
             lineHeight: 1.75,
             margin:     0,
             fontSize:   "14px",
