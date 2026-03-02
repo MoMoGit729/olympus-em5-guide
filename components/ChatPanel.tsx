@@ -361,7 +361,8 @@ export default function ChatPanel() {
               onKeyDown={handleKey}
               placeholder={pendingImage ? "Add a question, or just hit send…" : "Ask a question…"}
               style={{
-                flex: 1, padding: "9px 12px",
+                flex: 1, minWidth: 0, padding: "9px 12px",
+                boxSizing: "border-box",
                 backgroundColor: "#142e2a",
                 border: "1px solid #1a3530",
                 borderRadius: "10px",
