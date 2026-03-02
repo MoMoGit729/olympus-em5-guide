@@ -25,12 +25,23 @@ export default function ChatPanel() {
     const updated = [...messages, { role: "user" as const, content: text }];
     setMessages(updated);
     setIsLoading(true);
+
+    // Only send the last 10 messages to keep request size manageable
+    const recentMessages = updated.slice(-10);
+
+    const attemptFetch = () => fetch("/api/chat", {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify({ messages: recentMessages }),
+    });
+
     try {
-      const res  = await fetch("/api/chat", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ messages: updated }),
-      });
+      let res = await attemptFetch();
+      // If it fails, wait 2 seconds and retry once automatically
+      if (!res.ok) {
+        await new Promise(r => setTimeout(r, 2000));
+        res = await attemptFetch();
+      }
       const data = await res.json();
       setMessages(prev => [...prev, { role: "assistant", content: data.content ?? "Sorry, something went wrong!" }]);
     } catch {
