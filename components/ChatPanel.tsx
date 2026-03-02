@@ -7,6 +7,7 @@ interface Message {
   content:      string;
   imageBase64?: string;
   mediaType?:   string;
+  isError?:     boolean;
 }
 
 export default function ChatPanel() {
@@ -56,7 +57,7 @@ export default function ChatPanel() {
     setMessages(updated);
     setIsLoading(true);
 
-    const recentMessages = updated.slice(-10);
+    const recentMessages = updated.filter(m => !m.isError).slice(-10);
 
     const attemptFetch = () => fetch("/api/chat", {
       method:  "POST",
@@ -71,9 +72,9 @@ export default function ChatPanel() {
         res = await attemptFetch();
       }
       const data = await res.json();
-      setMessages(prev => [...prev, { role: "assistant", content: data.content ?? "Sorry, something went wrong!" }]);
+      setMessages(prev => [...prev, { role: "assistant", content: data.content ?? "Sorry, something went wrong!", isError: !data.content }]);
     } catch {
-      setMessages(prev => [...prev, { role: "assistant", content: "Oops! Couldn't reach the assistant. Check your internet and try again." }]);
+      setMessages(prev => [...prev, { role: "assistant", content: "Oops! Couldn't reach the assistant. Check your internet and try again.", isError: true }]);
     } finally {
       setIsLoading(false);
     }
