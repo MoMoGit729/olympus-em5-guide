@@ -73,11 +73,11 @@ export default function ChatPanel() {
         }}
       >
         {isOpen ? (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#091412" strokeWidth="2.5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0e2420" strokeWidth="2.5">
             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         ) : (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#091412" strokeWidth="2.5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0e2420" strokeWidth="2.5">
             <circle cx="12" cy="12" r="3"/>
             <path d="M9 2h6l1.5 3H20a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h3.5L9 2z"/>
           </svg>
@@ -89,7 +89,7 @@ export default function ChatPanel() {
         <div style={{
           position: "fixed", bottom: "88px", right: "24px", zIndex: 40,
           width: "340px",
-          backgroundColor: "#0f1e1c",
+          backgroundColor: "#142e2a",
           border: "1px solid #1a3530",
           borderRadius: "16px",
           display: "flex", flexDirection: "column",
@@ -101,7 +101,7 @@ export default function ChatPanel() {
           {/* Header */}
           <div style={{
             padding: "14px 16px",
-            backgroundColor: "#0d1a18",
+            backgroundColor: "#112824",
             borderBottom: "1px solid #1a3530",
             display: "flex", alignItems: "center", gap: "10px",
           }}>
@@ -110,7 +110,7 @@ export default function ChatPanel() {
               backgroundColor: "#6ee7b7", borderRadius: "50%",
               display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
             }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#091412" strokeWidth="2.5">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0e2420" strokeWidth="2.5">
                 <circle cx="12" cy="12" r="3"/>
                 <path d="M9 2h6l1.5 3H20a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h3.5L9 2z"/>
               </svg>
@@ -152,7 +152,7 @@ export default function ChatPanel() {
                   padding: "9px 13px",
                   borderRadius: m.role === "user" ? "14px 14px 4px 14px" : "14px 14px 14px 4px",
                   backgroundColor: m.role === "user" ? "#6ee7b7" : "#1a3530",
-                  color: m.role === "user" ? "#091412" : "#a8d4c4",
+                  color: m.role === "user" ? "#0e2420" : "#a8d4c4",
                   fontSize: "13px",
                   lineHeight: 1.5,
                   whiteSpace: "pre-wrap",
@@ -182,7 +182,7 @@ export default function ChatPanel() {
           <div style={{
             padding: "12px",
             borderTop: "1px solid #1a3530",
-            backgroundColor: "#0d1a18",
+            backgroundColor: "#112824",
             display: "flex", gap: "8px",
           }}>
             <input
@@ -192,7 +192,7 @@ export default function ChatPanel() {
               placeholder="Ask a question..."
               style={{
                 flex: 1, padding: "9px 12px",
-                backgroundColor: "#0f1e1c",
+                backgroundColor: "#142e2a",
                 border: "1px solid #1a3530",
                 borderRadius: "10px",
                 color: "#a8d4c4",
@@ -213,7 +213,7 @@ export default function ChatPanel() {
                 flexShrink: 0,
               }}
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#091412" strokeWidth="2.5">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0e2420" strokeWidth="2.5">
                 <line x1="22" y1="2" x2="11" y2="13"/>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"/>
               </svg>

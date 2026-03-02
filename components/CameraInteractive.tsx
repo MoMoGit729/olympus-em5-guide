@@ -455,7 +455,7 @@ export default function CameraInteractive() {
           style={{
             width:           "100%",
             padding:         "14px 16px",
-            backgroundColor: isOpen ? "#0d1a18" : "#0f1e1c",
+            backgroundColor: isOpen ? "#112824" : "#142e2a",
             border:          isOpen ? "1px solid #6ee7b7" : "1px solid #1a3530",
             borderRadius:    isOpen ? "10px 10px 0 0" : "10px",
             color:           selected ? "#e8f8f2" : "#3a7a6a",
@@ -490,7 +490,7 @@ export default function CameraInteractive() {
             top:             "100%",
             left:            0,
             right:           0,
-            backgroundColor: "#0f1e1c",
+            backgroundColor: "#142e2a",
             border:          "1px solid #6ee7b7",
             borderTop:       "1px solid #1a3530",
             borderRadius:    "0 0 10px 10px",
@@ -511,7 +511,7 @@ export default function CameraInteractive() {
                     padding:         "13px 16px",
                     backgroundColor: isSelected ? "rgba(110,231,183,0.12)" : "transparent",
                     border:          "none",
-                    borderBottom:    isLast ? "none" : "1px solid #0d1a18",
+                    borderBottom:    isLast ? "none" : "1px solid #112824",
                     borderRadius:    isLast ? "0 0 10px 10px" : 0,
                     color:           isSelected ? "#6ee7b7" : "#a8d4c4",
                     fontSize:        "14px",
@@ -550,7 +550,7 @@ export default function CameraInteractive() {
           key={selected.id}
           style={{
             marginTop:       "16px",
-            backgroundColor: "#0f1e1c",
+            backgroundColor: "#142e2a",
             border:          "1px solid #1a3530",
             borderLeft:      "3px solid #6ee7b7",
             borderRadius:    "10px",
