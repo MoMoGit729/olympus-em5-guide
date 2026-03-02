@@ -3,30 +3,57 @@
 import { useState, useRef, useEffect } from "react";
 
 interface Message {
-  role: "user" | "assistant";
-  content: string;
+  role:         "user" | "assistant";
+  content:      string;
+  imageBase64?: string;
+  mediaType?:   string;
 }
 
 export default function ChatPanel() {
-  const [isOpen, setIsOpen]       = useState(false);
-  const [messages, setMessages]   = useState<Message[]>([]);
-  const [input, setInput]         = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const bottomRef                 = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen]             = useState(false);
+  const [messages, setMessages]         = useState<Message[]>([]);
+  const [input, setInput]               = useState("");
+  const [isLoading, setIsLoading]       = useState(false);
+  const [pendingImage, setPendingImage] = useState<{
+    base64: string; mediaType: string; previewUrl: string;
+  } | null>(null);
+  const bottomRef   = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
+      setPendingImage({
+        base64:     dataUrl.split(",")[1],
+        mediaType:  file.type,
+        previewUrl: dataUrl,
+      });
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
+  };
+
   const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+    if ((!input.trim() && !pendingImage) || isLoading) return;
     const text = input.trim();
     setInput("");
-    const updated = [...messages, { role: "user" as const, content: text }];
+    const newMsg: Message = {
+      role:    "user",
+      content: text,
+      ...(pendingImage ? { imageBase64: pendingImage.base64, mediaType: pendingImage.mediaType } : {}),
+    };
+    setPendingImage(null);
+    const updated = [...messages, newMsg];
     setMessages(updated);
     setIsLoading(true);
 
-    // Only send the last 10 messages to keep request size manageable
     const recentMessages = updated.slice(-10);
 
     const attemptFetch = () => fetch("/api/chat", {
@@ -37,7 +64,6 @@ export default function ChatPanel() {
 
     try {
       let res = await attemptFetch();
-      // If it fails, wait 2 seconds and retry once automatically
       if (!res.ok) {
         await new Promise(r => setTimeout(r, 2000));
         res = await attemptFetch();
@@ -55,8 +81,19 @@ export default function ChatPanel() {
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); }
   };
 
+  const canSend = (input.trim().length > 0 || !!pendingImage) && !isLoading;
+
   return (
     <>
+      {/* Hidden file input */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        style={{ display: "none" }}
+        onChange={handleFileSelect}
+      />
+
       {/* Floating button */}
       <button
         onClick={() => setIsOpen(o => !o)}
@@ -141,14 +178,14 @@ export default function ChatPanel() {
             {messages.length === 0 && (
               <div style={{ textAlign: "center", padding: "30px 10px" }}>
                 <p style={{ color: "#3a7a6a", fontSize: "13px", lineHeight: 1.6, margin: 0 }}>
-                  Hey! Ask me anything about your Nikon D60, your lenses, or photography in general 📷
+                  Hey! Ask me anything about your Nikon D60, your lenses, or photography in general. Tap the image icon to upload a photo for feedback.
                 </p>
               </div>
             )}
             {messages.map((m, i) => (
               <div key={i} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
                 <div style={{
-                  maxWidth: "80%",
+                  maxWidth: "85%",
                   padding: "9px 13px",
                   borderRadius: m.role === "user" ? "14px 14px 4px 14px" : "14px 14px 14px 4px",
                   backgroundColor: m.role === "user" ? "#6ee7b7" : "#1a3530",
@@ -157,6 +194,17 @@ export default function ChatPanel() {
                   lineHeight: 1.5,
                   whiteSpace: "pre-wrap",
                 }}>
+                  {m.imageBase64 && (
+                    <img
+                      src={`data:${m.mediaType};base64,${m.imageBase64}`}
+                      alt="Uploaded photo"
+                      style={{
+                        width: "100%", borderRadius: "8px",
+                        display: "block",
+                        marginBottom: m.content ? "6px" : 0,
+                      }}
+                    />
+                  )}
                   {m.content}
                 </div>
               </div>
@@ -178,18 +226,75 @@ export default function ChatPanel() {
             <div ref={bottomRef}/>
           </div>
 
-          {/* Input */}
+          {/* Pending image preview */}
+          {pendingImage && (
+            <div style={{
+              padding: "8px 12px",
+              backgroundColor: "#112824",
+              borderTop: "1px solid #1a3530",
+            }}>
+              <div style={{ position: "relative", display: "inline-block" }}>
+                <img
+                  src={pendingImage.previewUrl}
+                  alt="Ready to send"
+                  style={{ height: "64px", width: "auto", borderRadius: "8px", display: "block" }}
+                />
+                <button
+                  onClick={() => setPendingImage(null)}
+                  style={{
+                    position: "absolute", top: "-6px", right: "-6px",
+                    width: "18px", height: "18px",
+                    backgroundColor: "#142e2a",
+                    border: "1px solid #5a9e8e",
+                    borderRadius: "50%",
+                    color: "#a8d4c4",
+                    fontSize: "12px",
+                    cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    padding: 0,
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Input area */}
           <div style={{
             padding: "12px",
             borderTop: "1px solid #1a3530",
             backgroundColor: "#112824",
-            display: "flex", gap: "8px",
+            display: "flex", gap: "8px", alignItems: "center",
           }}>
+            {/* Image upload button */}
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              title="Upload a photo"
+              style={{
+                width: "36px", height: "36px",
+                backgroundColor: pendingImage ? "#6ee7b7" : "transparent",
+                border: `1px solid ${pendingImage ? "#6ee7b7" : "#1a3530"}`,
+                borderRadius: "10px",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                cursor: "pointer",
+                flexShrink: 0,
+                transition: "background 0.15s, border 0.15s",
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke={pendingImage ? "#0e2420" : "#5a9e8e"} strokeWidth="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </button>
+
             <input
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKey}
-              placeholder="Ask a question..."
+              placeholder={pendingImage ? "Add a question, or just hit send…" : "Ask a question…"}
               style={{
                 flex: 1, padding: "9px 12px",
                 backgroundColor: "#142e2a",
@@ -202,14 +307,14 @@ export default function ChatPanel() {
             />
             <button
               onClick={sendMessage}
-              disabled={!input.trim() || isLoading}
+              disabled={!canSend}
               style={{
                 width: "36px", height: "36px",
                 backgroundColor: "#6ee7b7",
                 border: "none", borderRadius: "10px",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: input.trim() && !isLoading ? "pointer" : "not-allowed",
-                opacity: input.trim() && !isLoading ? 1 : 0.4,
+                cursor: canSend ? "pointer" : "not-allowed",
+                opacity: canSend ? 1 : 0.4,
                 flexShrink: 0,
               }}
             >
