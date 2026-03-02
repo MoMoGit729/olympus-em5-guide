@@ -135,7 +135,7 @@ export default function ChatPanel() {
       {isOpen && (
         <div style={{
           position: "fixed", bottom: "88px", right: "24px", zIndex: 40,
-          width: "340px",
+          width: "min(340px, calc(100vw - 48px))",
           backgroundColor: "#142e2a",
           border: "1px solid #1a3530",
           borderRadius: "16px",
