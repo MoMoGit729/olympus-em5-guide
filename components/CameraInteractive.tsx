@@ -436,7 +436,7 @@ export default function CameraInteractive() {
 
       {/* Dropdown label */}
       <p style={{
-        color:         "#4a6b4a",
+        color:         "#5a9e8e",
         fontSize:      "11px",
         margin:        "0 0 8px 0",
         textTransform: "uppercase",
@@ -455,10 +455,10 @@ export default function CameraInteractive() {
           style={{
             width:           "100%",
             padding:         "14px 16px",
-            backgroundColor: isOpen ? "#162016" : "#111a11",
-            border:          isOpen ? "1px solid #6ee7b7" : "1px solid #1a2a1a",
+            backgroundColor: isOpen ? "#0d1a18" : "#0f1e1c",
+            border:          isOpen ? "1px solid #6ee7b7" : "1px solid #1a3530",
             borderRadius:    isOpen ? "10px 10px 0 0" : "10px",
-            color:           selected ? "#f5f5f5" : "#3a5a3a",
+            color:           selected ? "#e8f8f2" : "#3a7a6a",
             fontSize:        "15px",
             fontFamily:      "system-ui",
             display:         "flex",
@@ -473,7 +473,7 @@ export default function CameraInteractive() {
           <span style={{
             display:    "inline-block",
             fontSize:   "18px",
-            color:      isOpen ? "#6ee7b7" : "#3a5a3a",
+            color:      isOpen ? "#6ee7b7" : "#3a7a6a",
             transform:  isOpen ? "rotate(180deg)" : "rotate(0deg)",
             transition: "transform 0.2s ease, color 0.15s",
             marginLeft: "8px",
@@ -490,9 +490,9 @@ export default function CameraInteractive() {
             top:             "100%",
             left:            0,
             right:           0,
-            backgroundColor: "#111a11",
+            backgroundColor: "#0f1e1c",
             border:          "1px solid #6ee7b7",
-            borderTop:       "1px solid #1a2a1a",
+            borderTop:       "1px solid #1a3530",
             borderRadius:    "0 0 10px 10px",
             zIndex:          200,
             maxHeight:       "320px",
@@ -511,9 +511,9 @@ export default function CameraInteractive() {
                     padding:         "13px 16px",
                     backgroundColor: isSelected ? "rgba(110,231,183,0.12)" : "transparent",
                     border:          "none",
-                    borderBottom:    isLast ? "none" : "1px solid #162016",
+                    borderBottom:    isLast ? "none" : "1px solid #0d1a18",
                     borderRadius:    isLast ? "0 0 10px 10px" : 0,
-                    color:           isSelected ? "#6ee7b7" : "#d4d4c8",
+                    color:           isSelected ? "#6ee7b7" : "#a8d4c4",
                     fontSize:        "14px",
                     fontFamily:      "system-ui",
                     fontWeight:      isSelected ? 600 : 400,
@@ -550,8 +550,8 @@ export default function CameraInteractive() {
           key={selected.id}
           style={{
             marginTop:       "16px",
-            backgroundColor: "#111a11",
-            border:          "1px solid #1a2a1a",
+            backgroundColor: "#0f1e1c",
+            border:          "1px solid #1a3530",
             borderLeft:      "3px solid #6ee7b7",
             borderRadius:    "10px",
             padding:         "20px",
@@ -568,7 +568,7 @@ export default function CameraInteractive() {
             {selected.title}
           </h2>
           <p style={{
-            color:      "#d4d4c8",
+            color:      "#a8d4c4",
             lineHeight: 1.75,
             margin:     0,
             fontSize:   "14px",
