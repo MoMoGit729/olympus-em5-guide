@@ -57,7 +57,10 @@ export default function ChatPanel() {
     setMessages(updated);
     setIsLoading(true);
 
-    const recentMessages = updated.filter(m => !m.isError).slice(-10);
+    const nonError = updated.filter(m => !m.isError);
+    const recentMessages = nonError
+      .filter((m, i) => i === nonError.length - 1 || m.role !== nonError[i + 1].role)
+      .slice(-10);
 
     const attemptFetch = () => fetch("/api/chat", {
       method:  "POST",
