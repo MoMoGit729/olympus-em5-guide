@@ -97,12 +97,16 @@ export async function POST(request: NextRequest) {
       ],
     };
 
-    // Attempt the API call; retry once after 3s if Anthropic is overloaded (529)
+    // Attempt the API call; retry once after 3s if Anthropic is overloaded (529/503)
+    const apiStatus = (err: unknown): number =>
+      typeof err === "object" && err !== null && "status" in err
+        ? (err as { status: number }).status : 0;
+
     let response;
     try {
       response = await client.messages.create(params);
     } catch (err) {
-      if (err instanceof Anthropic.APIError && (err.status === 529 || err.status === 503)) {
+      if (apiStatus(err) === 529 || apiStatus(err) === 503) {
         await new Promise(r => setTimeout(r, 3000));
         response = await client.messages.create(params);
       } else {
@@ -115,10 +119,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ content: text });
 
   } catch (err) {
-    const detail = err instanceof Anthropic.APIError
-      ? `Anthropic ${err.status}: ${err.message}`
-      : String(err);
-    console.error("Chat API error:", detail);
+    const status  = typeof err === "object" && err !== null && "status" in err
+      ? (err as { status: number }).status : 0;
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`Chat API error (${status}):`, message);
     return NextResponse.json({ error: "Failed to get a response" }, { status: 500 });
   }
 }
