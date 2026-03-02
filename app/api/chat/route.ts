@@ -14,6 +14,12 @@ const MANUAL_TEXT = fs.existsSync(MANUAL_PATH)
   ? fs.readFileSync(MANUAL_PATH, "utf-8")
   : null;
 
+// Load the camera diagram image as base64 so Claude can see it
+const DIAGRAM_PATH = path.join(process.cwd(), "public", "camera-diagram.png");
+const DIAGRAM_B64  = fs.existsSync(DIAGRAM_PATH)
+  ? fs.readFileSync(DIAGRAM_PATH).toString("base64")
+  : null;
+
 // Client with prompt-caching beta enabled so the large manual is cached
 // between calls and only billed at the cheap cache-read rate after the first request
 const client = new Anthropic({
@@ -42,14 +48,38 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // Prepend the camera diagram as a visual reference before the conversation
+    const diagramContext: Anthropic.Messages.MessageParam[] = DIAGRAM_B64 ? [
+      {
+        role: "user",
+        content: [
+          {
+            type:   "image",
+            source: { type: "base64", media_type: "image/png", data: DIAGRAM_B64 },
+          },
+          {
+            type: "text",
+            text: "This is the official Nikon D60 Parts of the Camera diagram. Use it as your visual reference for all questions about button and control locations.",
+          },
+        ],
+      },
+      {
+        role:    "assistant",
+        content: "I can see the Nikon D60 Parts of the Camera diagram. I'll use it as my visual reference for button and control locations throughout our conversation.",
+      },
+    ] : [];
+
     const response = await client.messages.create({
       model:      "claude-sonnet-4-6",
       max_tokens: 1024,
       system:     systemBlocks,
-      messages:   messages.map((m: { role: string; content: string }) => ({
-        role:    m.role as "user" | "assistant",
-        content: m.content,
-      })),
+      messages:   [
+        ...diagramContext,
+        ...messages.map((m: { role: string; content: string }) => ({
+          role:    m.role as "user" | "assistant",
+          content: m.content,
+        })),
+      ],
     });
 
     const block = response.content[0];
