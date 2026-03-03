@@ -15,6 +15,17 @@ export default function ChatPanel() {
   const [messages, setMessages]         = useState<Message[]>([]);
   const [input, setInput]               = useState("");
   const [isLoading, setIsLoading]       = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState("Thinking…");
+
+  const classifyQuestion = (text: string, hasImage: boolean): string => {
+    if (hasImage) return "Analyzing your photo…";
+    const lower = text.toLowerCase();
+    if (/\bwhere\b|which side|location|find the|(left|right) of|which button|diopter/.test(lower))
+      return "Looking at the diagram…";
+    if (/d60|nikon|\bmenu\b|\bmode\b|\biso\b|shutter|aperture|\bflash\b|\blens\b|autofocus|white balance|metering|playback|\bfocus\b|exposure|burst|continuous|viewfinder|\bdial\b|selector|release|image quality|settings/.test(lower))
+      return "Checking the D60 manual…";
+    return "Drawing on photography knowledge…";
+  };
   const [pendingImage, setPendingImage]   = useState<{
     base64: string; mediaType: string; previewUrl: string;
   } | null>(null);
@@ -55,6 +66,7 @@ export default function ChatPanel() {
     setPendingImage(null);
     const updated = [...messages, newMsg];
     setMessages(updated);
+    setLoadingMessage(classifyQuestion(text, !!newMsg.imageBase64));
     setIsLoading(true);
 
     const nonError = updated.filter(m => !m.isError);
@@ -225,15 +237,18 @@ export default function ChatPanel() {
             ))}
             {isLoading && (
               <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                <div style={{ backgroundColor: "#1a3530", borderRadius: "14px 14px 14px 4px", padding: "10px 14px", display: "flex", gap: "5px" }}>
-                  {[0, 150, 300].map(d => (
-                    <span key={d} style={{
-                      width: "7px", height: "7px", borderRadius: "50%",
-                      backgroundColor: "#5a9e8e",
-                      display: "inline-block",
-                      animation: `bounce 1s ${d}ms infinite`,
-                    }}/>
-                  ))}
+                <div style={{ backgroundColor: "#1a3530", borderRadius: "14px 14px 14px 4px", padding: "10px 14px", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span style={{ color: "#5a9e8e", fontSize: "12px", fontStyle: "italic" }}>{loadingMessage}</span>
+                  <span style={{ display: "flex", gap: "4px" }}>
+                    {[0, 150, 300].map(d => (
+                      <span key={d} style={{
+                        width: "5px", height: "5px", borderRadius: "50%",
+                        backgroundColor: "#5a9e8e",
+                        display: "inline-block",
+                        animation: `bounce 1s ${d}ms infinite`,
+                      }}/>
+                    ))}
+                  </span>
                 </div>
               </div>
             )}
