@@ -1,3 +1,331 @@
+[PAGE 17]
+Getting to Know the Camera
+5
+Introduction
+21
+4 5 6
+3
+2
+7
+1
+8
+9
+20
+10
+19 11
+18 12
+17
+13
+14
+16
+15
+1 Rubber Eyecup DK-20.........................................56 13 Battery-chamber cover latch..........................17
+2 Viewfinder eyepiece........................................7, 26 14 Battery-chamber cover............................17, 157
+3 Eye sensor.........................................................32, 123 15 Tripod socket
+4 Diopter adjustment control............................26
+16 Monitor.........................................................8, 72, 123
+H (AE-L/AF-L) button...........................63, 113
+5 K (playback zoom in) button........................77
+I (protect) button..........................................78
+L (Information display/Quick settings
+17
+6 Command dial.........................................................10 display) button..............................................48
+7 Eyelet for camera strap.......................................14 A (reset) button......................................................70
+8 Multi selector............................................................12 M (thumbnail/playback zoom out)
+9 Memory card slot cover.....................................23 18 button...........................................................................76
+10 J (delete) button.........................................34, 96 N (help) button......................................................13
+11 Memory card access lamp...............................23 19 O (menu) button..........................................94
+Power connector cover for optional 20 P (playback) button.................................34, 72
+12
+power connector................................................157 21 Eyepiece Cap DK-5................................................56
+
+[PAGE 18]
+6
+Introduction
+Getting to Know the Camera
+The Mode Dial
+Use the mode dial to change the shooting mode. Rotate the mode
+dial so that shooting mode icon is aligned with the indicator.
+Advanced Modes (Exposure Modes)
+Select these modes for full control over camera settings.
+a — Programmed auto: A41 c — Aperture-priority auto: A43
+b — Shutter-priority auto: A42 d — Manual: A44
+Point-and-Shoot Modes (Digital Vari-Programs)
+Selecting a Digital Vari-Program automatically optimizes settings to suit the selected
+scene, making creative photography as simple as rotating the mode dial.
+e — Auto: A28 i — Child: A37
+f — Auto (flash off): A36 j — Sports: A37
+g — Portrait: A36 k — Close up: A37
+h — Landscape: A37 l — Night portrait: A37
+The Power Switch
+The power switch is used to turn the camera on and off.
+On Off
+
+[PAGE 19]
+Getting to Know the Camera
+7
+Introduction
+The Viewfinder Display
+1
+2 3 4 5 6 7 8 9 10 11
+12 13 14 15 16
+Actual display varies with current shooting mode and camera settings.
+1 Focus points...............................26, 30, 58, 59, 60 Number of exposures remaining......28, 178
+2 Focus indicator................................................32, 61 Number of shots remaining before
+memory buffer fills.....................................55, 178
+Focus point display................26, 30, 58, 59, 60
+3 Preset white balance recording
+AF-area mode...........................................................58
+indicator....................................................................106
+4 Autoexposure (AE) lock......................................63 10
+Exposure compensation value......................67
+5 Flexible program indicator...............................41
+Flash compensation value...............................68
+6 Shutter speed...................................................39–46
+Active D-Lighting indicator.............................69
+Aperture (f-number).....................................39–46
+7 PC connection indicator....................................82
+Noise reduction indicator..............................108
+Dust off ref photo mode indicator...........127
+Flash compensation
+8 11 Flash-ready indicator...........................................33
+indicator.............................................................68, 113
+12 Battery indicator.....................................................29
+9 Exposure compensation indicator..............67
+Electronic analog exposure display............45
+13 Exposure compensation....................................67
+Rangefinder............................................................116
+14 ISO auto indicator.......................................53, 112
+“K” (appears when memory remains for
+15
+over 1000 exposures)..........................................29
+16 Warning indicator.......................................13, 172
+C The Viewfinder
+The response time and brightness of the viewfinder may vary with temperature. This is normal and
+does not indicate a malfunction.
+
+[PAGE 20]
+8
+Introduction
+Getting to Know the Camera
+The Shooting Information Display
+When the camera is turned on, the Shooting information display
+will be shown in the monitor. Shooting information such as shutter
+speed, aperture, and number of exposures remaining, as well as
+the settings currently applied, can be confirmed.
+The display changes, in the following order, each time K (L) is
+pressed:
+Shooting information display
+Set
+Quick settings display* Monitor off
+Imagequality
+Off Move OK
+* Frequently used shooting settings can be adjusted from the Quick settings display (A48).
+C Tuning on and off Shooting Information Display
+At default settings, shooting information also turns off as indicated below.
+•When no operations are performed for about eight seconds.
+•When the eye sensor is activated by looking through the viewfinder (A31, 123).
+•While the shutter-release button is held down.
+When the Shooting information display is off, the Shooting information display is also shown as
+indicated below.
+•When pressing halfway and releasing the shutter-release button (A31).
+•When M or C is pressed.
+•When F/G is pressed, unless White balance is selected for Custom setting 11 (F/G button;
+A112) in e, f, g, h, i, j, k, or l mode.
+•When D is pressed in any mode other than f Auto (flash off) mode.
+•When A is pressed in a, b, or c mode.
+D Information Display Format
+The format for information display is selected from the Info display format option (A120) in the
+setup menu.
+
+[PAGE 21]
+Getting to Know the Camera
+9
+Introduction
+“Wide” (Landscape) Orientation “Tall” (Portrait) Orientation
+2827 26 252423
+1
+2
+2827 26 25242322
+1 3
+21 6
+2 20 22 12
+3
+4 19 7 13
+18 8
+5 17 11
+9
+6 16 21 15
+7 15 20 14
+8 14
+19
+9
+Set Set
+10
+10 11 12 13 17 16 18
+The information displayed in the monitor varies depending upon shooting mode and shooting
+conditions. The information included above may vary with current camera settings.
+1 Shooting mode..........................................................6 15 AF-area mode...........................................................58
+2 Shutter speed...................................................40–46 16 Focus mode...............................................................57
+3 Aperture (f-number).....................................40–46 17 Release mode...........................................................54
+4 Shutter-speed display
+18 ISO sensitivity............................................................53
+5 Aperture display
+19 White balance mode......................52, 103, 104
+Electronic analog exposure display............45
+6 20 Image size...................................................................50
+Exposure compensation...................................67
+7 Flash compensation value...............................68 21 Image quality............................................................50
+8 Flash sync mode.....................................................65 22 Focus point display................26, 30, 58, 59, 60
+AF-area mode...........................................................58
+9 Exposure compensation value......................67
+10 Help indicator...........................................................13 23 Battery indicator.....................................................29
+11 Active D-Lighting indicator.............................69 24 “Beep” indicator....................................................110
+Number of exposures remaining.......28, 178 25 Optimize image indicator..............................101
+12 Preset white balance recording 26 ISO auto indicator.......................................53, 112
+indicator....................................................................106
+Manual flash control indicator....................113
+Capture mode indicator....................................82
+27 Flash compensation indicator
+“K” (appears when memory remains for
+13 for optional Speedlight...................................153
+over 1000 exposures)..........................................29
+28 Date imprint indicator......................................115
+14 Metering mode.......................................................62
+D The Shutter-Speed and Aperture Displays
+These displays provide a visual indication of shutter speed and aperture.
+Fast shutter speed, large aperture Slow shutter speed, small aperture
+(small f-number) (large f-number)
+Graphic displays of the shutter speed and aperture are shown when the mode dial is rotated.
+
+[PAGE 22]
+10
+Introduction
+Getting to Know the Camera
+The Command Dial
+Rotate the command dial alone or use the command dial with other buttons to adjust the
+following settings. Changes to shooting settings can be viewed in the viewfinder and the
+monitor’s Shooting information display as settings are adjusted.
+Function Operation Display
+Flexible program (a mode;
+A41)
+Set
+Choose a shutter speed (b
+and d modes; A42, 44).
+Set
+Set aperture (c mode;
+A43).
+Set
+Set aperture (d mode;
+A44).
+Set
++ Exposurecomp.
+Set exposure compensation
+(a, b, and c modes; A67).
+Set
+
+[PAGE 23]
+Getting to Know the Camera
+11
+Introduction
+Flashmode
+Choose a flash mode (e,
+g, i, k, l, a, b, c and
+d modes; A65). +
+Set
+Flashcompensation
+Set flash compensation (a,
+b, c and d modes; A68).
++ +
+Set
+ActiveD–Lighting
+Active D-Lighting (A69)
++
+Set
+When F/G (Custom Setting 11 Releasemode
+Release mode (A54)
+F/G button; A112) is set to any
+(Set to single frame,
+of the options indicated at right,
+continuous, self-timer,
+the setting can be changed using
+delayed remote, or quick-
+response remote mode.) the command dial.
+Set
+Imagequality/size
+Image quality/size (A49)
+Set
++ ISOsensitivity
+ISO sensitivity (A53)
+Set
+Whitebalance
+White balance (A52)
+Set
+
+[PAGE 24]
+12
+Introduction
+Getting to Know the Camera
+Multi Selector
+The multi selector is used for the following operations.
+With Shooting
+(Only when the dynamic Select focus point
+area or single point option (A59)
+is selected for AF-area
+mode; A58)
+With Quick Settings Display
+Move highlight up
+Imagequality
+or right
+Off Move OK
+Apply selection
+Move highlight down or left
+With Menu Screens
+•Move highlight up
+SETUPMENU
+•Increase value
+CSM/Setupmenu
+Formatmemorycard
+Infodisplayformat
+Autoshootinginfo
+Shootinginfoautooff
+Return to previous menu Display sub-menu Worldtime
+LCDbrightness
+Apply selection
+•Move highlight down
+•Decrease value
+With Playback
+View more photo info (A73)
+View previous photo View next photo
+Display retouch menu
+(A129)
+View more photo info (A73)
+
+[PAGE 25]
+Getting to Know the Camera
+13
+Introduction
+The Shutter-Release Button
+The camera is equipped with a two-stage shutter-release button. To focus, press the
+shutter-release button halfway, stopping when you feel resistance. Focus will lock* while
+the shutter-release button is held in this position. To release the shutter and shoot, press
+the shutter-release button the rest of the way down.
+* Focus will not lock, nor will the beep indicating that the subject is in focus sound, if Focus
+mode (A57) is set to Continuous-servo AF, or if Continuous-servo AF is automatically
+applied with Auto-servo AF selected for moving subjects.
+Focus Take photograph
+N (Help) Button
+While M (N) is held down, information on current
+Optimizeimage
+shooting conditions, and help for menus, are Choosehowpictureswillbe
+processedaccordingtothetype
+displayed in the monitor; to scroll the display, press ofsubjectandhowthepictures
+willbeused.
+the multi selector up or down. A blinking F icon in
+the monitor or a blinking L (warning indicator) in the
+viewfinder indicates that help on an error or other
+problem can be viewed in the monitor by pressing M (N).
+
 [PAGE 51]
 a, b, c, and d Modes
 This chapter explains the procedures for shooting in Programmed auto (a) mode,
