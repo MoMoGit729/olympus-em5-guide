@@ -92,7 +92,7 @@ export default function ChatPanel() {
     const utterance = new SpeechSynthesisUtterance(text);
     const voice = voices.find(v => v.name === selectedVoice);
     if (voice) utterance.voice = voice;
-    utterance.rate = 0.95;
+    utterance.rate = 0.85;
     setSpeakingIndex(index);
     utterance.onend  = () => setSpeakingIndex(null);
     utterance.onerror = () => setSpeakingIndex(null);
@@ -240,8 +240,8 @@ export default function ChatPanel() {
               </svg>
             </div>
             <div style={{ flex: 1 }}>
-              <p style={{ margin: 0, fontWeight: 700, fontSize: "17px", color: "#e8f8f2" }}>Photo Assistant</p>
-              <p style={{ margin: 0, fontSize: "14px", color: "#5a9e8e" }}>Ask me anything about your D60</p>
+              <p style={{ margin: 0, fontWeight: 700, fontSize: "20px", color: "#e8f8f2" }}>Photo Assistant</p>
+              <p style={{ margin: 0, fontSize: "15px", color: "#5a9e8e" }}>Ask me anything about your D60</p>
             </div>
             {messages.length > 0 && (
               <button
