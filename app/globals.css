@@ -24,3 +24,52 @@ body {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ── Desktop layout (768px+) ────────────────────────────── */
+@media (min-width: 768px) {
+
+  /* Main content area */
+  .main-content {
+    padding: 32px 48px !important;
+  }
+
+  /* Two-column camera layout */
+  .camera-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  .camera-diagram-col {
+    flex: 3;
+    min-width: 0;
+    position: sticky;
+    top: 24px;
+  }
+  .camera-controls-col {
+    flex: 2;
+    min-width: 0;
+  }
+
+  /* Header */
+  .site-header        { height: 80px !important; padding: 0 !important; }
+  .site-header-inner  { padding: 0 48px; }
+  .site-header-title  { font-size: 28px !important; }
+  .site-header-sub    { font-size: 17px !important; }
+
+  /* Floating chat button */
+  .chat-fab {
+    width:  64px !important;
+    height: 64px !important;
+    box-shadow: 0 6px 32px rgba(110,231,183,0.4) !important;
+  }
+
+  /* Chat panel — inline in controls column on desktop */
+  .chat-panel-box {
+    position: static !important;
+    width:    100% !important;
+    height:   520px !important;
+    right:    auto !important;
+    bottom:   auto !important;
+    margin-top: 16px;
+  }
+}

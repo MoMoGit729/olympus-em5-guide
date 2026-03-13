@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import ChatPanel from "@/components/ChatPanel";
 
 export const viewport: Viewport = {
   themeColor: "#0e2420",
@@ -19,7 +18,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         {children}
-        <ChatPanel />
       </body>
     </html>
   );

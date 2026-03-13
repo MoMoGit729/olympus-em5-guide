@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import React from "react";
 
 interface Part {
   id:          string;
@@ -408,49 +409,88 @@ Tip: After every important shoot, zoom in on key shots using this button and che
 
 const SORTED_PARTS = [...PARTS].sort((a, b) => a.title.localeCompare(b.title));
 
-export default function CameraInteractive() {
+export default function CameraInteractive({ chatOpen, onChatClose, children }: { chatOpen: boolean; onChatClose: () => void; children?: React.ReactNode }) {
   const [selected, setSelected] = useState<Part | null>(null);
   const [isOpen, setIsOpen]     = useState(false);
+
+  // Clear selection and close dropdown when chat opens
+  useEffect(() => {
+    if (chatOpen) { setSelected(null); setIsOpen(false); }
+  }, [chatOpen]);
 
   const choose = (part: Part) => {
     setSelected(part);
     setIsOpen(false);
+    onChatClose();
   };
 
   return (
-    <div>
-      {/* Static camera diagram */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/camera-diagram.png"
-        alt="Nikon D60 — Parts of the Camera"
-        style={{
-          width:        "100%",
-          height:       "auto",
-          display:      "block",
-          borderRadius: "8px",
-          marginBottom: "6px",
-        }}
-        draggable={false}
-      />
-      <p style={{
-        margin:     "0 0 16px 0",
-        fontSize:   "11px",
-        color:      "#3a7a6a",
-        textAlign:  "center",
-        letterSpacing: "0.02em",
-      }}>
-        © Nikon D60 Quick Start Guide
-      </p>
+    <div className="camera-layout">
+
+      {/* Left column — diagram */}
+      <div className="camera-diagram-col">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/camera-diagram.png"
+          alt="Nikon D60 — Parts of the Camera"
+          style={{
+            width:        "100%",
+            height:       "auto",
+            display:      "block",
+            borderRadius: "8px",
+            marginBottom: "6px",
+          }}
+          draggable={false}
+        />
+        <p style={{
+          margin:        "0",
+          fontSize:      "11px",
+          color:         "#3a7a6a",
+          textAlign:     "center",
+          letterSpacing: "0.02em",
+        }}>
+          © Nikon D60 Quick Start Guide
+        </p>
+      </div>
+
+      {/* Right column — controls */}
+      <div className="camera-controls-col">
+
+      {/* Welcome card — shown only when no part is selected and chat is closed */}
+      {!selected && !chatOpen && (
+        <div style={{
+          marginBottom:    "20px",
+          backgroundColor: "#142e2a",
+          border:          "1px solid #1a3530",
+          borderRadius:    "10px",
+          padding:         "20px 22px",
+          animation:       "fadeIn 0.3s ease",
+        }}>
+          <h2 style={{
+            color:      "#6ee7b7",
+            fontSize:   "18px",
+            fontWeight: 700,
+            margin:     "0 0 14px 0",
+            fontFamily: "system-ui",
+          }}>
+            Welcome to Your D60 Guide
+          </h2>
+          <p style={{ color: "#e8f8f2", fontSize: "17px", margin: "0 0 10px 0", lineHeight: 1.6 }}>
+            Select a camera part from the menu below to learn exactly what it does and how to use it.
+          </p>
+          <p style={{ color: "#e8f8f2", fontSize: "17px", margin: 0, lineHeight: 1.6 }}>
+            Tap the <strong style={{ color: "#6ee7b7" }}>?</strong> button in the corner to ask your Photo Assistant anything about your camera or photography.
+          </p>
+        </div>
+      )}
 
       {/* Dropdown label */}
       <p style={{
-        color:         "#5a9e8e",
-        fontSize:      "14px",
-        margin:        "0 0 8px 0",
-        textTransform: "uppercase",
-        letterSpacing: "0.06em",
-        fontWeight:    600,
+        color:       "#6ee7b7",
+        fontSize:    "16px",
+        margin:      "0 0 8px 0",
+        fontWeight:  700,
+        paddingLeft: "22px",
       }}>
         Select a camera part
       </p>
@@ -467,8 +507,8 @@ export default function CameraInteractive() {
             backgroundColor: isOpen ? "#112824" : "#142e2a",
             border:          isOpen ? "1px solid #6ee7b7" : "1px solid #1a3530",
             borderRadius:    isOpen ? "10px 10px 0 0" : "10px",
-            color:           selected ? "#e8f8f2" : "#3a7a6a",
-            fontSize:        "19px",
+            color:           selected ? "#e8f8f2" : "#a8d4c4",
+            fontSize:        "17px",
             fontFamily:      "system-ui",
             display:         "flex",
             alignItems:      "center",
@@ -481,14 +521,13 @@ export default function CameraInteractive() {
           <span>{selected ? selected.title : "Choose a part to learn about it…"}</span>
           <span style={{
             display:    "inline-block",
-            fontSize:   "18px",
-            color:      isOpen ? "#6ee7b7" : "#3a7a6a",
-            transform:  isOpen ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.2s ease, color 0.15s",
+            fontSize:   "28px",
+            color:      "#6ee7b7",
             marginLeft: "8px",
             flexShrink: 0,
+            lineHeight: 1,
           }}>
-            ›
+            {isOpen ? "▴" : "▾"}
           </span>
         </button>
 
@@ -565,14 +604,35 @@ export default function CameraInteractive() {
             borderRadius:    "10px",
             padding:         "20px",
             animation:       "fadeIn 0.2s ease",
+            position:        "relative",
           }}
         >
+          <button
+            onClick={() => setSelected(null)}
+            title="Close"
+            style={{
+              position:        "absolute",
+              top:             "12px",
+              right:           "12px",
+              background:      "none",
+              border:          "none",
+              color:           "#3a7a6a",
+              fontSize:        "18px",
+              cursor:          "pointer",
+              lineHeight:      1,
+              padding:         "2px 6px",
+              borderRadius:    "6px",
+            }}
+          >
+            ✕
+          </button>
           <h2 style={{
             color:      "#6ee7b7",
             fontSize:   "21px",
             fontWeight: 700,
             margin:     "0 0 10px 0",
             fontFamily: "system-ui",
+            paddingRight: "28px",
           }}>
             {selected.title}
           </h2>
@@ -588,6 +648,10 @@ export default function CameraInteractive() {
           </p>
         </div>
       )}
+
+      {children}
+
+      </div>
     </div>
   );
 }
