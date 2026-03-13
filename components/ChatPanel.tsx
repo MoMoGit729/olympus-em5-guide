@@ -17,6 +17,11 @@ export default function ChatPanel() {
   const [isLoading, setIsLoading]       = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("Thinking…");
 
+  // TTS state
+  const [voices, setVoices]               = useState<SpeechSynthesisVoice[]>([]);
+  const [selectedVoice, setSelectedVoice] = useState<string>("");
+  const [speakingIndex, setSpeakingIndex] = useState<number | null>(null);
+
   const classifyQuestion = (text: string, hasImage: boolean): string => {
     if (hasImage) return "Analyzing your photo…";
     const lower = text.toLowerCase();
@@ -34,9 +39,65 @@ export default function ChatPanel() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
 
+  // Load available TTS voices and restore saved preference
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+
+    const ALLOWED = ["Google US English", "Google UK English Female", "Google UK English Male"];
+
+    const loadVoices = () => {
+      const available = window.speechSynthesis.getVoices();
+      if (available.length === 0) return;
+      const filtered = available.filter(v => ALLOWED.includes(v.name));
+      const list = filtered.length > 0 ? filtered : available.filter(v => v.lang.startsWith("en"));
+      setVoices(list);
+      const saved = localStorage.getItem("tts-voice");
+      if (saved && list.find(v => v.name === saved)) {
+        setSelectedVoice(saved);
+      } else {
+        setSelectedVoice(list[0]?.name ?? "");
+      }
+    };
+
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+    return () => { window.speechSynthesis.onvoiceschanged = null; };
+  }, []);
+
+  // Stop speaking when the panel closes
+  useEffect(() => {
+    if (!isOpen && typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+      setSpeakingIndex(null);
+    }
+  }, [isOpen]);
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  const handleVoiceChange = (voiceName: string) => {
+    setSelectedVoice(voiceName);
+    localStorage.setItem("tts-voice", voiceName);
+  };
+
+  const speakMessage = (text: string, index: number) => {
+    if (!window.speechSynthesis) return;
+    if (speakingIndex === index) {
+      window.speechSynthesis.cancel();
+      setSpeakingIndex(null);
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = voices.find(v => v.name === selectedVoice);
+    if (voice) utterance.voice = voice;
+    utterance.rate = 0.95;
+    setSpeakingIndex(index);
+    utterance.onend  = () => setSpeakingIndex(null);
+    utterance.onerror = () => setSpeakingIndex(null);
+    window.speechSynthesis.speak(utterance);
+  };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -151,12 +212,12 @@ export default function ChatPanel() {
       {isOpen && (
         <div style={{
           position: "fixed", bottom: "88px", right: "24px", zIndex: 40,
-          width: "min(340px, calc(100vw - 48px))",
+          width: "min(360px, calc(100vw - 48px))",
           backgroundColor: "#142e2a",
           border: "1px solid #1a3530",
           borderRadius: "16px",
           display: "flex", flexDirection: "column",
-          height: "480px",
+          height: "520px",
           boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
           overflow: "hidden",
         }}>
@@ -179,8 +240,8 @@ export default function ChatPanel() {
               </svg>
             </div>
             <div style={{ flex: 1 }}>
-              <p style={{ margin: 0, fontWeight: 700, fontSize: "13px", color: "#e8f8f2" }}>Photo Assistant</p>
-              <p style={{ margin: 0, fontSize: "11px", color: "#5a9e8e" }}>Ask me anything about your D60</p>
+              <p style={{ margin: 0, fontWeight: 700, fontSize: "17px", color: "#e8f8f2" }}>Photo Assistant</p>
+              <p style={{ margin: 0, fontSize: "14px", color: "#5a9e8e" }}>Ask me anything about your D60</p>
             </div>
             {messages.length > 0 && (
               <button
@@ -188,7 +249,7 @@ export default function ChatPanel() {
                 title="Clear chat"
                 style={{
                   background: "none", border: "none",
-                  color: "#3a7a6a", fontSize: "11px",
+                  color: "#3a7a6a", fontSize: "14px",
                   cursor: "pointer", padding: "4px 8px",
                   borderRadius: "6px",
                   flexShrink: 0,
@@ -199,25 +260,61 @@ export default function ChatPanel() {
             )}
           </div>
 
+          {/* Voice picker bar */}
+          {voices.length > 0 && (
+            <div style={{
+              padding: "7px 12px",
+              backgroundColor: "#0f2421",
+              borderBottom: "1px solid #1a3530",
+              display: "flex", alignItems: "center", gap: "7px",
+            }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5a9e8e" strokeWidth="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+              </svg>
+              <span style={{ color: "#5a9e8e", fontSize: "12px", flexShrink: 0 }}>Voice</span>
+              <select
+                value={selectedVoice}
+                onChange={e => handleVoiceChange(e.target.value)}
+                style={{
+                  flex: 1, minWidth: 0,
+                  backgroundColor: "#142e2a",
+                  border: "1px solid #1a3530",
+                  borderRadius: "6px",
+                  color: "#a8d4c4",
+                  fontSize: "12px",
+                  padding: "3px 6px",
+                  outline: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {voices.map(v => (
+                  <option key={v.name} value={v.name}>{v.name}</option>
+                ))}
+              </select>
+            </div>
+          )}
+
           {/* Messages */}
           <div style={{ flex: 1, overflowY: "auto", padding: "14px", display: "flex", flexDirection: "column", gap: "10px" }}>
             {messages.length === 0 && (
               <div style={{ textAlign: "center", padding: "30px 10px" }}>
-                <p style={{ color: "#3a7a6a", fontSize: "13px", lineHeight: 1.6, margin: 0 }}>
+                <p style={{ color: "#3a7a6a", fontSize: "17px", lineHeight: 1.6, margin: 0 }}>
                   Hey! Ask me anything about your Nikon D60, your lenses, or photography in general. Tap the image icon to upload a photo for feedback.
                 </p>
               </div>
             )}
             {messages.map((m, i) => (
-              <div key={i} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
+              <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: m.role === "user" ? "flex-end" : "flex-start" }}>
                 <div style={{
                   maxWidth: "85%",
                   padding: "9px 13px",
                   borderRadius: m.role === "user" ? "14px 14px 4px 14px" : "14px 14px 14px 4px",
                   backgroundColor: m.role === "user" ? "#6ee7b7" : "#1a3530",
                   color: m.role === "user" ? "#0e2420" : "#a8d4c4",
-                  fontSize: "13px",
-                  lineHeight: 1.5,
+                  fontSize: "17px",
+                  lineHeight: 1.55,
                   whiteSpace: "pre-wrap",
                 }}>
                   {m.imageBase64 && (
@@ -233,12 +330,44 @@ export default function ChatPanel() {
                   )}
                   {m.content}
                 </div>
+                {/* Speaker button for assistant messages */}
+                {m.role === "assistant" && !m.isError && voices.length > 0 && (
+                  <button
+                    onClick={() => speakMessage(m.content, i)}
+                    title={speakingIndex === i ? "Stop reading" : "Read aloud"}
+                    style={{
+                      marginTop: "5px",
+                      background: "none", border: "none",
+                      cursor: "pointer", padding: "2px 4px",
+                      color: speakingIndex === i ? "#6ee7b7" : "#3a7a6a",
+                      display: "flex", alignItems: "center", gap: "5px",
+                      borderRadius: "6px",
+                      transition: "color 0.15s",
+                    }}
+                  >
+                    {speakingIndex === i ? (
+                      /* Stop icon */
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="6" y="6" width="12" height="12" rx="2"/>
+                      </svg>
+                    ) : (
+                      /* Speaker icon */
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                      </svg>
+                    )}
+                    <span style={{ fontSize: "12px" }}>
+                      {speakingIndex === i ? "Stop" : "Read aloud"}
+                    </span>
+                  </button>
+                )}
               </div>
             ))}
             {isLoading && (
               <div style={{ display: "flex", justifyContent: "flex-start" }}>
                 <div style={{ backgroundColor: "#1a3530", borderRadius: "14px 14px 14px 4px", padding: "10px 14px", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <span style={{ color: "#5a9e8e", fontSize: "12px", fontStyle: "italic" }}>{loadingMessage}</span>
+                  <span style={{ color: "#5a9e8e", fontSize: "15px", fontStyle: "italic" }}>{loadingMessage}</span>
                   <span style={{ display: "flex", gap: "4px" }}>
                     {[0, 150, 300].map(d => (
                       <span key={d} style={{
@@ -320,7 +449,7 @@ export default function ChatPanel() {
                         width: "100%", padding: "11px 14px",
                         background: "none", border: "none",
                         borderBottom: "1px solid #1a3530",
-                        color: "#a8d4c4", fontSize: "13px",
+                        color: "#a8d4c4", fontSize: "17px",
                         textAlign: "left", cursor: "pointer",
                         display: "flex", alignItems: "center", gap: "10px",
                       }}
@@ -336,7 +465,7 @@ export default function ChatPanel() {
                       style={{
                         width: "100%", padding: "11px 14px",
                         background: "none", border: "none",
-                        color: "#a8d4c4", fontSize: "13px",
+                        color: "#a8d4c4", fontSize: "17px",
                         textAlign: "left", cursor: "pointer",
                         display: "flex", alignItems: "center", gap: "10px",
                       }}
@@ -385,7 +514,7 @@ export default function ChatPanel() {
                 border: "1px solid #1a3530",
                 borderRadius: "10px",
                 color: "#a8d4c4",
-                fontSize: "13px",
+                fontSize: "17px",
                 outline: "none",
               }}
             />

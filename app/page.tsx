@@ -30,10 +30,10 @@ export default function Home() {
           </svg>
         </div>
         <div>
-          <h1 style={{ color: "#e8f8f2", fontSize: "16px", fontWeight: 700, margin: 0, letterSpacing: "-0.02em" }}>
+          <h1 style={{ color: "#e8f8f2", fontSize: "21px", fontWeight: 700, margin: 0, letterSpacing: "-0.02em" }}>
             Nikon D60 Guide
           </h1>
-          <p style={{ color: "#5a9e8e", fontSize: "11px", margin: 0 }}>Interactive Camera Reference</p>
+          <p style={{ color: "#5a9e8e", fontSize: "14px", margin: 0 }}>Interactive Camera Reference</p>
         </div>
       </header>
 

@@ -429,15 +429,24 @@ export default function CameraInteractive() {
           height:       "auto",
           display:      "block",
           borderRadius: "8px",
-          marginBottom: "20px",
+          marginBottom: "6px",
         }}
         draggable={false}
       />
+      <p style={{
+        margin:     "0 0 16px 0",
+        fontSize:   "11px",
+        color:      "#3a7a6a",
+        textAlign:  "center",
+        letterSpacing: "0.02em",
+      }}>
+        © Nikon D60 Quick Start Guide
+      </p>
 
       {/* Dropdown label */}
       <p style={{
         color:         "#5a9e8e",
-        fontSize:      "11px",
+        fontSize:      "14px",
         margin:        "0 0 8px 0",
         textTransform: "uppercase",
         letterSpacing: "0.06em",
@@ -459,7 +468,7 @@ export default function CameraInteractive() {
             border:          isOpen ? "1px solid #6ee7b7" : "1px solid #1a3530",
             borderRadius:    isOpen ? "10px 10px 0 0" : "10px",
             color:           selected ? "#e8f8f2" : "#3a7a6a",
-            fontSize:        "15px",
+            fontSize:        "19px",
             fontFamily:      "system-ui",
             display:         "flex",
             alignItems:      "center",
@@ -514,7 +523,7 @@ export default function CameraInteractive() {
                     borderBottom:    isLast ? "none" : "1px solid #112824",
                     borderRadius:    isLast ? "0 0 10px 10px" : 0,
                     color:           isSelected ? "#6ee7b7" : "#a8d4c4",
-                    fontSize:        "14px",
+                    fontSize:        "17px",
                     fontFamily:      "system-ui",
                     fontWeight:      isSelected ? 600 : 400,
                     textAlign:       "left",
@@ -560,7 +569,7 @@ export default function CameraInteractive() {
         >
           <h2 style={{
             color:      "#6ee7b7",
-            fontSize:   "16px",
+            fontSize:   "21px",
             fontWeight: 700,
             margin:     "0 0 10px 0",
             fontFamily: "system-ui",
@@ -571,7 +580,7 @@ export default function CameraInteractive() {
             color:      "#a8d4c4",
             lineHeight: 1.75,
             margin:     0,
-            fontSize:   "14px",
+            fontSize:   "17px",
             whiteSpace: "pre-line",
             fontFamily: "system-ui",
           }}>
