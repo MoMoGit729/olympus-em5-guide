@@ -163,11 +163,11 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
     const utterance = new SpeechSynthesisUtterance(content);
     const voice = voices.find(v => v.name === selectedVoice);
     if (voice) utterance.voice = voice;
-    utterance.rate = 0.90;
+    utterance.rate = 0.95;
 
-    // Estimate speech duration: ~135 words/min at rate 0.90
+    // Estimate speech duration: ~143 words/min at rate 0.95
     const wordCount = content.trim().split(/\s+/).length;
-    const estimatedMs = (wordCount / 135) * 60 * 1000;
+    const estimatedMs = (wordCount / 143) * 60 * 1000;
 
     const finish = () => {
       clearScrollTimer();
