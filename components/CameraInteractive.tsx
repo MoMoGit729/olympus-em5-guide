@@ -439,6 +439,8 @@ export default function CameraInteractive({ chatOpen, onChatClose, children }: {
             display:      "block",
             borderRadius: "8px",
             marginBottom: "6px",
+            border:       "1px solid #6ee7b7",
+            boxSizing:    "border-box",
           }}
           draggable={false}
         />
