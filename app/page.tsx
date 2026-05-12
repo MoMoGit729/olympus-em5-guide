@@ -3,11 +3,13 @@
 import { useState } from "react";
 import CameraInteractive from "@/components/CameraInteractive";
 import ChatPanel from "@/components/ChatPanel";
+import PasswordGate from "@/components/PasswordGate";
 
 export default function Home() {
   const [chatOpen, setChatOpen] = useState(false);
 
   return (
+    <PasswordGate>
     <div style={{ minHeight: "100vh", backgroundColor: "#0e2420", paddingBottom: "100px" }}>
 
       {/* Header — full-width bar, inner content aligns with main content below */}
@@ -56,5 +58,6 @@ export default function Home() {
         </CameraInteractive>
       </main>
     </div>
+    </PasswordGate>
   );
 }

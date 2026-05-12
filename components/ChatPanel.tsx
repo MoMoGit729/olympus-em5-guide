@@ -239,11 +239,16 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
       .filter((m, i) => i === nonError.length - 1 || m.role !== nonError[i + 1].role)
       .slice(-10);
 
-    const attemptFetch = () => fetch("/api/chat", {
-      method:  "POST",
-      headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify({ messages: recentMessages }),
-    });
+    const attemptFetch = () => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 30000);
+      return fetch("/api/chat", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ messages: recentMessages }),
+        signal:  controller.signal,
+      }).finally(() => clearTimeout(timer));
+    };
 
     try {
       let res = await attemptFetch();
@@ -254,7 +259,7 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
       const data = await res.json();
       setMessages(prev => [...prev, { role: "assistant", content: data.content ?? "Sorry, something went wrong!", isError: !data.content }]);
     } catch {
-      setMessages(prev => [...prev, { role: "assistant", content: "Oops! Couldn't reach the assistant. Check your internet and try again.", isError: true }]);
+      setMessages(prev => [...prev, { role: "assistant", content: "Hmm, the connection seems slow. Try again — it usually works better on wifi.", isError: true }]);
     } finally {
       setIsLoading(false);
     }
