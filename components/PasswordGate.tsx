@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 
 const CORRECT_PASSWORD = "nikon60";
-const SESSION_KEY = "nikon-d60-auth";
+const SESSION_KEY = "nikon-d60-auth-v2";
 
 export default function PasswordGate({ children }: { children: React.ReactNode }) {
   const [authenticated, setAuthenticated] = useState(false);
