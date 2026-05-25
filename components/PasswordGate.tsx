@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 
-const CORRECT_PASSWORD = "nikon60";
-const SESSION_KEY = "nikon-d60-auth-v2";
+const CORRECT_PASSWORD = "helloEM5";
+const SESSION_KEY = "em5-guide-auth-v1";
 
 export default function PasswordGate({ children }: { children: React.ReactNode }) {
   const [authenticated, setAuthenticated] = useState(false);
@@ -48,15 +48,15 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
   return (
     <div style={{
       minHeight:       "100vh",
-      backgroundColor: "#0e2420",
+      backgroundColor: "#f0ece4",
       display:         "flex",
       alignItems:      "center",
       justifyContent:  "center",
       padding:         "16px",
     }}>
       <div style={{
-        backgroundColor: "#142e2a",
-        border:          "1px solid #1a3530",
+        backgroundColor: "#e6e1d8",
+        border:          "1px solid #c8c2b6",
         borderRadius:    "16px",
         padding:         "40px 32px",
         width:           "100%",
@@ -72,22 +72,24 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
           <div style={{
             width:           "48px",
             height:          "48px",
-            backgroundColor: "#6ee7b7",
+            backgroundColor: "#2d6464",
             borderRadius:    "10px",
             display:         "flex",
             alignItems:      "center",
             justifyContent:  "center",
           }}>
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0e2420" strokeWidth="2.5">
-              <circle cx="12" cy="12" r="3"/>
-              <path d="M9 2h6l1.5 3H20a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h3.5L9 2z"/>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f0ece4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="1.5" y="7.5" width="21" height="12.5" rx="2.5"/>
+              <path d="M8.5 7.5V5.5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2"/>
+              <circle cx="12" cy="14" r="4"/>
+              <circle cx="12" cy="14" r="2"/>
             </svg>
           </div>
           <div style={{ textAlign: "center" }}>
-            <div style={{ color: "#e8f8f2", fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em" }}>
-              Nikon D60 Guide
+            <div style={{ color: "#1a3030", fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", fontFamily: "system-ui" }}>
+              Olympus E-M5 III Guide
             </div>
-            <div style={{ color: "#5a9e8e", fontSize: "14px", marginTop: "2px" }}>
+            <div style={{ color: "#5a7a6e", fontSize: "14px", marginTop: "2px", fontFamily: "system-ui" }}>
               Enter password to continue
             </div>
           </div>
@@ -106,14 +108,15 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
               style={{
                 width:           "100%",
                 padding:         "10px 40px 10px 14px",
-                backgroundColor: "#0e2420",
-                border:          `1px solid ${error ? "#f87171" : "#2a5048"}`,
+                backgroundColor: "#dbd5cb",
+                border:          `1px solid ${error ? "#c0392b" : "#c8c2b6"}`,
                 borderRadius:    "8px",
-                color:           "#e8f8f2",
+                color:           "#1a3030",
                 fontSize:        "16px",
                 outline:         "none",
                 transition:      "border-color 0.15s",
                 boxSizing:       "border-box",
+                fontFamily:      "system-ui",
               }}
             />
             <button
@@ -128,7 +131,7 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
                 border:     "none",
                 padding:    "2px",
                 cursor:     "pointer",
-                color:      "#5a9e8e",
+                color:      "#5a7a6e",
                 display:    "flex",
                 alignItems: "center",
               }}
@@ -149,7 +152,7 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
             </button>
           </div>
           {error && (
-            <div style={{ color: "#f87171", fontSize: "13px", textAlign: "center" }}>
+            <div style={{ color: "#c0392b", fontSize: "13px", textAlign: "center", fontFamily: "system-ui" }}>
               Incorrect password. Please try again.
             </div>
           )}
@@ -158,13 +161,14 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
             style={{
               width:           "100%",
               padding:         "10px",
-              backgroundColor: "#6ee7b7",
-              color:           "#0e2420",
+              backgroundColor: "#2d6464",
+              color:           "#f0ece4",
               border:          "none",
               borderRadius:    "8px",
               fontSize:        "15px",
               fontWeight:      600,
               cursor:          "pointer",
+              fontFamily:      "system-ui",
             }}
           >
             Enter

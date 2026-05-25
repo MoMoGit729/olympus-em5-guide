@@ -1,14 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Background fills full square (required for maskable/adaptive icons) -->
-  <rect width="512" height="512" fill="#0e2420"/>
-  <!-- Mint circle badge — fits within the 80% safe zone -->
-  <circle cx="256" cy="256" r="196" fill="#6ee7b7"/>
-  <!-- Camera top hump -->
-  <rect x="208" y="169" width="96" height="44" rx="12" fill="#0e2420"/>
-  <!-- Camera body -->
-  <rect x="146" y="207" width="220" height="135" rx="18" fill="#0e2420"/>
-  <!-- Lens outer ring (mint shows through) -->
-  <circle cx="256" cy="274" r="50" fill="#6ee7b7"/>
-  <!-- Lens inner -->
-  <circle cx="256" cy="274" r="33" fill="#0e2420"/>
+  <!-- Full teal background (matches the in-app icon container colour) -->
+  <rect width="512" height="512" fill="#2d6464"/>
+  <!-- Camera outline in warm white — same design as the in-app icon, scaled up -->
+  <g fill="none" stroke="#f0ece4" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Camera body -->
+    <rect x="80" y="198" width="352" height="188" rx="28"/>
+    <!-- Viewfinder hump, centred -->
+    <path d="M178 198 V142 a16 16 0 0 1 16-16 H318 a16 16 0 0 1 16 16 V198"/>
+    <!-- Lens outer ring -->
+    <circle cx="256" cy="292" r="68"/>
+    <!-- Lens inner ring -->
+    <circle cx="256" cy="292" r="34"/>
+  </g>
 </svg>
