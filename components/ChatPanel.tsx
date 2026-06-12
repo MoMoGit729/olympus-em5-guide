@@ -27,8 +27,8 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
     const lower = text.toLowerCase();
     if (/\bwhere\b|which side|location|find the|(left|right) of|which button|diopter/.test(lower))
       return "Looking at the diagram…";
-    if (/d60|nikon|\bmenu\b|\bmode\b|\biso\b|shutter|aperture|\bflash\b|\blens\b|autofocus|white balance|metering|playback|\bfocus\b|exposure|burst|continuous|viewfinder|\bdial\b|selector|release|image quality|settings/.test(lower))
-      return "Checking the D60 manual…";
+    if (/olympus|e-m5|em5|\bmenus?\b|\bmodes?\b|\biso\b|shutter|aperture|\bflash\b|\blens\b|autofocus|white.?balance|metering|playback|\bfocus\b|exposure|burst|continuous|viewfinder|\bdial\b|stabili|ibis|image.quality|settings|\bbutton\b|\blever\b|\bcard\b|\bbattery\b|\braw\b|\bjpeg\b|\brecord\b|\bvideo\b|\baf\b|\bdrive\b|bracket|custom|shooting menu|setup|picture.mode|art.filter|scene.mode|anti.shock|live.?view|lv\b|evf|tilt.screen|touch.screen|face.detect|tracking|single.shot|high.speed/.test(lower))
+      return "Checking the E-M5 III manual…";
     return "Drawing on photography knowledge…";
   };
 
@@ -285,23 +285,23 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
         style={{
           position: "fixed", bottom: "24px", right: "max(24px, calc((100vw - 1200px) / 2 + 24px))", zIndex: 50,
           width: "52px", height: "52px",
-          backgroundColor: "#6ee7b7",
+          backgroundColor: "#2d6464",
           border: "none", borderRadius: "50%",
           display: "flex", alignItems: "center", justifyContent: "center",
           cursor: "pointer",
-          boxShadow: "0 4px 20px rgba(110,231,183,0.2)",
+          boxShadow: "0 4px 20px rgba(45,100,100,0.25)",
           transition: "transform 0.2s",
         }}
       >
         {isOpen ? (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0e2420" strokeWidth="2.5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f0ece4" strokeWidth="2.5">
             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         ) : (
           <svg width="38" height="38" viewBox="0 0 36 36" style={{ display: "block" }}>
             <text x="18" y="30" textAnchor="middle" fontSize="34" fontWeight="900"
               fontFamily="system-ui, -apple-system, sans-serif"
-              fill="#0e2420" stroke="white" strokeWidth="3.5" paintOrder="stroke">?</text>
+              fill="#f0ece4" stroke="#1a3030" strokeWidth="3.5" paintOrder="stroke">?</text>
           </svg>
         )}
       </button>
@@ -311,41 +311,41 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
         <div ref={panelRef} className="chat-panel-box" style={{
           position: "fixed", bottom: "88px", right: "max(24px, calc((100vw - 1200px) / 2 + 24px))", zIndex: 40,
           width: "min(360px, calc(100vw - 48px))",
-          backgroundColor: "#142e2a",
-          border: "1px solid #1a3530",
+          backgroundColor: "#e6e1d8",
+          border: "1px solid #c8c2b6",
           borderRadius: "16px",
           display: "flex", flexDirection: "column",
           height: "520px",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
+          boxShadow: "0 8px 40px rgba(0,0,0,0.14)",
           overflow: "hidden",
         }}>
 
           {/* Header */}
           <div style={{
-            padding: "14px 16px", backgroundColor: "#112824",
-            borderBottom: "1px solid #1a3530",
+            padding: "14px 16px", backgroundColor: "#dbd5cb",
+            borderBottom: "1px solid #c8c2b6",
             display: "flex", alignItems: "center", gap: "10px",
           }}>
             <div style={{
-              width: "32px", height: "32px", backgroundColor: "#6ee7b7",
+              width: "32px", height: "32px", backgroundColor: "#2d6464",
               borderRadius: "50%", display: "flex", alignItems: "center",
               justifyContent: "center", flexShrink: 0,
             }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0e2420" strokeWidth="2.5">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0ece4" strokeWidth="2.5">
                 <circle cx="12" cy="12" r="3"/>
                 <path d="M9 2h6l1.5 3H20a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h3.5L9 2z"/>
               </svg>
             </div>
             <div style={{ flex: 1 }}>
-              <p style={{ margin: 0, fontWeight: 700, fontSize: "20px", color: "#e8f8f2" }}>Photo Assistant</p>
-              <p style={{ margin: 0, fontSize: "15px", color: "#5a9e8e" }}>Ask me anything about your D60</p>
+              <p style={{ margin: 0, fontWeight: 700, fontSize: "20px", color: "#1a3030" }}>Photo Assistant</p>
+              <p style={{ margin: 0, fontSize: "15px", color: "#5a7a6e" }}>Ask me anything about your E-M5 III</p>
             </div>
             {messages.length > 0 && (
               <button
                 onClick={() => { stopSpeaking(); setMessages([]); }}
                 title="Clear chat"
                 style={{
-                  background: "none", border: "none", color: "#3a7a6a",
+                  background: "none", border: "none", color: "#8a9e92",
                   fontSize: "14px", cursor: "pointer", padding: "4px 8px",
                   borderRadius: "6px", flexShrink: 0,
                 }}
@@ -356,11 +356,11 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
           {/* Voice picker + Read aloud bar */}
           {voices.length > 0 && (
             <div style={{
-              padding: "7px 12px", backgroundColor: "#0f2421",
-              borderBottom: "1px solid #1a3530",
+              padding: "7px 12px", backgroundColor: "#dbd5cb",
+              borderBottom: "1px solid #c8c2b6",
               display: "flex", alignItems: "center", gap: "7px",
             }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5a9e8e" strokeWidth="2" style={{ flexShrink: 0 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5a7a6e" strokeWidth="2" style={{ flexShrink: 0 }}>
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
                 <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
               </svg>
@@ -368,15 +368,15 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
                 value={selectedVoice}
                 onChange={e => handleVoiceChange(e.target.value)}
                 style={{
-                  flex: 1, minWidth: 0, backgroundColor: "#142e2a",
-                  border: "1px solid #1a3530", borderRadius: "6px",
-                  color: "#a8d4c4", fontSize: "12px", padding: "3px 6px",
+                  flex: 1, minWidth: 0, backgroundColor: "#e6e1d8",
+                  border: "1px solid #c8c2b6", borderRadius: "6px",
+                  color: "#3a4a44", fontSize: "12px", padding: "3px 6px",
                   outline: "none", cursor: "pointer",
                 }}
               >
                 {voices.map(v => <option key={v.name} value={v.name}>{v.name}</option>)}
               </select>
-              <div style={{ width: "1px", height: "18px", backgroundColor: "#1a3530", flexShrink: 0 }} />
+              <div style={{ width: "1px", height: "18px", backgroundColor: "#c8c2b6", flexShrink: 0 }} />
 
               {/* Play / Pause / Resume button */}
               <button
@@ -390,7 +390,7 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
                 style={{
                   background: "none", border: "none",
                   cursor: (lastAssistantMsg || isPaused) ? "pointer" : "not-allowed",
-                  color: (isSpeaking || isPaused) ? "#6ee7b7" : lastAssistantMsg ? "#a8d4c4" : "#3a7a6a",
+                  color: (isSpeaking || isPaused) ? "#2d6464" : lastAssistantMsg ? "#3a4a44" : "#8a9e92",
                   fontSize: "12px", display: "flex", alignItems: "center", gap: "4px",
                   flexShrink: 0, padding: "2px 4px", borderRadius: "4px", transition: "color 0.15s",
                 }}
@@ -417,7 +417,7 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
                   title="Stop reading"
                   style={{
                     background: "none", border: "none", cursor: "pointer",
-                    color: "#5a9e8e", fontSize: "12px",
+                    color: "#5a7a6e", fontSize: "12px",
                     display: "flex", alignItems: "center", gap: "3px",
                     flexShrink: 0, padding: "2px 4px", borderRadius: "4px",
                   }}
@@ -438,8 +438,8 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
           >
             {messages.length === 0 && (
               <div style={{ textAlign: "center", padding: "30px 10px" }}>
-                <p style={{ color: "#3a7a6a", fontSize: "17px", lineHeight: 1.6, margin: 0 }}>
-                  Hey! Ask me anything about your Nikon D60, your lenses, or photography in general. Tap the image icon to upload a photo for feedback.
+                <p style={{ color: "#8a9e92", fontSize: "17px", lineHeight: 1.6, margin: 0 }}>
+                  Ask me anything about your Olympus E-M5 III, your lenses, or photography. Tap the image icon to upload a photo for feedback.
                 </p>
               </div>
             )}
@@ -452,8 +452,8 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
                 <div style={{
                   maxWidth: "85%", padding: "9px 13px",
                   borderRadius: m.role === "user" ? "14px 14px 4px 14px" : "14px 14px 14px 4px",
-                  backgroundColor: m.role === "user" ? "#6ee7b7" : "#1a3530",
-                  color: m.role === "user" ? "#0e2420" : "#a8d4c4",
+                  backgroundColor: m.role === "user" ? "#2d6464" : "#dbd5cb",
+                  color: m.role === "user" ? "#f0ece4" : "#3a4a44",
                   fontSize: "17px", lineHeight: 1.55, whiteSpace: "pre-wrap",
                 }}>
                   {m.imageBase64 && (
@@ -466,13 +466,13 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
             ))}
             {isLoading && (
               <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                <div style={{ backgroundColor: "#1a3530", borderRadius: "14px 14px 14px 4px", padding: "10px 14px", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <span style={{ color: "#5a9e8e", fontSize: "15px", fontStyle: "italic" }}>{loadingMessage}</span>
+                <div style={{ backgroundColor: "#dbd5cb", borderRadius: "14px 14px 14px 4px", padding: "10px 14px", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span style={{ color: "#5a7a6e", fontSize: "15px", fontStyle: "italic" }}>{loadingMessage}</span>
                   <span style={{ display: "flex", gap: "4px" }}>
                     {[0, 150, 300].map(d => (
                       <span key={d} style={{
                         width: "5px", height: "5px", borderRadius: "50%",
-                        backgroundColor: "#5a9e8e", display: "inline-block",
+                        backgroundColor: "#5a7a6e", display: "inline-block",
                         animation: `bounce 1s ${d}ms infinite`,
                       }}/>
                     ))}
@@ -485,14 +485,14 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
 
           {/* Pending image preview */}
           {pendingImage && (
-            <div style={{ padding: "8px 12px", backgroundColor: "#112824", borderTop: "1px solid #1a3530" }}>
+            <div style={{ padding: "8px 12px", backgroundColor: "#dbd5cb", borderTop: "1px solid #c8c2b6" }}>
               <div style={{ position: "relative", display: "inline-block" }}>
                 <img src={pendingImage.previewUrl} alt="Ready to send"
                   style={{ height: "64px", width: "auto", borderRadius: "8px", display: "block" }} />
                 <button onClick={() => setPendingImage(null)} style={{
                   position: "absolute", top: "-6px", right: "-6px",
-                  width: "18px", height: "18px", backgroundColor: "#142e2a",
-                  border: "1px solid #5a9e8e", borderRadius: "50%", color: "#a8d4c4",
+                  width: "18px", height: "18px", backgroundColor: "#e6e1d8",
+                  border: "1px solid #5a7a6e", borderRadius: "50%", color: "#3a4a44",
                   fontSize: "12px", cursor: "pointer", display: "flex",
                   alignItems: "center", justifyContent: "center", padding: 0,
                 }}>×</button>
@@ -502,8 +502,8 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
 
           {/* Input area */}
           <div style={{
-            padding: "12px", borderTop: "1px solid #1a3530",
-            backgroundColor: "#112824", display: "flex", gap: "8px", alignItems: "center",
+            padding: "12px", borderTop: "1px solid #c8c2b6",
+            backgroundColor: "#dbd5cb", display: "flex", gap: "8px", alignItems: "center",
           }}>
             <div style={{ position: "relative", flexShrink: 0 }}>
               {showUploadMenu && (
@@ -511,15 +511,15 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
                   <div onClick={() => setShowUploadMenu(false)} style={{ position: "fixed", inset: 0, zIndex: 9 }} />
                   <div style={{
                     position: "absolute", bottom: "calc(100% + 6px)", left: 0,
-                    backgroundColor: "#112824", border: "1px solid #1a3530",
+                    backgroundColor: "#dbd5cb", border: "1px solid #c8c2b6",
                     borderRadius: "10px", overflow: "hidden",
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.5)", minWidth: "170px", zIndex: 10,
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.1)", minWidth: "170px", zIndex: 10,
                   }}>
                     <button onClick={() => { cameraInputRef.current?.click(); setShowUploadMenu(false); }}
                       style={{ width: "100%", padding: "11px 14px", background: "none", border: "none",
-                        borderBottom: "1px solid #1a3530", color: "#a8d4c4", fontSize: "17px",
+                        borderBottom: "1px solid #c8c2b6", color: "#3a4a44", fontSize: "17px",
                         textAlign: "left", cursor: "pointer", display: "flex", alignItems: "center", gap: "10px" }}>
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a9e8e" strokeWidth="2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a7a6e" strokeWidth="2">
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                         <circle cx="12" cy="13" r="4"/>
                       </svg>
@@ -527,9 +527,9 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
                     </button>
                     <button onClick={() => { fileInputRef.current?.click(); setShowUploadMenu(false); }}
                       style={{ width: "100%", padding: "11px 14px", background: "none", border: "none",
-                        color: "#a8d4c4", fontSize: "17px", textAlign: "left", cursor: "pointer",
+                        color: "#3a4a44", fontSize: "17px", textAlign: "left", cursor: "pointer",
                         display: "flex", alignItems: "center", gap: "10px" }}>
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a9e8e" strokeWidth="2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a7a6e" strokeWidth="2">
                         <rect x="3" y="3" width="18" height="18" rx="2"/>
                         <circle cx="8.5" cy="8.5" r="1.5"/>
                         <polyline points="21 15 16 10 5 21"/>
@@ -541,13 +541,13 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
               )}
               <button onClick={() => setShowUploadMenu(o => !o)} title="Upload a photo" style={{
                 width: "36px", height: "36px",
-                backgroundColor: pendingImage ? "#6ee7b7" : "transparent",
-                border: `1px solid ${pendingImage ? "#6ee7b7" : "#1a3530"}`,
+                backgroundColor: pendingImage ? "#2d6464" : "transparent",
+                border: `1px solid ${pendingImage ? "#2d6464" : "#c8c2b6"}`,
                 borderRadius: "10px", display: "flex", alignItems: "center",
                 justifyContent: "center", cursor: "pointer", transition: "background 0.15s, border 0.15s",
               }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke={pendingImage ? "#0e2420" : "#5a9e8e"} strokeWidth="2">
+                  stroke={pendingImage ? "#f0ece4" : "#5a7a6e"} strokeWidth="2">
                   <rect x="3" y="3" width="18" height="18" rx="2"/>
                   <circle cx="8.5" cy="8.5" r="1.5"/>
                   <polyline points="21 15 16 10 5 21"/>
@@ -559,17 +559,17 @@ export default function ChatPanel({ isOpen, onOpenChange }: { isOpen: boolean; o
               placeholder={pendingImage ? "Add a question, or just hit send…" : "Ask a question…"}
               style={{
                 flex: 1, minWidth: 0, padding: "9px 12px", boxSizing: "border-box",
-                backgroundColor: "#142e2a", border: "1px solid #1a3530",
-                borderRadius: "10px", color: "#a8d4c4", fontSize: "17px", outline: "none",
+                backgroundColor: "#e6e1d8", border: "1px solid #c8c2b6",
+                borderRadius: "10px", color: "#3a4a44", fontSize: "17px", outline: "none",
               }} />
 
             <button onClick={sendMessage} disabled={!canSend} style={{
-              width: "36px", height: "36px", backgroundColor: "#6ee7b7",
+              width: "36px", height: "36px", backgroundColor: "#2d6464",
               border: "none", borderRadius: "10px", display: "flex",
               alignItems: "center", justifyContent: "center",
               cursor: canSend ? "pointer" : "not-allowed", opacity: canSend ? 1 : 0.4, flexShrink: 0,
             }}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0e2420" strokeWidth="2.5">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f0ece4" strokeWidth="2.5">
                 <line x1="22" y1="2" x2="11" y2="13"/>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"/>
               </svg>

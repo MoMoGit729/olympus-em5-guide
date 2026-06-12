@@ -2,13 +2,13 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name:             "Nikon D60 Guide",
-    short_name:       "D60 Guide",
-    description:      "Interactive Nikon D60 camera reference and photography assistant",
+    name:             "Olympus E-M5 III Guide",
+    short_name:       "EM5 Guide",
+    description:      "Interactive Olympus E-M5 Mark III camera reference and photography assistant",
     start_url:        "/",
     display:          "browser",
-    background_color: "#0e2420",
-    theme_color:      "#0e2420",
+    background_color: "#f0ece4",
+    theme_color:      "#2d6464",
     icons: [
       { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
       { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },

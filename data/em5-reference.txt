@@ -1,0 +1,904 @@
+OLYMPUS OM-D E-M5 MARK III — CAMERA REFERENCE
+Condensed from the official Instruction Manual (IM016)
+Key sections: Parts, Shooting Modes, Controls, Settings, Menus, Custom Settings
+
+
+═══════════════════════════════════════════════
+1. NAMES OF PARTS
+═══════════════════════════════════════════════
+
+FRONT OF CAMERA (numbered from top-left):
+1  Mode dial lock — press and hold to rotate the mode dial
+2  Rear dial (o) — main thumb-operated rotary dial
+3  Shutter button — half-press to focus/meter; full press to shoot
+4  R (Movie) / H button — starts/stops video; H function configurable
+5  F (Exposure compensation) button — hold and rotate a dial
+6  Front dial (r) — index-finger rotary dial (secondary control)
+7  Lens attachment mark — red dot; align with lens mark to attach
+8  Preview button — stops down lens to shooting aperture for DOF preview
+9  Mount — Micro Four Thirds bayonet mount; remove body cap before attaching lens
+0  Mode dial — selects shooting mode
+a  Stereo microphone
+b  ON/OFF lever — surrounds shutter button; rotate to power on/off
+c  LV (u) button — toggles display between EVF and monitor
+d  jY button — sequential / self-timer / HDR drive mode selection
+e  Self-timer lamp / AF illuminator
+f  Microphone jack cover
+g  Remote cable terminal cover
+h  Connector cover (front-left panel)
+i  Strap eyelet
+j  Lens release button — hold and rotate lens counter-clockwise to remove
+k  Lens lock pin — spring pin; audible click when lens is locked
+l  Microphone jack — 3.5mm stereo mini plug for external mic
+m  Remote cable terminal — for RM-UC1 or compatible remote
+n  HDMI connector (Type D / micro-HDMI)
+o  Micro-USB connector — image transfer and in-camera USB charging
+
+BACK OF CAMERA:
+1  Diopter adjustment dial — corrects EVF focus to match your eyesight
+2  Monitor (touch screen) — tilts up ~80° and down ~50°; full touch control
+3  Viewfinder (EVF) — 2.36-megadot electronic viewfinder; shows real-time exposure preview
+4  Eye sensor — infrared proximity sensor; auto-switches EVF/monitor when you raise camera to eye
+5  Eyecup — rubber cup; seals light from EVF
+6  MENU button — opens full menu system
+7  Hot shoe — ISO standard; supports Olympus FL-series TTL flash
+8  AEL/AFL / Protect (0) button — locks exposure and/or focus in shooting; protects images in playback
+9  Fn lever — two-position lever; instantly switches button assignments between two custom sets
+0  Speaker
+a  ISO button — opens ISO selection directly
+b  INFO button — cycles info overlays in shooting and playback
+c  Q button — opens Quick Menu (LV Super Control Panel in shooting mode)
+d  Arrow pad (FGHI) — navigation; direct function assignments in shooting mode
+e  Playback (q) button
+f  Erase button — deletes current image in playback
+g  CHARGE lamp — battery charging status LED
+h  Connector cover (left panel) — protects HDMI and USB ports
+i  Tripod socket — standard 1/4"-20 UNC
+j  Battery compartment cover
+k  Battery compartment lock — slide to unlock cover
+l  Card compartment cover
+m  Card slot — accepts SD/SDHC/SDXC (UHS-I recommended; U3/V30 required for 4K video)
+
+DIAL NOTATION in this manual:
+- r icon = front dial operation
+- o icon = rear dial operation
+- FGHI = arrow pad (up/down/left/right)
+
+
+═══════════════════════════════════════════════
+2. SHOOTING MODES (mode dial positions)
+═══════════════════════════════════════════════
+
+P — Program AE
+  Camera sets both aperture and shutter speed automatically.
+  Front dial: adjusts exposure compensation
+  Rear dial: program shift (changes aperture/shutter combination without changing exposure; "Ps" shown in display when active)
+  To cancel program shift: rotate rear dial in opposite direction until Ps disappears.
+  Note: Live View shows the effects of exposure settings in real time (unless Live View Boost is on).
+
+A — Aperture-Priority AE
+  You set aperture; camera sets shutter speed automatically.
+  Rear dial (default): selects aperture
+  Front dial: exposure compensation
+  Lower f-number = larger aperture = shallower depth of field = more background blur
+  Higher f-number = smaller aperture = greater depth of field = more in focus
+  If shutter speed display flashes: subject too dark (slow speed) or too bright (fast speed).
+
+S — Shutter-Priority AE
+  You set shutter speed; camera sets aperture automatically.
+  Rear dial (default): selects shutter speed (range: 1/8000–60s; up to 1/32000s in silent mode)
+  Front dial: exposure compensation
+  Faster speeds freeze motion. Slower speeds add motion blur.
+  If aperture value flashes: subject under- or overexposed.
+
+M — Manual Exposure
+  You set both aperture and shutter speed.
+  Front dial (default): aperture
+  Rear dial (default): shutter speed (range: 1/8000–60s; 1/32000s in silent mode)
+  Display shows exposure difference from optimal metered exposure (flashes if >±3 EV).
+  When ISO is set to AUTO in M mode, exposure compensation is available — it adjusts ISO.
+
+B — Bulb / Time / Live Composite
+  For long exposures.
+  Bulb: shutter stays open while button is held; release button to end exposure.
+  Time: press once to open shutter; press again to close.
+  Live Bulb / Live Time: monitor updates at a set interval during exposure so you can see image building.
+  To set: rotate to B, use rear dial to select Bulb or Time, press MENU to choose update interval.
+  Live Composite: stacks multiple exposures to capture light trails, star trails, fireworks.
+
+AUTO (iAUTO)
+  Fully automatic mode. Camera controls all settings. Best for quick snapshots.
+
+SCN — Scene Mode
+  Selects from preset scene modes via menu. Options include:
+  Portrait, Landscape, Landscape+Portrait, Sport, Hand-held Starlight, Night Scene, Night+Portrait,
+  Children, High Key, Low Key, DIS Mode (digital image stabilization), Macro, Nature Macro,
+  Candle, Sunset, Documents, Fireworks, Beach & Snow, Fisheye Conv., Wide Conv., Tele Conv.,
+  Macro Conv., Multi-Focus Shot, Panorama.
+  Navigate to SCN on mode dial, then use Q button or arrow pad to pick scene in menu.
+
+ART — Art Filter Mode
+  Applies creative in-camera filter effects. Options include:
+  Pop Art, Soft Focus, Pale & Light Color, Light Tone, Grainy Film, Pin Hole, Diorama,
+  Cross Process, Gentle Sepia, Dramatic Tone, Key Line, Watercolor, Vintage, Partial Color,
+  Color Select.
+  Each filter has sub-variations. Access via Q button in ART mode.
+  Note: sequential burst and some ISO settings are restricted in ART mode.
+
+C — Custom Mode
+  Stores a complete set of camera settings for instant recall.
+  Save settings: MENU → W Shooting Menu 1 → Reset/Custom Modes → Assign to Custom Mode
+  Recall: rotate mode dial to C, then use front/rear dial to select C1, C2, or C3.
+  Custom modes store shooting mode, exposure settings, AF mode, drive mode, IS, and most
+  menu-based shooting settings.
+
+n — Movie Mode
+  Dedicated video recording mode with movie-specific menu settings.
+  Press R button in any photo mode to start/stop recording without entering movie mode.
+  4K video: up to 30p. 1080p: up to 120p (for slow motion).
+  Movie exposure modes: P, A, S, M (set in Video Menu → n Mode).
+
+
+═══════════════════════════════════════════════
+3. INFORMATION DISPLAYS WHILE SHOOTING
+═══════════════════════════════════════════════
+
+KEY INDICATORS IN MONITOR / EVF:
+- Shooting mode (P, A, S, M, B, AUTO, SCN, ART, C)
+- Shutter speed and aperture value
+- Exposure compensation bar (range ±3 EV shown; bar flashes outside that range)
+- ISO sensitivity (shows AUTO or number)
+- AF mode (S-AF, C-AF, MF, etc.)
+- AF confirmation mark (lights when focus locked)
+- Metering mode icon
+- White balance mode
+- Flash mode and flash compensation
+- Image stabilizer status (S-IS AUTO, S-IS1, etc.)
+- Drive mode (single, sequential, self-timer, etc.)
+- Image quality and aspect ratio
+- Battery level
+- Number of remaining shots / available recording time
+- Histogram (optional, toggle with INFO)
+- Level gauge (optional, toggle with INFO)
+- Face/eye priority indicator
+- Card write indicator
+
+SWITCHING INFO DISPLAYS:
+Press INFO button to cycle through available overlays:
+- Standard shooting data
+- Live histogram
+- Highlight/shadow warning (exposure aid)
+- Level gauge
+- Minimal display (clean composition view)
+In playback, INFO cycles through: basic info, full EXIF data, histogram, highlight blinkies.
+
+SWITCHING EVF / MONITOR:
+- Eye sensor: automatically switches to EVF when eye is near; back to monitor when moved away
+- LV (u) button: manually toggles between monitor and EVF
+- Configure switching behavior: MENU → d Setup Menu → EVF Auto Switch
+
+
+═══════════════════════════════════════════════
+4. DIRECT BUTTONS (quick access controls)
+═══════════════════════════════════════════════
+
+These buttons give immediate access to key functions without opening menus:
+
+Button             Default function
+Preview button     Stop down lens to shooting aperture (depth-of-field preview)
+AEL/AFL button     Lock exposure (AEL) and/or focus (AFL)
+ISO button         Open ISO selection screen
+Arrow pad (FGHI)   Move AF target / navigate (also has direct assignments; see custom menus)
+jY button          Sequential / self-timer / drive mode selection
+LV (u) button      Switch between monitor and EVF
+F button           Exposure compensation (hold + rotate front or rear dial)
+R button           Start/stop movie recording
+
+To use the F (exposure compensation) button:
+  Hold F and rotate front or rear dial; or hold F and press left/right on arrow pad.
+  Current EV value shown in display. Reset to 0: press and hold Q button.
+
+To reassign buttons: MENU → G Custom Menu → M Button/Dial/Lever → K Button Function
+
+
+═══════════════════════════════════════════════
+5. LV SUPER CONTROL PANEL (Q button in shooting mode)
+═══════════════════════════════════════════════
+
+The LV Super Control Panel is the fastest way to change key shooting settings during live view.
+
+HOW TO USE:
+1. Press Q button to activate the panel and place cursor on last-used setting.
+2. Use arrow pad (FGHI) to highlight a setting, or tap the display.
+3. Rotate front dial to change the highlighted setting.
+4. Press Q button for additional options on the current setting.
+5. Press INFO button for further sub-options on some settings.
+6. Half-press shutter to accept settings and exit the panel.
+
+SETTINGS ACCESSIBLE IN THE LV SUPER CONTROL PANEL:
+- ISO sensitivity
+- White Balance (WB)
+- AF Mode (S-AF, C-AF, MF, S-AFb, C-AF+TR, PreMF)
+- Image Stabilizer (S-IS OFF, S-IS AUTO, S-IS1, S-IS2, S-IS3)
+- Metering (Digital ESP, Center-weighted, Spot, Spot highlight, Spot shadow)
+- Flash Mode (Fill, Off, Red-eye, Slow, Slow2, Manual)
+- Drive / Sequential shooting (Single, Sequential High, Sequential Low, Self-timer, Anti-shock, Silent, Pro Capture, High Res Shot)
+- Picture Mode (Natural, Vivid, Muted, Portrait, i-Enhance, Flat, Monochrome, Color Creator, plus custom slots)
+- Aspect Ratio (4:3, 16:9, 3:2, 1:1, 3:4)
+- Image Quality (RAW, JPEG Fine L, JPEG Normal L, etc.)
+- Color Space (sRGB, AdobeRGB)
+- WB Compensation (fine-tune white balance by A-B and G-M axes)
+- Face / Eye Priority AF
+
+SUPER CONTROL PANEL (viewfinder photography):
+When framing through the EVF, the super LV control panel is always shown in the monitor.
+Press Q to activate the cursor, then navigate with arrow pad or rear dial.
+
+
+═══════════════════════════════════════════════
+6. ISO SENSITIVITY
+═══════════════════════════════════════════════
+
+Access: ISO button, or via LV Super Control Panel.
+
+Range: LOW, 200–25600, AUTO
+
+ISO 200: best image quality; recommended as baseline in good light.
+ISO 400–800: excellent quality; good for slightly dim conditions.
+ISO 1600–3200: some noise visible, especially in shadows; usable for indoor available light.
+ISO 6400+: visible noise; use when shutter speed or aperture choices are limited.
+ISO LOW: expands range below ISO 200; reduces dynamic range.
+ISO AUTO: camera selects sensitivity automatically based on lighting.
+
+AUTO ISO settings: MENU → G Custom Menu → T Exp/ISO/BULB/p → ISO-Auto Set
+  - Max ISO in Auto: set your ceiling (e.g., ISO 3200 or 6400)
+  - Shutter speed threshold: ISO auto kicks in when shutter would go below this speed
+
+Note on M mode: when ISO is set to AUTO in Manual mode, exposure compensation is applied
+by adjusting ISO rather than aperture or shutter speed.
+
+IBIS advantage: The E-M5 Mark III's 5-axis image stabilization allows use of slower
+shutter speeds than on cameras without IBIS, so you can often keep ISO lower.
+
+
+═══════════════════════════════════════════════
+7. AUTOFOCUS (AF) — Mode and Target
+═══════════════════════════════════════════════
+
+AF MODE (change via LV Super Control Panel → AF Mode, or MENU → G Custom Menu → J AF/MF → K AF Mode):
+
+S-AF (Single AF)
+  Camera focuses once when shutter is half-pressed. Beep confirms focus. Suitable for still subjects.
+  Focus locks at half-press; recompose while holding.
+
+C-AF (Continuous AF)
+  Camera continuously adjusts focus while shutter is half-pressed.
+  Best for moving subjects. AF confirmation mark lights at initial lock; camera keeps refocusing.
+
+MF (Manual Focus)
+  Use focus ring on lens to focus manually.
+  MF Assist (magnified view or focus peaking) activates when focus ring is turned.
+  Configure: MENU → G Custom Menu → L AF/MF → MF Assist.
+
+S-AFb (Single AF + Manual Fine-tune)
+  Focuses in S-AF first; then you can turn focus ring to fine-adjust.
+
+C-AF+TR (C-AF with Subject Tracking)
+  Half-press locks onto subject; camera tracks it even if it moves or you recompose.
+  AF target turns red if tracking is lost; release shutter and re-acquire.
+
+PreMF (Preset Manual Focus)
+  Camera auto-focuses to a pre-set distance stored in memory.
+  Set distance: select PreMF, press Q + INFO, half-press shutter, press Q to store.
+
+AF TARGET MODE (arrow pad in shooting mode, or FGHI to display AF area):
+  Use front dial during AF target selection to choose shape:
+  Single target (M) — one precise focus point
+  Small target (o) — smaller single target for pinpoint accuracy on tiny subjects
+  5-target group (N) — cross-shaped cluster of 5 targets
+  9-target group (r) — 3×3 square cluster of 9 targets
+  25-target group (s) — 5×5 square cluster of 25 targets
+  All targets (q) — 121 targets covering whole frame; camera picks focus point
+
+To move a single AF target: use arrow pad after pressing FGHI.
+Touch AF: tap the screen to set focus point anywhere in the frame.
+
+Face / Eye Priority AF:
+  Detects and prioritizes faces or eyes within the frame.
+  Enable in LV Super Control Panel (Face icon).
+  Works in S-AF and C-AF modes.
+
+AEL/AFL (focus lock with AEL/AFL button):
+  Default: hold AEL/AFL button to lock both AE and AF.
+  Highly configurable; see MENU → G Custom Menu → J AF/MF → K AEL/AFL.
+  Back-button focus: assign AF activation to AEL/AFL and disable AF on half-press.
+
+
+═══════════════════════════════════════════════
+8. METERING MODES
+═══════════════════════════════════════════════
+
+Change via LV Super Control Panel → Metering.
+
+Digital ESP (p) — default
+  Divides frame into 324 zones; analyzes and optimizes for scene and subjects.
+  Recognizes faces (if face priority is on) and weights metering accordingly.
+  Recommended for general use.
+
+Center-Weighted (B)
+  Averages entire frame but weights center more heavily.
+  Classic mode for traditional shooting styles.
+
+Spot (C)
+  Meters ~2% of frame at the selected AF point.
+  Use when precise exposure for a specific tone is needed.
+
+Spot Highlight (D)
+  Spot metering biased toward bright areas — ensures bright subjects stay bright.
+
+Spot Shadow (E)
+  Spot metering biased toward shadows — ensures dark subjects stay dark.
+
+Spot metering position can be linked to AF target: MENU → G Custom Menu → V Exp/ISO → N Spot Metering
+
+
+═══════════════════════════════════════════════
+9. WHITE BALANCE (WB)
+═══════════════════════════════════════════════
+
+Change via LV Super Control Panel → WB. Press Q then INFO for one-touch WB and extra options.
+
+AUTO          — Recommended for most situations; adapts to light source
+AUTO (Keep Warm Color) — AUTO with an option to preserve incandescent warmth (press Q + INFO when AUTO selected)
+Sunny (5)     — 5300K; outdoor sunlit scenes, sunsets, fireworks
+Shade (N)     — 7500K; subjects in shade
+Cloudy (O)    — 6000K; overcast skies
+Incandescent (1) — 3000K; tungsten/incandescent indoor lighting
+Fluorescent (>) — 4000K; fluorescent lighting
+Underwater (U) — for underwater shooting
+Flash (n)     — 5500K; matches color temperature of electronic flash
+One-touch WB (P/Q/W/X) — 4 custom presets measured from a white/gray reference card
+CWB (Custom)  — manually enter color temperature 2000K–14000K
+
+One-Touch WB procedure:
+  1. Select P, Q, W, or X and press Q + INFO.
+  2. Point at a white or gray card and take a shot.
+  3. Select Yes to store.
+
+WB Fine-tune (Compensation):
+  In LV Super Control Panel, after selecting WB mode, press left/right (HI) to access compensation.
+  A axis (red-blue): + = more red, – = more blue.
+  G axis (green-magenta): + = more green, – = more magenta.
+  Can be applied globally to all WB modes: MENU → G Custom Menu → X K/WB/Color → All x
+
+
+═══════════════════════════════════════════════
+10. IMAGE STABILIZATION (IBIS)
+═══════════════════════════════════════════════
+
+The E-M5 Mark III has 5-axis in-body image stabilization (IBIS). This is one of the camera's
+most valuable features. It compensates for camera motion in 5 axes: pitch, yaw, horizontal
+shift, vertical shift, and roll. Take advantage of it to use slower shutter speeds and lower ISO.
+
+Change via LV Super Control Panel → Image Stabilizer (K IS icon).
+
+S-IS OFF — Disable IS completely. Use on a tripod to prevent IS fighting a fixed mount.
+S-IS AUTO — Default. IS on all axes; auto-detects panning and suspends that axis.
+S-IS1 — All-axis IS (does not auto-suspend during panning).
+S-IS2 — Vertical-axis IS only. Use when panning horizontally.
+S-IS3 — Horizontal-axis IS only. Use when panning vertically.
+
+Movie IS:
+M-IS OFF — No movie IS.
+M-IS1 — Electronic IS + sensor-shift IS (maximum stabilization but slight crop).
+M-IS2 — Sensor-shift IS only.
+
+Notes:
+- The lens IS switch (if present) takes priority over camera body settings.
+- Tripod use: set to S-IS OFF or use a tripod-specific mode if available.
+- Using non-MFT lenses: specify focal length manually (Q button + INFO in IS setting).
+
+Half-press + IS: configure whether IS starts at half-press or only at full press.
+  MENU → G Custom Menu → O Release → Half Way Rls With IS
+
+
+═══════════════════════════════════════════════
+11. DRIVE MODES (sequential / self-timer)
+═══════════════════════════════════════════════
+
+Access: jY button, or LV Super Control Panel → drive mode icon. Rotate front/rear dial to select.
+
+Single (o)            One frame per full press.
+Sequential High (T)   Up to ~10 fps while shutter held. Focus, exposure, WB locked at first shot.
+                      Frame rate drops at ISO >8000.
+Sequential Low (S)    Up to ~6 fps while shutter held. Focus and exposure follow K AF Mode setting.
+                      C-AF/C-AF+TR can refocus between shots.
+Self-timer 12s (X)    12-second delay; lamp lights for ~10s then flashes last 2s.
+Self-timer 2s (Z)     2-second delay; lamp flashes.
+Custom Self-timer (c) Press INFO while c is selected to configure: delay, number of frames, interval, per-frame AF.
+Anti-Shock r (S icon) Brief delay after shutter press before exposure; eliminates shutter-induced vibration. Good for macro and telephoto on a tripod.
+Silent s (S icon)     Electronic shutter; completely silent. Up to 1/32000s. Flash sync: 1/50s (1/20s at ISO >8000).
+Pro Capture High (p)  Camera buffers frames from half-press; records ~0–14 pre-capture frames + shots from full-press.
+Pro Capture Low (q)   As above but with C-AF tracking between frames.
+High Res Shot (h)     Pixel-shift high-resolution mode. Camera must be on a tripod. Produces very high-res composite.
+
+Sequential High/Low max fps and frame limit: MENU → G Custom Menu → N Release → jL Settings / jH Settings.
+To show Anti-Shock and Silent in the drive menu: MENU → G Custom Menu → P Disp → j/Y Settings (add checkmark).
+
+
+═══════════════════════════════════════════════
+12. FLASH
+═══════════════════════════════════════════════
+
+The E-M5 III does not have a built-in pop-up flash. An FL-LM3 flash is included in the box.
+Mount flash on the hot shoe.
+
+FLASH MODES (LV Super Control Panel → Flash Mode):
+# Fill In          — flash fires at every shot; front-curtain sync; fastest sync: 1/250s
+$ Flash Off        — flash will not fire even if unit is powered on
+0 Red-Eye          — pre-flash reduces red-eye; otherwise like Fill In; shutter fires ~1s after pre-flash
+Slow 2 (front)     — slow shutter + front-curtain sync; captures ambient background + flash subject
+1 Red-Eye Slow     — Slow + red-eye reduction
+Slow2 M (rear)     — slow shutter + rear-curtain sync; moving subjects show light trails behind them
+Manual (#Manual)   — set flash output level manually; press G to select FULL then use front dial
+
+Flash intensity compensation (fill flash only, not Manual):
+  LV Super Control Panel → scroll to flash compensation icon (near Flash Mode); rotate front dial.
+  Range: adjust output relative to TTL metering.
+
+Flash sync speed: fastest is 1/250s. In P and A modes with slow sync: 30–1/250s.
+In S and M modes: 60s–1/250s.
+Silent / High Res / Focus Bracketing: sync speed drops to 1/50s (or 1/20s at ISO >8000).
+
+Super FP (high-speed sync): configure using flash unit controls.
+
+Flash X-sync speed: MENU → G Custom Menu → W #Custom → #X-Sync. (default 1/250s)
+Slow limit (slowest speed with #/0 modes in P/A): MENU → G Custom Menu → W #Custom → #Slow Limit
+
+
+═══════════════════════════════════════════════
+13. PICTURE MODES
+═══════════════════════════════════════════════
+
+Picture modes control JPEG processing: color, tone, sharpness, contrast.
+Change via LV Super Control Panel → Picture Mode.
+
+Natural        — neutral colors, moderate contrast; good general-purpose mode
+Vivid          — saturated, punchy colors; contrast-boosted
+Muted          — desaturated, soft tones
+Portrait       — soft skin tones, reduced sharpening
+i-Enhance      — scene-adaptive; boosts colors and contrast contextually
+Flat           — very low contrast for post-processing flexibility
+Monochrome     — black and white; sub-options: Color Filter (yellow/orange/red/green), Monochrome Color tint (sepia, blue, purple, green), Sharpness, Contrast, Gradation
+Color Creator  — choose from 30 hues and 8 saturation levels; records RAW+JPEG when RAW quality selected
+
+Custom slots (e1, e2, e3): save custom combinations of Picture Mode parameters.
+
+For each mode, adjustable parameters:
+  Sharpness   — outline emphasis; higher = crisper edges
+  Contrast    — difference between bright and dark areas
+  Saturation  — color intensity (not available in Monochrome)
+  Gradation   — tonal curve: Auto (shadow adjust), Normal, High Key, Low Key
+  Color Filter — (Monochrome only) yellow/orange/red/green shifts contrast in B&W
+
+These parameters are stored separately per picture mode.
+RAW files are unaffected by picture mode — the mode only affects JPEG processing.
+
+
+═══════════════════════════════════════════════
+14. IMAGE QUALITY AND SIZE (KK)
+═══════════════════════════════════════════════
+
+Change via LV Super Control Panel → KK icon, or MENU → W Shooting Menu 1 → KK.
+
+RAW (ORI/ORF)   — 20MP raw file; maximum quality and editing flexibility; no in-camera JPEG processing
+JPEG Fine L     — highest-quality JPEG, large size
+JPEG Normal L   — standard JPEG, large size
+JPEG Basic L    — compressed JPEG, large size
+RAW+JPEG        — saves both simultaneously in all quality/size combinations
+L/M/S           — large (20MP), medium (10MP), small (5MP) for JPEG
+
+For serious photography: use RAW or RAW+JPEG Fine.
+For sharing directly from camera: JPEG Fine L.
+
+KK Set (custom): MENU → G Custom Menu → b K Utility → K Set
+  Define custom JPEG size/compression combinations for rapid switching.
+
+Image aspect ratio: 4:3 (native), 16:9, 3:2, 1:1, 3:4.
+  RAW always stores native 4:3 data; aspect crop is applied to JPEG only.
+
+
+═══════════════════════════════════════════════
+15. EXPOSURE COMPENSATION
+═══════════════════════════════════════════════
+
+Range: ±5.0 EV in 1/3 or 1/2 stop steps (configurable in Custom Menu T → EV Step).
+Display bar shows ±3 EV; bar flashes for values outside that range.
+Available in modes P, A, S, ART, and movie (up to ±3 EV in movie mode).
+In M mode: only available when ISO is set to AUTO (adjusts ISO instead of aperture/shutter).
+
+ACCESS METHODS:
+1. Hold F button and rotate front or rear dial
+2. Hold F button and press left/right on arrow pad
+3. In P mode: rotate front dial (exposure compensation) + rear dial (program shift)
+4. In A mode: rotate front dial
+5. In S mode: rotate front dial
+
+Reset compensation: press and hold Q button.
+Live view shows compensation effects in real time (unless Live View Boost is set to On).
+
+EV Step: MENU → G Custom Menu → T Exp/ISO/BULB/p → EV Step (1/3 stop or 1/2 stop)
+Exposure Shift (bias all auto exposures): MENU → G Custom Menu → T → Exposure Shift
+
+
+═══════════════════════════════════════════════
+16. AE LOCK / AF LOCK
+═══════════════════════════════════════════════
+
+AEL/AFL button (back of camera, upper right):
+  Default: hold to lock both exposure and focus simultaneously.
+
+Behavior is fully configurable per AF mode:
+  MENU → G Custom Menu → J AF/MF → K AEL/AFL
+  Options for S-AF, C-AF, and MF:
+    AEL: metering on/off, lock hold vs. toggle
+    AFL: focus on/off, lock hold vs. toggle
+    Examples of configurations:
+    - Lock AE only (let focus stay unlocked for recomposing)
+    - Back-button focus: assign AF to AEL/AFL button; disable half-press AF
+
+Locked exposure indicator: small u icon in display.
+To release: press AEL/AFL button again, or operate mode dial/MENU/Q.
+
+
+═══════════════════════════════════════════════
+17. MENU SYSTEM — OVERVIEW
+═══════════════════════════════════════════════
+
+Open: MENU button. Navigate: FG to select tab, Q to enter, FG to scroll items, Q to open options, FG to highlight choice, Q to confirm.
+Go back: MENU button. Exit: press MENU repeatedly or half-press shutter.
+
+MENU TABS:
+W  Shooting Menu 1 — core photo settings
+X  Shooting Menu 2 — advanced photo settings
+n  Video Menu — movie settings
+q  Playback Menu — review and edit
+G  Custom Menu — camera customization (sub-tabs J through c)
+d  Setup Menu — clock, language, display, card, connectivity
+
+Also accessible via dials: front and rear dials can scroll menus in place of arrow pad.
+
+
+═══════════════════════════════════════════════
+18. SHOOTING MENU 1 (W) — KEY OPTIONS
+═══════════════════════════════════════════════
+
+Reset / Custom Modes
+  Reset: restores most settings to factory defaults (two levels: basic and full).
+  Assign to Custom Mode: saves all current settings to C1, C2, or C3.
+
+Picture Mode — same as LV Super Control Panel (P. 98, 129)
+
+KK (Image Quality/Size) — JPEG quality, size, RAW settings (P. 88)
+
+Image Aspect — 4:3 / 16:9 / 3:2 / 1:1 / 3:4 (P. 87)
+
+Digital Tele-converter — 1.4× or 2× crop in live view; useful for telephoto reach (P. 130)
+
+jYi (Drive/Timer) — same as jY button (P. 71, 73, 131); includes Time Lapse Shooting
+
+Time Lapse Shooting — automated interval shooting (P. 131)
+
+
+═══════════════════════════════════════════════
+19. SHOOTING MENU 2 (X) — KEY OPTIONS
+═══════════════════════════════════════════════
+
+Bracketing — AE bracketing (up to ±3 EV), WB bracketing, Flash bracketing, Focus bracketing, ISO bracketing, Art filter bracketing (P. 132)
+
+HDR — in-camera HDR; camera takes 3 exposures and blends them (P. 137)
+
+Multiple Exposure — overlays 2 exposures in-camera (P. 139)
+
+Keystone Comp. — correct perspective distortion in-camera (P. 141)
+
+Anti-Shock r / Silent s — set delays for anti-shock and silent mode shutter timing (P. 142)
+
+High Res Shot — pixel-shift high-res composite (requires tripod) (P. 143)
+
+#RC Mode — wireless remote flash control (P. 143)
+
+
+═══════════════════════════════════════════════
+20. VIDEO MENU (n) — KEY OPTIONS
+═══════════════════════════════════════════════
+
+n Mode — movie exposure mode: P, A, S, M (P. 147)
+n Buttons/Dials/Levers — assign button functions for movie recording separately (P. 145)
+nK — frame size, frame rate, compression (e.g., 4K 30p, 1080p 120p) (P. 89, 149)
+Movie R (audio) — recording level, L/R balance, wind noise reduction (P. 150)
+n IS — movie image stabilization mode (P. 165)
+n Flicker Scan — reduce LED flicker in video (P. 148)
+n HDMI — clean HDMI output settings (P. 146)
+Time Code — time code recording settings (P. 146)
+
+Movie recording:
+  Press R button from any photo mode to start recording immediately.
+  Or rotate mode dial to n for dedicated movie mode.
+  Recording stops: press R button again, or shutter button (in photo modes).
+  Silencing camera sounds during movies: press down arrow pad → press Q.
+
+
+═══════════════════════════════════════════════
+21. CUSTOM MENUS (G) — KEY SECTIONS
+═══════════════════════════════════════════════
+
+Custom menus are accessed via MENU → G tab, then select sub-tab (J through c).
+
+─────────────────────────────────────────────
+J / K / L / I  AF/MF (focus customization)
+─────────────────────────────────────────────
+
+K AF Mode — choose AF mode for stills (S-AF, C-AF, MF, S-AFb, C-AF+TR, PreMF)
+K AEL/AFL — define what AEL/AFL button does in each AF mode (see Section 16)
+AF Scanner — behavior when AF cannot find focus: mode1 (off), mode2 (one scan), mode3 (always on)
+K C-AF Sensitivity — how quickly C-AF responds to subject changes
+K C-AF Center Start — for group AF targets, start focus from center before expanding
+K C-AF Center Priority — keep priority on center target in C-AF group targeting
+
+K AF/MF (tab K):
+N Mode Settings — enable/disable AF target shapes in selection menu
+AF Area Pointer — display style of the AF target frame
+AF Targeting Pad — enable touch-pad AF target positioning while using EVF
+N Set Home — store a preferred AF target/mode as home position
+
+L AF/MF (tab L):
+AF Limiter — restrict AF search range (useful for wildlife/sports to speed up AF)
+AF Illuminator — enable/disable the front AF assist lamp
+
+I AF/MF (tab I):
+MF Assist — magnified view or focus peaking when focus ring turned
+Preset MF Distance — set distance for PreMF mode
+Bulb/Time Focusing — adjust focus during Bulb/Time exposure
+MF Clutch — behavior of lenses with MF clutch ring
+Reset Lens — reset lens position on power-off
+
+─────────────────────────────────────────────
+M  Button/Dial/Lever
+─────────────────────────────────────────────
+
+K Button Function — assign any function to any configurable button for still shooting
+  Buttons that can be reassigned: Preview, AEL/AFL, ISO, Fn lever buttons (d/E/D/l),
+  arrow pad directions (FGHI), R button, jY button, LV button, hot shoe button (if applicable)
+  Assignable functions include: ISO, WB, drive mode, AF mode, metering, IS mode, AEL/AFL,
+  AF stop, MF, face priority, various bracket modes, Magnify, Info, and many more.
+
+K Dial Function — reassign front and rear dial roles per shooting mode
+  Default assignments by mode:
+    P: front dial = exposure comp; rear dial = program shift
+    A: front dial = exposure comp; rear dial = aperture
+    S: front dial = exposure comp; rear dial = shutter speed
+    M: front dial = aperture; rear dial = shutter speed
+    B: front dial = aperture; rear dial = bulb/time
+    Menu: front dial = page scroll; rear dial = enter/value
+    Playback: front dial = advance; rear dial = zoom
+
+Dial Direction — reverse rotation direction of front and/or rear dial.
+
+K Fn Lever Function — define what the Fn lever switch does
+  The Fn lever has 2 positions. At position 2 (default: mode2), buttons can have alternate assignments.
+  Options: mode1 (always position 1), mode2 (lever switches complete button assignment set),
+  or assign the lever to other functions (e.g., switch DOF preview, IS on/off, etc.).
+  Configure per-lever-position button assignments in the separate "Lever Position 2" section
+  within Button Function.
+
+Fn Lever / Power Lever — configure whether ON/OFF lever also controls Fn lever
+
+K Elec. Zoom Speed — set speed of electronic zoom for power zoom lenses
+
+qR Function — assign the Playback/Erase area button in shooting mode
+
+─────────────────────────────────────────────
+N / O  Release / j / Image Stabilizer
+─────────────────────────────────────────────
+
+N S-AF Release Priority — whether shutter can fire before focus confirmed in S-AF (Off = won't fire if not focused)
+C-AF Release Priority — whether shutter can fire before focus confirmed in C-AF (On = fires even if slightly soft)
+jL Settings — configure Sequential Low: fps, max frame count limit
+jH Settings — configure Sequential High: fps, max frame count limit
+  Pro Capture sub-settings: pre-shutter frame count, frame count limiter
+Flicker Reduction — Anti-Flicker LV (auto/manual), Anti-Flicker Shooting (fires at non-flicker moment)
+
+O K Image Stabilizer — IS mode for stills (S-IS OFF, S-IS AUTO, S-IS1, 2, 3)
+j Image Stabilizer — IS mode for movie recording
+Half Way Rls With IS — whether IS activates at half-press or only at full press
+Lens I.S. Priority — prioritize lens IS over body IS when both are available
+
+─────────────────────────────────────────────
+P / Q / R / S  Disp / 8 / PC (display settings)
+─────────────────────────────────────────────
+
+K Control Settings — choose which items appear in the LV Super Control Panel grid
+G / Info Settings — add or remove items from the INFO button display cycle (histogram, level gauge, etc.)
+Picture Mode Settings — which picture mode parameters appear as sub-items in Super Control Panel
+j/Y Settings — enable Anti-Shock and Silent items in the drive mode menu (add checkmark)
+Multi Function Settings — configure what Multi Function button (if assigned) cycles through
+Live View Boost — On (EVF always bright, no live exposure preview) / Off (EVF shows actual exposure)
+Art LV Mode — display style for ART mode live view
+LV Close Up Settings — behavior of focus magnification
+qa Default Setting — playback zoom default level
+z Settings — grid overlay pattern
+Grid Settings — grid type
+Peaking Settings — focus peaking color and sensitivity for MF
+Histogram Settings — histogram display type (luminosity or RGB)
+Mode Guide — brief help text shown when switching modes (On/Off)
+Selfie Assist — enable/disable self-portrait mode with reversed display (P. 190)
+
+─────────────────────────────────────────────
+T / U / V  Exp / ISO / BULB / p
+─────────────────────────────────────────────
+
+Exposure Shift — apply a permanent bias to all auto-exposure readings (alternative to always using EV comp)
+EV Step — step size for exposure compensation and aperture/shutter: 1/3 EV or 1/2 EV
+ISO Step — step size for ISO: 1/3 EV or 1 EV
+ISO-Auto Set — configure Auto ISO: maximum ISO allowed and minimum shutter speed threshold
+ISO-Auto K — limit for Auto ISO in movie mode
+Noise Filter — in-camera noise reduction strength for JPEG: Off / Low / Standard / High
+Noise Reduct. — long-exposure noise reduction (takes a dark frame after exposure; doubles shot time)
+
+Bulb/Time Timer — maximum bulb/time exposure duration; prevents accidentally very long exposures
+Bulb/Time Monitor — monitor behavior during Bulb/Time: on or off (saves battery)
+Live Bulb — update interval for Live Bulb display during exposure
+Live Time — update interval for Live Time display
+Composite Settings — shutter speed for composite photography base exposure
+
+K Flicker Scan — detect flicker frequency under LED/fluorescent lights for burst shooting
+
+Metering — same as Super Control Panel (Digital ESP, center-weighted, spot, etc.)
+AEL Metering — re-meter when AEL button released
+N Spot Metering — link spot metering position to AF target (On/Off)
+
+─────────────────────────────────────────────
+W  #Custom (flash custom settings)
+─────────────────────────────────────────────
+
+#X-Sync. — flash sync speed (default 1/250s; can set lower to allow more blur in background with flash)
+#Slow Limit — slowest shutter speed used with fill flash in P/A modes (prevents excessively long handheld flash exposures)
+x+F — slow sync + flash mode link (keeps front-curtain sync with slow flash)
+#+WB — auto WB behavior when flash is used
+
+─────────────────────────────────────────────
+X  K / WB / Color
+─────────────────────────────────────────────
+
+K Set — save custom JPEG size and compression combinations for quick selection
+Pixel Count — display pixel count in shooting info (On/Off)
+Shading Comp. — lens shading correction (vignette reduction); requires Olympus lens
+WB All x — apply WB fine-tune compensation to all white balance modes simultaneously
+W Keep Warm Color — same as Super Control Panel option for AUTO WB warm preservation
+Color Space — sRGB or AdobeRGB (AdobeRGB not available in AUTO, SCN, ART, HDR, movie)
+
+─────────────────────────────────────────────
+Y / Z  Record / Erase
+─────────────────────────────────────────────
+
+File Name — set file naming convention (structure and prefix)
+Edit Filename — change default filename prefix
+dpi Settings — set dpi value embedded in JPEG files
+Copyright Settings — embed photographer name and copyright in EXIF
+
+Quick Erase — skip confirmation step when erasing a single image (default: Off, so confirmation shown)
+RAW+JPEG Erase — when deleting from RAW+JPEG pair: delete both, or select RAW only / JPEG only
+
+─────────────────────────────────────────────
+a  EVF (viewfinder display settings)
+─────────────────────────────────────────────
+
+EVF Auto Switch — how the eye sensor controls display switching (auto / EVF only / monitor only)
+EVF Adjust — brightness and color temperature of the EVF
+EVF Style — display style: Style1 (monitor-like with info overlays) or Style2 (classic with separate info bar)
+V Info Settings — choose info shown in EVF when shooting data is visible
+EVF Grid Settings — grid overlay for EVF
+
+─────────────────────────────────────────────
+b / c  K Utility
+─────────────────────────────────────────────
+
+Backlit LCD — monitor power-saving: Off / Auto (dims in dark) / Normal
+Sleep — time before camera enters power-saving sleep (display off but camera on)
+Auto Power Off — time before full power-off
+Quick Sleep Mode — faster sleep entry for battery saving
+Certification — display wireless certifications
+
+
+═══════════════════════════════════════════════
+22. PLAYBACK MENU (q)
+═══════════════════════════════════════════════
+
+Auto Rotate — automatically rotates portrait-orientation images for display
+Retouching — in-camera edits: Red-Eye Fix, Crop, Resize, Rotate, Aspect Conversion, Retouch, WB Adjustment, Shadow Adjustment, Saturation, Monochrome, Pin Hole, Fish-eye, Drawing
+Image Overlay — combine two images in-camera
+In-Movie Image Capture — extract a still frame from a video clip
+Movie Trimming — cut in/out points of a video clip
+Reset Protect — remove protection from all images at once
+Reset Share Order — cancel all share order selections
+
+
+═══════════════════════════════════════════════
+23. SETUP MENU (d)
+═══════════════════════════════════════════════
+
+X — date and time setting
+W — display language
+s — monitor brightness and color temperature adjustment
+Rec View — how long captured image is shown after shooting (0.3s–20s, Off, Auto)
+Wi-Fi/Bluetooth Settings — wireless connectivity; connect to smartphone (OI.Share app)
+Firmware — displays current firmware version
+Card Setup → Format: formats the SD card (erases ALL data including protected images)
+Card Setup → All Erase: deletes all unprotected images
+EVF Auto Switch — (also found here) eye sensor behavior
+Touchscreen Settings — enable/disable touch screen
+Selfie Assist — front-screen display for self-portraits
+Pixel Mapping — check and correct stuck pixels in image sensor
+HDMI — HDMI output settings for TV connection
+USB Mode — Storage (transfer images to computer) or MTP
+
+
+═══════════════════════════════════════════════
+24. KEY OPERATIONAL TIPS
+═══════════════════════════════════════════════
+
+USING BOTH DIALS TOGETHER:
+In M mode: front dial = aperture, rear dial = shutter — change both without releasing.
+In A mode: rear dial = aperture, front dial = exposure compensation.
+In S mode: rear dial = shutter, front dial = exposure compensation.
+Dial roles can be reversed with the Fn lever (position 2) if K Fn Lever Function assigns "Dial Reversal".
+
+PREVIEW DEPTH OF FIELD:
+Press and hold Preview button to stop down lens to shooting aperture.
+Subject will appear at actual depth of field. Image darkens at small apertures — this is normal.
+
+USING THE Fn LEVER:
+Fn lever has two positions. In position 2 (mode2 default), each button with a Fn2 assignment
+takes on an alternate role. This lets you switch between two complete control layouts instantly —
+e.g., stills set vs. video set, or portrait set vs. landscape set.
+Configure: MENU → G Custom Menu → M → K Fn Lever Function and K Button Function (Lever Position 2 section).
+
+TOUCH CONTROLS IN SHOOTING:
+Tap to focus: tap anywhere on the screen to set AF point.
+Touch Shutter: tap to focus and release shutter simultaneously (enable in touch settings).
+Touch AF pad: even while using EVF, slide finger on monitor to move AF target (enable in K AF Targeting Pad).
+
+MFT LENS INFORMATION:
+All Micro Four Thirds lenses have full electronic communication: AF, IBIS, metering, EXIF data.
+Crop factor: 2× relative to 35mm full-frame. A 25mm MFT lens = 50mm full-frame equivalent.
+Four Thirds (non-Micro) lenses work with adapter but do not AF during movie recording.
+Non-MFT lenses via adapter: specify focal length manually in IS settings (Q + INFO from IS setting).
+
+CAMERA CARE:
+Sensor cleaning: MENU → d Setup Menu → Pixel Mapping (checks processing); sensor vibration cleaning activates on startup/shutdown by default.
+Card formatting: format in-camera regularly for file system health. Always back up first.
+Battery: USB charging supported. Charge with camera off for faster charging.
+
+
+═══════════════════════════════════════════════
+25. MICROPHONE / AUDIO (video)
+═══════════════════════════════════════════════
+
+Built-in stereo mic: two small openings on front of camera.
+External mic input: 3.5mm stereo mini plug on front-left panel under rubber cover.
+When external mic is connected, built-in mics are disabled.
+Audio recording level: Video Menu → Movie R → Recording Level (adjustable in-camera).
+Wind noise reduction: Video Menu → Movie R → Wind Noise Reduction.
+For best audio: use an external directional (shotgun) mic. Small deadcat windshield eliminates most wind noise.
+
+
+═══════════════════════════════════════════════
+26. WIRELESS / SMARTPHONE CONNECTION
+═══════════════════════════════════════════════
+
+App: Olympus Image Share (OI.Share) — iOS and Android.
+Enable wireless: MENU → d Setup Menu → Wi-Fi/Bluetooth Settings.
+Functions: remote shutter release, live view on phone, image transfer, GPS tagging via phone.
+Power-off standby: camera can accept connections while off (battery drain; configure in Wi-Fi/BT settings).
+Change password: MENU → d Setup Menu → Wi-Fi/Bluetooth Settings → Connection Password.

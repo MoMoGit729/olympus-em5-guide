@@ -2,426 +2,601 @@
 import { useState, useEffect } from "react";
 import React from "react";
 
+// ── Color tokens ────────────────────────────────────────────
+const C = {
+  bg:         "#f0ece4",
+  card:       "#e6e1d8",
+  cardHead:   "#dbd5cb",
+  teal:       "#2d6464",
+  sage:       "#6b8c7a",
+  heading:    "#1a3030",
+  body:       "#3a4a44",
+  muted:      "#5a7a6e",
+  faint:      "#8a9e92",
+  border:     "#c8c2b6",
+};
+
 interface Part {
   id:          string;
   title:       string;
   description: string;
 }
 
-const PARTS: Part[] = [
+const FRONT_PARTS: Part[] = [
   {
-    id: "af-assist",
-    title: "AF-Assist Illuminator",
-    description: `A small lamp on the front of the camera that lights up automatically in dark conditions so the autofocus system can "see" your subject clearly enough to lock on.
+    id: "mode-dial-lock",
+    title: "Mode Dial Lock",
+    description: `A centre press-button on the mode dial that must be held down to rotate the dial. This prevents the mode dial from shifting accidentally when the camera is in a bag or being handled.
 
-• Activates when you press the shutter halfway in dim light.
-• Working range: about 0.5–3.0 m (roughly 1½ to 10 feet) — most useful for nearby subjects indoors.
-• Does NOT work in Continuous AF mode, Manual Focus mode, Landscape mode, or Sports mode.
-• The centre focus point must be active for it to light up.
-• You can turn it off in Custom Setting 09 (AF-assist) — handy if you don't want to disturb a sleeping baby or a shy animal.
+To change shooting modes: press and hold the lock button with your thumb while rotating the mode dial with your fingers to the desired position, then release.
 
-Tip: If you're using a lens hood, remove it when the AF-assist lamp is on — the hood can cast a shadow and make focusing harder.`,
+The lock engages automatically as soon as you let go — you can't leave it unlocked.`,
   },
   {
-    id: "battery-cover",
-    title: "Battery-Chamber Cover",
-    description: `The hinged plastic door on the bottom of the camera that opens to let you insert or remove the rechargeable EN-EL9 battery.
+    id: "rear-dial",
+    title: "Rear Dial",
+    description: `The main rotary dial on the upper back of the camera, operated with your right thumb. In most shooting modes it controls aperture, and in others it adjusts shutter speed or other parameters depending on the active mode.
 
-• To open it: slide the battery-chamber cover latch (the small catch next to the door) and the cover swings open.
-• Always confirm the camera is turned OFF before opening.
-• Check that the memory card access lamp is off first — if it's still lit, the camera is saving a photo and opening the cover could cause you to lose it.
-• Insert the battery with the metal contacts facing down, as shown by the diagram inside the camera body.
-• Close and secure the latch firmly before shooting.
+In P mode: rotate to shift the program (change the shutter/aperture combination while keeping the same exposure).
+In A mode: rotate to set aperture.
+In S mode: rotate to set shutter speed.
+In M mode: rotate to set aperture; use the front dial for shutter speed.
 
-Tip: Carry a second charged battery. Cold weather drains batteries much faster than normal — on a winter day you may need a fresh one sooner than you'd expect.`,
+During playback: rotate to scroll through images.
+
+The rear dial symbol is used throughout the Olympus manual to indicate rear-dial operations.`,
   },
   {
-    id: "card-lamp",
-    title: "Card Access Lamp",
-    description: `A small indicator light near the memory card slot. It lights up or blinks whenever the camera is actively reading from or writing data to the memory card.
+    id: "shutter-button",
+    title: "Shutter Button",
+    description: `The two-stage release button for capturing images.
 
-• It lights briefly when you insert a card, confirming it's been detected.
-• It lights after every shot while the image is being saved.
-• ⚠️ NEVER open the card slot cover, open the battery door, or remove the battery while this lamp is lit — doing so can corrupt or permanently destroy your saved photos.
-• Always wait for the lamp to go completely dark before touching the card or battery.
+Half-press: activates the autofocus system and exposure meter, locks focus when AF confirms, and wakes the camera from sleep. Hold the half-press to keep AF active while composing.
 
-Tip: Make it a habit to glance at the access lamp before putting the camera away. It takes one second and can save you from losing a great shot.`,
+Full press: fires the shutter and records the image. The buffer indicator in the viewfinder or monitor shows remaining capacity for burst shooting.
+
+A half-press also cancels menu navigation and returns the camera to shooting mode. For manual focus, a half-press still activates the exposure meter without triggering AF.`,
   },
   {
-    id: "card-slot",
-    title: "Card Slot Cover",
-    description: `The hinged door on the side of the camera that protects the slot where your SD memory card lives.
+    id: "movie-button",
+    title: "Movie / H Button",
+    description: `The red-accented button on the top plate. Its function depends on how it is configured.
 
-• Always turn the camera OFF and confirm the access lamp is off before opening.
-• To insert: slide the card in — label facing the back of the camera — until it clicks.
-• To remove: gently press the card inward. It pops out slightly so you can grip and pull it free.
-• Keep this cover closed whenever you're not swapping cards.
+Default function: starts and stops video recording in any shooting mode. Press once to start recording; press again to stop. A red recording indicator appears in the monitor or EVF during capture.
 
-Tip: Before using a brand new memory card for the first time, format it inside the camera: Setup Menu → Format memory card. This prepares it properly and avoids potential errors.`,
+The H function (accessible via a Fn lever position) can be assigned to a custom shortcut through the camera's button/dial/lever customisation menu — for example, to quickly call up a frequently used setting.
+
+In live view, pressing this button during stills shooting starts video recording immediately without entering a dedicated movie mode first.`,
   },
   {
-    id: "command-dial",
-    title: "Command Dial",
-    description: `The round rotating wheel on the upper-back-right of the camera, operated with your right thumb. You'll use it constantly — it's how you quickly change key exposure settings.
+    id: "exp-comp-button",
+    title: "Exposure Compensation Button",
+    description: `Marked with a +/– symbol. Press and hold this button while rotating the rear dial to shift the exposure brighter or darker relative to what the camera meters.
 
-Used alone:
-• S mode: rotate to change shutter speed.
-• A mode: rotate to change aperture.
-• M mode: rotate to change shutter speed; hold the Exposure Compensation button (A) at the same time to change aperture.
-• P mode: rotate to shift the shutter speed / aperture combination while keeping the same overall exposure.
+Range: –5 EV to +5 EV in 1/3 or 1/2 stop steps (configurable in the custom menu).
 
-Used with other buttons:
-• A + rotate: adjusts exposure compensation.
-• Flash button + rotate: cycles through flash modes.
-• Flash button + A + rotate: adjusts flash brightness.
+Practical use:
+– Bright subjects against dark backgrounds (snow, white walls): dial in +1 to +2 EV to prevent underexposure.
+– Dark subjects against bright backgrounds (backlit portraits): add +1 to +2 EV.
+– High-key or low-key creative shots: use the full range deliberately.
 
-During playback:
-• Rotate to scroll forward and backward through your photos.
-• While zoomed in, rotate to view the same area in a different photo.
-
-Tip: Watch the Shooting Information Display while rotating — you'll see the numbers change in real time, which is a great way to understand what shutter speed and aperture actually mean.`,
+The set value remains active until you reset it. A small indicator appears in the EVF/monitor when compensation is active — a useful reminder to zero it out before moving to the next scene.`,
   },
   {
-    id: "delete",
-    title: "Delete Button",
-    description: `The trash-can button on the back of the camera. It permanently erases photos you don't want.
+    id: "front-dial",
+    title: "Front Dial",
+    description: `The secondary rotary dial on the front of the camera, operated with your right index finger. It works in combination with the rear dial to give you two-dial control over exposure in manual and semi-automatic modes.
 
-To delete a single photo:
-1. Press the Playback button to view your photos.
-2. When the unwanted photo is on screen, press the delete button once. A "Delete?" confirmation appears.
-3. Press it a second time to confirm. Press Playback to cancel and keep the photo.
+In M mode: controls shutter speed (rear dial controls aperture).
+In other modes: can be configured via the custom menu to adjust ISO, white balance, or other frequently changed parameters.
 
-To delete multiple photos:
-• In thumbnail view (press the zoom-out button for a grid of photos), highlight a photo and press delete.
-• Or use the Playback Menu → Delete to erase groups of photos or an entire folder at once.
-
-Important: Deletion is permanent — you cannot recover a deleted photo in the camera.
-
-Tip: If you're unsure about a photo, use the Protect button to mark it safe rather than deleting it. Review your shots on a computer screen later — what looks slightly off on a small screen sometimes turns out to be your best shot.`,
+Having both dials available means you can change shutter speed and aperture simultaneously in M mode without pressing any other buttons — the way most experienced photographers prefer to work.`,
   },
   {
-    id: "diopter",
-    title: "Diopter Adjustment Control",
-    description: `A small sliding lever right beside the viewfinder eyepiece. It adjusts the optical focus of the viewfinder to suit your individual eyesight — like adjusting binoculars for your eyes.
+    id: "lens-mark",
+    title: "Lens Attachment Mark",
+    description: `A small red dot on the camera body at the lens mount. A matching red dot appears on every Micro Four Thirds lens.
 
-• If the focus points, numbers, and indicators inside the viewfinder look blurry, you need to adjust this.
-• To adjust: remove the lens cap so the viewfinder is active, look through it, then slide the diopter lever up or down until everything inside looks sharp and crisp.
-• You're only adjusting what you see through the viewfinder — not the focus of the actual photo.
-• Take care not to put your fingers near your eye while adjusting.
-• Once set for your eyes, you won't need to change it again — unless someone else with different eyesight uses your camera.
+To attach a lens: align the two red dots, insert the lens, and rotate clockwise until you feel and hear a firm click.
+To remove a lens: press and hold the lens release button, then rotate the lens counter-clockwise until it lifts free.
 
-Tip: If you can't get the viewfinder sharp at either extreme of the diopter range, Nikon makes optional correction lenses that attach to the eyepiece for stronger prescriptions.`,
+Always power the camera off before attaching or removing lenses, and point the mount slightly downward in dusty environments to reduce the chance of particles entering the sensor chamber.`,
   },
   {
-    id: "eye-sensor",
-    title: "Eye Sensor",
-    description: `A small automatic sensor just below the viewfinder eyepiece. It detects when your face gets close to the viewfinder and manages the camera's displays automatically.
+    id: "preview-button",
+    title: "Preview Button",
+    description: `Stops the lens down to the shooting aperture so you can preview depth of field in the EVF or monitor before taking the shot.
 
-• When you raise the camera to your eye, the sensor detects your face and turns OFF the LCD monitor — and turns ON the viewfinder display instead. This saves battery.
-• When you lower the camera, the monitor's shooting information display turns back on.
-• This feature is controlled in Setup Menu → Shooting info auto off.
-  - On (default): eye sensor is active.
-  - Off: eye sensor is disabled.
+At wide apertures (low f-numbers), depth of field is shallow and the out-of-focus blur (bokeh) is pronounced. At narrow apertures (high f-numbers) more of the scene appears sharp.
 
-Tip: If you notice the monitor turning off unexpectedly, check whether your hand, camera strap, or another object is accidentally covering the eye sensor. Adjust your grip or strap position to fix it.`,
+Hold the preview button while composing to judge whether the background blur or foreground sharpness is what you intend. The image in the EVF will darken at narrow apertures — this is normal. The preview button can also be reassigned via the custom button menu to any other function you prefer.`,
   },
   {
-    id: "flash",
-    title: "Flash, Built-in",
-    description: `The pop-up flash built into the top of the camera. It adds light when shooting in dark conditions or when your subject is backlit (bright light source behind them).
+    id: "mount",
+    title: "Lens Mount",
+    description: `The Micro Four Thirds (MFT) bayonet mount — the standard shared by Olympus (now OM System) and Panasonic Lumix cameras. Any lens carrying the Micro Four Thirds logo will fit and communicate fully with the camera's AF, image stabilisation, and metering systems.
 
-In Auto and scene modes (Portrait, Child, Night Portrait, etc.):
-• The flash pops up automatically when needed as you half-press the shutter.
-• Wait for the flash-ready indicator in the viewfinder before pressing all the way down, or the photo may be too dark.
-• When done, gently press the flash head down until it clicks closed.
+The MFT sensor has a 2× crop factor relative to 35mm full-frame. A 25mm MFT lens gives a field of view equivalent to 50mm on full-frame; a 75mm MFT lens is equivalent to 150mm.
 
-In advanced modes (P, S, A, M):
-• The flash does NOT pop up automatically — press the Flash button on the front of the camera to raise it manually.
-• Hold the Flash button and rotate the command dial to choose different flash modes.
-
-Key facts:
-• Flash cannot be used in Sports, Landscape, or Auto Flash Off modes.
-• Minimum range: about 60 cm (2 ft) — subjects closer than that can appear washed out.
-• Remove lens hoods when using flash to avoid unwanted shadows.
-• The flash needs a moment to recharge between shots.
-
-Tip: On sunny days, try using the flash on a person who is standing in shadow or with the sun behind them. This "fill flash" brightens their face and is a technique professional photographers use all the time.`,
-  },
-  {
-    id: "flash-button",
-    title: "Flash Button",
-    description: `The button on the front-left of the camera body. In the advanced shooting modes (P, S, A, M), the built-in flash doesn't pop up on its own — you use this button to raise it when you want to use flash.
-
-• Press it once to pop the flash up. Once raised, the flash fires with every shot until you close it.
-• To close the flash: press it gently downward until it clicks back in place.
-• To change flash mode: hold this button and rotate the command dial. You can cycle through Fill Flash, Red-Eye Reduction, Slow Sync, and Rear-Curtain Sync.
-• To adjust flash brightness: hold this button + the Exposure Compensation button (A) at the same time, and rotate the command dial. Range is –3 to +1 stops.
-
-Tip: In a bright outdoor portrait where the subject's face is in shadow, raise the flash with this button and shoot. The flash adds just enough light to the face without making the photo look like a harsh flash shot.`,
-  },
-  {
-    id: "focal-scale",
-    title: "Focal Length Scale",
-    description: `The row of numbers printed on the zoom lens barrel (for example: 18, 24, 35, 45, 55 on the 18–55mm lens). They indicate the current focal length in millimetres as you zoom.
-
-• The number aligned with the small index mark on the lens is the focal length you're currently at.
-• Short focal lengths (e.g. 18mm) = wide-angle: more of the scene fits in the frame. Great for landscapes and groups.
-• Long focal lengths (e.g. 55mm) = telephoto: subjects appear larger and more magnified. Great for portraits.
-• Because the D60's sensor is smaller than 35mm film, every focal length looks about 1.5× longer than it would on a traditional film camera. So 55mm on your D60 acts more like 82mm.
-• Longer focal lengths also blur the background more behind your subject — great for portraits.
-
-Tip: Try spending a day shooting only at 18mm, then another day only at 55mm. Comparing the results teaches you more about focal length than any textbook.`,
-  },
-  {
-    id: "lens-index",
-    title: "Lens Mounting Index",
-    description: `A small coloured alignment dot found on both the camera body and on each lens. Its job is to help you correctly orient and attach the lens.
-
-To attach a lens:
-1. Line up the dot on the lens with the matching dot on the camera body.
-2. Insert the lens into the bayonet mount on the front of the camera.
-3. Rotate the lens counter-clockwise (to the left, as seen from the front) until you feel and hear a firm click. It's now locked.
-
-To remove a lens:
-1. Press and hold the lens-release button on the front of the camera.
-2. Rotate the lens clockwise (to the right, as seen from the front) until it comes free.
-
-• Always turn the camera OFF before attaching or removing any lens.
-• Keep the body cap on the camera and the rear lens cap on the lens whenever no lens is mounted.
-
-Tip: When changing lenses outdoors, do it quickly in a sheltered spot away from wind and dust. Hold the camera with the lens mount tilted slightly downward so dust is less likely to fall onto the sensor.`,
-  },
-  {
-    id: "menu",
-    title: "Menu Button",
-    description: `The MENU button on the back of the camera. Pressing it opens the full menu system where you can access virtually all of the D60's detailed settings.
-
-The five menu sections:
-• Playback Menu: manage and delete photos, slide shows, print settings.
-• Shooting Menu: image quality and size, white balance, ISO, noise reduction, Active D-Lighting.
-• Custom Settings: personalise autofocus behaviour, button assignments, timers, beep sounds, and more.
-• Setup Menu: format the memory card, set date and time, language, LCD brightness, and other basic settings.
-• Retouch Menu: edit copies of photos directly in the camera — crop, fix red-eye, apply filters — without needing a computer.
-
-How to navigate:
-• Multi selector up/down: move between items.
-• Multi selector right: enter a sub-menu or confirm a selection.
-• Multi selector left: go back.
-• Press MENU again, or half-press the shutter, to exit.
-• Grey (dimmed) menu items aren't available in the current mode — switch to P, S, A, or M to unlock more options.
-
-Tip: Start with the Setup Menu — it's where you set the date, time, language, and format the memory card. Getting those right first makes everything else much easier.`,
+Keep the body cap on whenever no lens is mounted, and store lenses with both caps attached to protect the rear element and mount contacts.`,
   },
   {
     id: "mode-dial",
     title: "Mode Dial",
-    description: `The large rotating dial on the top of the camera. It's the most important control — it decides how much creative control you have over the exposure.
+    description: `The large dial on the top plate that selects the main shooting mode.
 
-Scene modes — camera handles most decisions:
-• AUTO — Fully automatic. Camera controls everything. Best starting point.
-• AUTO (flash off) — Same as Auto but flash is always off. Use in museums or concerts.
-• Portrait — Softens skin tones and blurs the background.
-• Landscape — Boosts colour vividness for outdoor scenes; flash turns off automatically.
-• Child — Natural skin with vivid backgrounds. Great for snapshots of children.
-• Sports — Fast shutter speeds to freeze moving subjects; camera focuses continuously.
-• Close Up — Sharpens small nearby subjects like flowers or insects.
-• Night Portrait — Combines flash with a slow shutter for natural-looking low-light portraits.
+P – Program Auto: camera sets shutter speed and aperture; you can shift the combination.
+A – Aperture Priority: you set aperture; camera sets shutter speed.
+S – Shutter Priority: you set shutter speed; camera sets aperture.
+M – Manual: you set both shutter speed and aperture independently.
+B – Bulb: shutter stays open while the button is held (for long exposures on a tripod).
+Movie: dedicated video recording mode with movie-specific settings.
+SCN: selects from preset scene modes via the menu.
+ART: applies creative in-camera art filter effects.
+AP – Auto Program: fully automatic, camera-controlled mode.
 
-Advanced modes — you choose the settings:
-• P (Programmed Auto) — Camera picks shutter speed and aperture; you can nudge the combination.
-• S (Shutter-Priority) — You set the shutter speed; camera picks the aperture. Use to freeze or blur motion.
-• A (Aperture-Priority) — You set the aperture; camera picks the shutter speed. Controls background blur.
-• M (Manual) — You control both shutter speed and aperture yourself. Full creative freedom.
-
-Tip: Start in AUTO to get comfortable. When you're ready, try A (Aperture-Priority) — set f/3.5 for blurry backgrounds in portraits, or f/16 to keep everything sharp in a landscape.`,
+The dial has a centre lock button — hold it down to rotate.`,
   },
   {
-    id: "monitor",
-    title: "Monitor (LCD Screen)",
-    description: `The colour LCD screen on the back of the camera. It's your main display for reviewing photos and navigating settings. Note: the D60 does NOT support live view — you can't use the monitor to frame shots. You must use the viewfinder for that.
+    id: "stereo-mic",
+    title: "Stereo Microphone",
+    description: `Two small grille openings near the top of the camera body that capture stereo audio during video recording.
 
-What it shows:
-• Shooting Information Display: current settings at a glance — shutter speed, aperture, ISO, battery level, shots remaining, flash mode, and more. Press the Playback Zoom / Info button to cycle through: full info → quick settings → monitor off.
-• Image Review: right after taking a shot, the photo briefly appears on screen so you can check it.
-• Playback: press the Playback button to browse your photos.
-• Menus: pressing MENU or other function buttons shows the camera's menus.
+The built-in stereo mic picks up sound from a relatively wide angle. For serious video work, connecting an external microphone via the 3.5mm mic jack gives you better sound isolation, directionality, and overall quality.
 
-Adjusting the monitor:
-• Brightness: Setup Menu → LCD Brightness. Choose from seven levels (–3 darkest to +3 brightest).
-• Auto-off: the monitor turns off after a period of inactivity to save battery. Adjust timing in Custom Setting 15 (Auto off timers).
-
-Tip: In bright sunlight the monitor can be nearly impossible to read. Temporarily boost brightness to +3, or rely on the viewfinder for composing and use the monitor only for reviewing shots afterward.`,
+Wind noise is the most common problem with built-in mics outdoors. The camera has a wind noise reduction setting in the video menu. Alternatively, a small dead-cat windshield on an external mic eliminates wind noise almost entirely.`,
   },
   {
-    id: "multi-selector",
-    title: "Multi Selector",
-    description: `The small four-way directional pad on the back of the camera (up, down, left, right). It works like a D-pad on a game controller and is your main navigation tool for menus, playback, and focus point selection.
+    id: "on-off",
+    title: "ON/OFF Lever",
+    description: `The power switch surrounding the shutter button. Rotate it to power the camera on or off.
 
-While shooting — focus point selection:
-• Press left or right to move the active focus point to one of the three positions in the viewfinder. Moving the focus point directly onto someone's eyes gives you much better portraits than always focusing in the centre.
+On first power-up, the camera will prompt you to set the date, time, and language if it hasn't been configured yet.
 
-In menus:
-• Up/down: scroll through options.
-• Right: enter a sub-menu or confirm a choice.
-• Left: go back to the previous screen.
+The camera has a sleep/auto-off timer that dims the monitor and EVF after a period of inactivity — adjustable in the setup menu. A half-press of the shutter wakes it instantly without fully cycling the power.
 
-During playback:
-• Left/right: view the previous or next photo.
-• Up/down: cycle through information screens for the current photo (file info, shooting data, histogram, highlights).
-• When zoomed into a photo: up/down/left/right pans around the zoomed image.
-
-Tip: In playback, press up or down to access the histogram view. If the graph bunches up on the right edge, your photo is overexposed. On the left edge, it's underexposed. Learning to read histograms will make you a much better photographer.`,
+Always power off before changing lenses or batteries, and before storing the camera in a bag. Leaving the camera on in sleep mode still drains the battery slowly.`,
   },
   {
-    id: "playback",
-    title: "Playback Button",
-    description: `The triangular play button on the back of the camera. Press it to switch the camera into playback mode so you can view your photos on the monitor.
+    id: "lv-button",
+    title: "LV Button",
+    description: `The LV (Live View) button toggles between the electronic viewfinder and the rear monitor as the primary display.
 
-• Press it to display the most recently taken photo.
-• Multi selector left/right, or the command dial: browse through other photos.
-• Multi selector up/down: view different information screens for the current photo (shooting data, histogram, highlights, etc.).
-• Playback Zoom button (K): zoom in on the photo for a closer look.
-• Zoom Out button (M): switch to thumbnail view — see 4 or 9 smaller photos at once.
-• Press Playback again, or half-press the shutter, to exit playback and return to shooting.
-• Right after taking a shot, the photo appears on the monitor automatically. Press the shutter halfway during this review to instantly cancel it and shoot again without delay.
+Press once: switches display to the rear monitor.
+Press again: returns to the EVF.
+(Some configurations also cycle through EVF-only or auto-switching via the eye sensor.)
 
-Tip: Make a habit of pressing Playback and zooming in right after important shots to check focus on your subject's eyes. It's the fastest way to know if you need to retake the shot while you're still there.`,
+The eye sensor can be set to switch automatically between EVF and monitor when you raise the camera to your eye — configurable in the setup menu. The LV button gives you a manual override of that automatic behaviour when you want to lock to one display.`,
   },
   {
-    id: "power",
-    title: "Power Switch",
-    description: `The rotating switch that surrounds the shutter-release button on the top of the camera. Rotate it to turn the camera on or off.
+    id: "drive-button",
+    title: "Sequential / Self-Timer / HDR Button",
+    description: `Cycles through drive modes and related capture options. Press the button and then use the dials or arrow pad to select:
 
-• Rotate to ON: the camera powers up. The monitor briefly shows an image sensor cleaning screen, then the Shooting Information Display appears.
-• Rotate back to OFF: camera turns off.
-• The camera has an Auto meter-off timer that turns off the viewfinder display after a period of inactivity (default 8 seconds) to save battery — but the camera is still on if the switch is in the ON position.
-• Each time you turn the camera on or off, the Clean Image Sensor function briefly activates to shake dust off the sensor filter. This is normal.
+Single shot: one frame per shutter press.
+Sequential shooting (low/high): continuous burst at a specified frame rate while the shutter is held.
+Self-timer: 2-second or 12-second delay before the shutter fires — useful for avoiding camera shake on a tripod or for including yourself in the frame.
+Anti-shock / Anti-shock + self-timer: introduces a brief delay between mirror/shutter movement and image capture to eliminate vibration (important for macro and telephoto work).
+HDR: camera takes multiple exposures automatically and combines them in-camera for extended tonal range.
 
-Tip: Always turn the camera off when putting it away, even briefly. This conserves battery significantly and also prevents accidental shutter presses while the camera is in your bag.`,
+The available options and maximum burst rates depend on the shooting mode and image format.`,
   },
   {
-    id: "shutter",
-    title: "Shutter-Release Button",
-    description: `The large button on the top-right of the camera that you press to take a photo. It's a two-stage button with two distinct actions.
+    id: "self-timer-lamp",
+    title: "Self-Timer Lamp / AF Illuminator",
+    description: `A small LED on the front of the camera with two roles:
 
-Stage 1 — Press halfway (hold gently):
-• Wakes up the exposure meters and viewfinder display.
-• Triggers autofocus — the camera locks focus on your subject.
-• When focus locks, a short beep sounds and a small dot (●) appears in the viewfinder. The active focus point lights up red.
-• Exposure and focus stay locked while you hold the button halfway.
-• If the focus indicator blinks instead of staying steady, the camera couldn't achieve focus — try again before pressing fully.
+Self-timer indicator: flashes slowly during the countdown, then rapidly in the final two seconds before the shutter fires. Useful visual confirmation that the camera is about to shoot.
 
-Stage 2 — Press all the way down:
-• The shutter fires and the photograph is recorded.
-• The memory card access lamp lights briefly as the image saves.
+AF illuminator: emits a brief pattern of light in low-contrast or dark conditions to help the autofocus system find edges and achieve focus lock. Effective at close to moderate distances (roughly 1–3 metres). The illuminator can be disabled in the AF menu if it would be disruptive.`,
+  },
+  {
+    id: "mic-jack-cover",
+    title: "Microphone Jack Cover",
+    description: `A rubber cover protecting the 3.5mm stereo microphone input. Pull the cover aside to access the jack.
 
-Other useful behaviours:
-• Half-press wakes up the monitor and viewfinder display if they've gone dark.
-• Half-press during image review instantly cancels the review so you can shoot again.
+An external microphone plugged in here replaces the built-in stereo mics entirely. This is the most effective upgrade for video audio quality — a small directional (shotgun) or cardioid microphone dramatically reduces background noise and improves voice recording.
 
-Tip: The most common beginner mistake is jabbing the button all the way down in one movement. Practice the deliberate half-press pause to let focus lock — your photos will be noticeably sharper.`,
+Always replace the cover when not in use to prevent dust and moisture from entering the connector.`,
+  },
+  {
+    id: "remote-cover",
+    title: "Remote Cable Terminal Cover",
+    description: `Protects the port for Olympus-compatible remote shutter release cables. Connecting a remote cable lets you fire the shutter without touching the camera body — essential for long exposures, macro photography, and any situation where even the lightest camera shake would degrade the image.
+
+For bulb exposures, a lockable remote cable is especially useful because you can lock the shutter open without holding the button continuously. Replace the cover when the remote is not in use.`,
+  },
+  {
+    id: "connector-cover-front",
+    title: "Connector Cover (Front Side)",
+    description: `A rubber port cover on the front-left panel protecting the HDMI and USB connectors. Pull it open to access either connector.
+
+Keep this cover closed when the connectors are not in use — the rubber seal helps protect the internal contacts from dust and moisture, which matters particularly in field conditions. The cover is attached by a thin hinge; avoid pulling it too far open to prevent tearing.`,
+  },
+  {
+    id: "strap-eyelet",
+    title: "Strap Eyelet",
+    description: `The metal loop where the camera strap attaches. The E-M5 Mark III has eyelets on both sides of the body.
+
+Thread the strap through the eyelet and through the plastic retaining clip before looping it back — the clip prevents the strap from working loose over time. Always check strap attachment before shooting, especially if you carry the camera on your shoulder or around your neck for extended periods.
+
+Third-party peak design anchors or similar systems can be used with compatible strap systems if you prefer a quick-release setup.`,
+  },
+  {
+    id: "lens-release",
+    title: "Lens Release Button",
+    description: `The button on the front of the camera body, beside the lens mount. Press and hold it while rotating the lens counter-clockwise to detach the lens.
+
+Never try to remove a lens without pressing this button — the bayonet lock will resist and forcing it can damage both the lens mount and the body contacts.
+
+Cover the exposed sensor chamber with your hand or a body cap immediately after removing a lens, especially outdoors, to minimise dust exposure. The camera's built-in sensor-shift image stabilisation mechanism can move the sensor slightly; avoid touching or blowing into the chamber.`,
+  },
+  {
+    id: "lens-lock-pin",
+    title: "Lens Lock Pin",
+    description: `A small spring-loaded pin inside the lens mount that engages a corresponding recess in the lens when it is rotated to the locked position. This is what holds the lens securely in place during shooting.
+
+You will feel and hear a distinct click when the lens is properly locked. If you don't hear the click after attaching a lens, rotate it slightly further until the pin engages. Never shoot with a lens that isn't fully locked — it can cause the lens to drop or produce erratic communication errors.`,
+  },
+  {
+    id: "mic-jack",
+    title: "Microphone Jack",
+    description: `A 3.5mm stereo mini-plug input for an external microphone. When a microphone is connected here, the built-in stereo mics are disabled and all audio is recorded from the external source.
+
+Suitable microphones include cardioid condenser mics (good for interviews and controlled environments), directional shotgun mics (good for video, isolates sound from the front), and lavalier mics (clipped to clothing for close-range voice recording).
+
+Check the camera's audio level display in video mode after connecting an external mic and adjust the input level in the audio/movie menu to avoid clipping.`,
+  },
+  {
+    id: "remote-terminal",
+    title: "Remote Cable Terminal",
+    description: `The port for connecting an Olympus-compatible electronic remote shutter release cable (such as the RM-UC1). The remote cable plugs in here and allows you to trigger the shutter without physically pressing the shutter button.
+
+This is the recommended method for long exposures (B/bulb mode), macro photography on a tripod, or any situation where pressing the shutter button would cause unwanted vibration. Some remote cables include a locking mechanism to hold the shutter open in bulb mode without your finger on the button.`,
+  },
+  {
+    id: "hdmi",
+    title: "HDMI Connector (Type D)",
+    description: `A micro-HDMI (Type D) output for connecting the camera to an external monitor, TV, or video recorder via a standard micro-HDMI cable.
+
+During shooting: an external monitor shows the live view feed — useful when the camera is mounted at an awkward angle (overhead, low to the ground) or for showing a scene to clients or collaborators.
+
+For playback: images and video are displayed on the connected screen at full resolution.
+
+Note: micro-HDMI cables and connectors are fragile. Support the cable at the camera body to avoid stressing the port, and never leave a long cable unsupported during a shoot.`,
   },
   {
     id: "usb",
-    title: "USB Connector",
-    description: `A small port on the camera body (protected by a rubber cap when not in use). It connects the camera to a computer or a compatible printer using the supplied USB cable.
+    title: "Micro-USB Connector",
+    description: `The USB port for connecting the camera to a computer for image transfer or tethered shooting, and for in-camera charging via a compatible USB charger or power bank.
 
-Connecting to a computer:
-• Turn the camera OFF, connect the USB cable, then turn the camera ON. The computer detects the camera and Nikon Transfer software can copy your photos.
-• Do not turn the camera off or unplug the cable while photos are being transferred — this can corrupt files.
+For image transfer: connect the USB cable, power on the camera, and select "Storage" in the USB mode prompt. The camera appears as a removable drive on your computer.
 
-Connecting to a printer (PictBridge):
-• Turn the printer on first, then connect the USB cable (camera off), then turn the camera on.
-• The PictBridge screen appears and you can select and print photos directly from the camera without a computer.
+For charging: the camera charges via USB when connected to a compatible charger (5V). Charging while shooting keeps the battery topped up during long sessions on a tripod.
 
-Care:
-• Always orient the connector correctly before inserting — never force it.
-• Keep the rubber protective cap on when not in use to prevent dust and damage.
-
-Tip: For faster photo transfers, use a memory card reader plugged into your computer's USB port instead of connecting the camera directly. Card readers are inexpensive, fast, and don't drain your camera battery during the transfer.`,
-  },
-  {
-    id: "viewfinder",
-    title: "Viewfinder Eyepiece",
-    description: `The small rectangular window at the back of the camera that you press your eye against to compose your shots. It's surrounded by a soft rubber eyecup that makes it comfortable against your face and blocks distracting light from the sides.
-
-• When you look through the viewfinder, the eye sensor detects your face, the monitor turns off, and the viewfinder display turns on — showing focus points, shutter speed, aperture, battery level, and other shooting indicators.
-• The viewfinder shows three focus points (small brackets). When focus locks, the active focus point lights up red.
-• If the viewfinder looks blurry, use the Diopter Adjustment Control (the small slider right beside the eyepiece) to tune it for your eyes.
-• An Eyepiece Cap (DK-5) is included in the box — attach it over the eyepiece when using the self-timer without your eye at the viewfinder, as stray light entering through the eyepiece can throw off the exposure meter.
-
-Tip: Press the camera body firmly against your brow and nose when shooting. This physical contact dramatically reduces camera shake and produces sharper photos than holding the camera away from your face.`,
-  },
-  {
-    id: "zoom-ring",
-    title: "Zoom Ring",
-    description: `The larger rotating ring on the lens barrel (on the 18–55mm kit lens, it's the ring closest to the camera body). Turning it adjusts the focal length — zooming in to make subjects appear larger, or zooming out to show a wider view.
-
-• Rotate away from the camera body (toward the front of the lens) to zoom in to a longer focal length (e.g., 55mm) — your subject fills more of the frame.
-• Rotate toward the camera body to zoom out to a shorter focal length (e.g., 18mm) — you see a wider angle with more of the scene in the frame.
-• Watch the Focal Length Scale on the lens barrel to see the current focal length as you rotate.
-• On the kit lens, the maximum aperture changes as you zoom: f/3.5 at 18mm, f/5.6 at 55mm — this is normal for this type of lens.
-• After zooming, always half-press the shutter again to re-confirm autofocus before shooting — zooming doesn't automatically update focus.
-• The other ring on the lens (the narrower one closer to the front) is the Focus Ring — don't confuse the two.
-
-Tip: Instead of always zooming to frame a shot, try physically moving closer to your subject and using a shorter focal length. Moving in changes the perspective in an interesting way that zooming alone can't replicate.`,
-  },
-  {
-    id: "zoom-out",
-    title: "Zoom Out / Thumbnail Button",
-    description: `The button marked with a minus magnifying glass on the back-left of the camera. It has two jobs depending on what you're doing.
-
-During photo review:
-• While viewing a photo full-screen, press once to shrink to a grid of 4 thumbnails. Press again to see 9 thumbnails at once — great for quickly finding the shot you want.
-• Use the multi selector or command dial to highlight different photos in the grid.
-• Press the Playback Zoom button (the plus magnifying glass) to reduce the number of thumbnails and return toward full-screen view.
-• Press Q (playback zoom out cancel) to view the highlighted photo at full size.
-• When zoomed into a photo: press this button to zoom back out incrementally.
-
-In menus and while shooting — Help:
-• Press and hold this button while a menu option is highlighted to display helpful explanatory text about that setting.
-• If a warning indicator blinks in the viewfinder, press this button to see an explanation of the problem on the monitor.
-
-Tip: Use thumbnail view when scanning through a large batch of photos — it's much faster than stepping through them one by one. Then press OK on the one you want to inspect at full size.`,
-  },
-  {
-    id: "playback-zoom",
-    title: "Playback Zoom / Info Button",
-    description: `The button marked with a plus magnifying glass (and an i symbol) on the back-left of the camera. It has two very different jobs depending on what you're doing.
-
-During photo review — Zoom In:
-• Press to zoom into the photo. Press repeatedly to zoom in further — up to 25× on large images, 19× on medium, 13× on small.
-• While zoomed in, use the multi selector (up, down, left, right) to pan around the image. Keep it held to scroll quickly.
-• A small navigation window appears briefly in the corner showing the full photo with a yellow rectangle indicating the area you're looking at.
-• Rotate the command dial while zoomed in to view the same area in a different photo.
-• Press the Zoom Out button to zoom back out; press Q to return to full-frame view.
-
-During thumbnail view:
-• Press to reduce the number of thumbnails — from 9 back to 4, then from 4 back to one full-screen view.
-
-During shooting — Shooting Info Display:
-• Press to cycle the monitor through: Shooting Information Display → Quick Settings Display (where you can change ISO, white balance, flash mode, and more with just a few button presses) → Monitor Off.
-• Also wakes up the monitor if the auto-off timer has turned it off.
-
-Tip: After every important shoot, zoom in on key shots using this button and check that your subject's eyes are sharp. A photo that looks fine at thumbnail size can turn out to be slightly soft when examined closely — and finding out while you're still on location means you can take another shot.`,
+For tethered shooting: compatible software (such as Olympus Capture) can trigger the shutter and transfer images to a computer in near real time.`,
   },
 ];
 
-const SORTED_PARTS = [...PARTS].sort((a, b) => a.title.localeCompare(b.title));
+const BACK_PARTS: Part[] = [
+  {
+    id: "diopter",
+    title: "Diopter Adjustment Dial",
+    description: `A small ridged dial beside the viewfinder eyepiece that corrects the EVF's optical focus to match your eyesight — the equivalent of adjusting binoculars for your eyes.
 
-export default function CameraInteractive({ chatOpen, onChatClose, children }: { chatOpen: boolean; onChatClose: () => void; children?: React.ReactNode }) {
+To set it: look through the EVF with the camera powered on and a subject visible. Rotate the dial until the information overlays and the image itself appear sharp and crisp. If you wear glasses you can often shoot without them once the diopter is set correctly.
+
+Once adjusted for your vision, you'll only need to revisit it if someone else uses the camera. Some photographers tape the dial lightly once set to prevent accidental movement.`,
+  },
+  {
+    id: "monitor",
+    title: "Monitor (Touch Screen)",
+    description: `A tilting touchscreen LCD on the back of the camera. It tilts up approximately 80° and down approximately 50°, which is useful for shooting from low angles, waist-level, or overhead without having to crouch or contort.
+
+Touch functions:
+– Tap to set the focus point anywhere on the frame (Touch AF / Touch Shutter).
+– Tap the shutter icon or the screen itself (if Touch Shutter is enabled) to focus and shoot.
+– Pinch to zoom in playback; swipe to advance images.
+– Navigate menus by tapping options directly.
+
+In bright sunlight, the screen can wash out. Switching to the EVF, or boosting monitor brightness in the display settings, helps. The monitor brightness can also be set to Auto to adjust based on ambient light.`,
+  },
+  {
+    id: "viewfinder",
+    title: "Viewfinder (EVF)",
+    description: `A 2.36-million-dot electronic viewfinder (EVF). Unlike a traditional optical viewfinder, the EVF shows a live electronic image of exactly what the sensor sees — including a real-time preview of your current exposure, white balance, and picture profile before you take the shot.
+
+Key advantages of the EVF:
+– Exposure preview: you see the effect of your settings in real time; overexposed areas appear blown, underexposed areas appear dark.
+– Works in any light: no blackout in bright sun.
+– Overlays: focus peaking, histogram, level gauge, and other displays are visible while composing.
+– Eye sensor: the EVF activates automatically when you raise the camera to your eye.
+
+The EVF refresh rate and resolution can be adjusted in the setup menu for a balance between smoothness and battery life.`,
+  },
+  {
+    id: "eye-sensor",
+    title: "Eye Sensor",
+    description: `An infrared proximity sensor below the viewfinder eyepiece. When your eye or hand approaches, it automatically switches the display from the rear monitor to the EVF.
+
+Moving away switches back to the monitor.
+
+You can configure the switching behaviour in the setup menu:
+– Auto: switches based on sensor detection (default).
+– EVF only: always shows EVF, monitor stays off.
+– Monitor only: always shows monitor, EVF stays off.
+
+If you find the sensor triggering accidentally (e.g. when the camera is in a bag or on a strap), set it to Monitor only or EVF only temporarily. The LV button on the front of the camera also provides a quick manual override.`,
+  },
+  {
+    id: "eyecup",
+    title: "Eyecup",
+    description: `The rubber cup surrounding the viewfinder eyepiece. It creates a light seal between your eye and the EVF, blocking stray ambient light from washing out the image in the viewfinder and making extended viewing more comfortable.
+
+The eyecup is a standard Olympus accessory part and can be removed and replaced if it becomes worn or torn. Replacements are available from Olympus/OM System accessory suppliers.
+
+When shooting on a tripod with the self-timer, shield the eyepiece from bright light sources behind you to prevent light from entering the EVF and affecting metering.`,
+  },
+  {
+    id: "menu-button",
+    title: "MENU Button",
+    description: `Opens the camera's full menu system. The Olympus menu is organised into several tabs:
+
+Shooting Menu 1 & 2: image quality, aspect ratio, noise reduction, bracketing, flash settings, and AF options.
+Video Menu: frame rate, video quality, audio levels, video stabilisation.
+Playback Menu: display options, protect, print settings, image editing.
+Setup Menu: date/time, display settings, card formatting, sensor cleaning, firmware, and general preferences.
+Custom Menu: deep customisation — button assignments, dial behaviour, AF fine-tuning, live view display, EVF settings, and more.
+
+Navigate with the arrow pad; press OK to confirm a selection. Press Menu again or half-press the shutter to exit without making changes.`,
+  },
+  {
+    id: "hot-shoe",
+    title: "Hot Shoe",
+    description: `The standard ISO accessory shoe on the top of the camera for mounting compatible flash units, EVF accessories, or other hot-shoe devices.
+
+The E-M5 III hot shoe is compatible with Olympus/OM System electronic flash units (FL series) for full TTL flash control, high-speed sync, and wireless flash triggering when used with compatible groups.
+
+Third-party flashes using the standard centre pin fire the flash but without TTL metering — you'll set flash output manually. Radio and optical wireless triggers can also be mounted here to control off-camera flash.
+
+The hot shoe makes full electrical contact only when a unit is slid fully in and the locking wheel (if present) is tightened.`,
+  },
+  {
+    id: "ael-afl",
+    title: "AEL/AFL / Protect Button",
+    description: `A dual-function button. In shooting mode it acts as AEL/AFL; in playback mode it acts as Protect.
+
+AEL (Auto Exposure Lock): hold this button to lock the current exposure reading. The meter is frozen while you recompose, allowing you to expose for a specific part of the scene and then frame the shot differently.
+
+AFL (Auto Focus Lock): in some AF mode configurations, this button is used to lock focus independently from the shutter button — a technique called back-button focus, which separates focus activation from shutter release for more flexible control in dynamic shooting situations.
+
+The AEL/AFL behaviour is highly configurable in the custom menu — you can choose whether it locks exposure, focus, or both, and whether it works as a toggle or momentary hold.
+
+In playback: press this button to protect the current image from accidental deletion.`,
+  },
+  {
+    id: "fn-lever",
+    title: "Fn Lever",
+    description: `A two-position lever on the back of the camera that instantly switches the custom function assignments of multiple buttons simultaneously.
+
+Position 1: buttons perform their default or first custom assignment.
+Position 2: buttons perform alternate assignments defined in the custom menu.
+
+This is an extremely useful feature for photographers who work across very different shooting scenarios — for example, lever position 1 for stills (with AF, ISO, and metering shortcuts) and lever position 2 for video (with different button assignments for audio level, IS mode, etc.). You can flip between the two setups in a single thumb movement.
+
+Set up via: Custom Menu → Button/Dial/Lever → Lever Function.`,
+  },
+  {
+    id: "speaker",
+    title: "Speaker",
+    description: `The built-in mono speaker on the back of the camera for audio playback of video clips and audio-tagged still images.
+
+Volume is controllable in the playback menu. The speaker is adequate for confirming that audio was recorded, but not intended for critical audio monitoring. For proper audio review, use headphones connected to an external monitor or audio recorder.
+
+The speaker also emits the AF confirmation beep and shutter operation sound effects (which can be disabled in the setup menu — useful in quiet environments or when quiet operation is preferred).`,
+  },
+  {
+    id: "iso-button",
+    title: "ISO Button",
+    description: `Pressing this button opens the ISO selection screen directly, without going into the menu.
+
+ISO controls the sensor's sensitivity to light:
+– Low ISO (200–400): cleanest images with the least digital noise. Use in good light.
+– Mid ISO (800–1600): slightly more noise, still very usable. Good for indoor available light.
+– High ISO (3200–6400): visible noise in shadow areas. Acceptable for action or low light when necessary.
+– Auto ISO: the camera chooses ISO automatically based on the exposure requirements; you can set a maximum ISO limit.
+
+The E-M5 III has effective in-body image stabilisation (IBIS) which often lets you use lower ISO and slower shutter speeds than you might otherwise need — take advantage of this before reaching for higher ISO values.`,
+  },
+  {
+    id: "info-button",
+    title: "INFO Button",
+    description: `Cycles through the available information overlays on the monitor or EVF.
+
+In shooting mode: each press cycles through different display layouts — live histogram, highlight/shadow warning, level gauge, shooting data, and a clean view with minimal overlays. Choose the display that best suits your current workflow.
+
+In playback mode: cycles through image information screens — basic file data, full shooting EXIF data (shutter speed, aperture, ISO, focal length, GPS if recorded), histogram view, and highlight blinkies (overexposure warning).
+
+Learning to read the live histogram in the EVF while composing is one of the most useful habits you can build — it tells you immediately whether your exposure is clipping highlights or crushing shadows.`,
+  },
+  {
+    id: "q-button",
+    title: "Q Button (Quick Menu)",
+    description: `Opens the Quick Menu — a configurable overlay of the most frequently adjusted shooting parameters, accessible without entering the full menu system.
+
+The Quick Menu grid typically includes: image quality, white balance, ISO, metering mode, AF mode, AF area, flash mode, image stabilisation mode, aspect ratio, and picture mode. The exact contents are configurable in the custom menu.
+
+Navigate with the arrow pad; adjust the highlighted setting with the front or rear dial. Press OK to confirm, or press Q again to close.
+
+The Quick Menu is the fastest way to make multiple adjustments between shots. Spending a few minutes customising it to include only the settings you actually change regularly is well worth the effort.`,
+  },
+  {
+    id: "arrow-pad",
+    title: "Arrow Pad",
+    description: `The four-directional navigation pad (up, down, left, right). It is used for menu navigation and also has direct function assignments in shooting mode.
+
+In menus: navigates between options; right confirms or enters a sub-menu; left goes back.
+
+In shooting mode: each direction can be assigned a direct function — for example, left for white balance, right for drive mode, up for ISO, down for AF area. These assignments are configurable in the custom menu.
+
+During playback: left/right advances through images; up/down cycles through display information screens.
+
+In AF area selection mode: moves the AF point or zone across the frame.
+
+The centre button of the pad acts as OK/Set.`,
+  },
+  {
+    id: "playback-button",
+    title: "Playback Button",
+    description: `Switches the camera into playback mode to review captured images and video clips.
+
+In playback:
+– Arrow pad left/right: advance through images.
+– Pinch on touchscreen or rear dial: zoom in for a closer look; check focus at 100%.
+– Arrow pad up/down or INFO button: cycle through image info overlays.
+– Q button or touchscreen: access playback quick menu (protect, delete, edit, print).
+– Half-press shutter: exit playback and return to shooting mode instantly.
+
+Video clips show a play button overlay — press OK or tap the touchscreen to play back. Audio plays through the speaker or any connected headphones.
+
+Zooming in to 100% to verify sharpness on keeper shots is a good field habit, especially for critical or once-only moments.`,
+  },
+  {
+    id: "erase-button",
+    title: "Erase Button",
+    description: `Deletes the current image or video in playback mode. Press once to show the confirmation prompt; press again to confirm deletion. Press the playback button or shutter half-press to cancel.
+
+For deleting multiple images at once: use Playback Menu → Erase → Select, which lets you check-mark individual images for batch deletion.
+
+Deletion is permanent and cannot be undone in-camera. If there is any doubt, use the Protect function (AEL/AFL button in playback) to mark images safe before doing any bulk deletions.
+
+Formatting the card (Setup Menu → Card Setup → Format) will erase everything including protected images — use formatting periodically to maintain card health, but only after confirming all images are backed up.`,
+  },
+  {
+    id: "charge-lamp",
+    title: "CHARGE Lamp",
+    description: `An indicator LED that shows battery charging status when the camera is connected via USB to a charger or computer.
+
+Blinking slowly: charging in progress.
+Solid on: charge complete.
+Blinking rapidly or off: charging error — check the USB connection, try a different cable or charger, and verify the battery is seated correctly.
+
+The E-M5 III supports in-camera USB charging, which is convenient for travel or field use with a power bank. Charging while the camera is off is faster than charging while it is on. A full charge from empty typically takes a couple of hours depending on the charger output.`,
+  },
+  {
+    id: "connector-cover-back",
+    title: "Connector Cover (Left Side)",
+    description: `A rubber port cover on the left side panel protecting the HDMI and USB connectors. Open it to access either port.
+
+The cover is hinged at one edge — pull carefully at the free edge to open it, and press it firmly closed afterward. The rubber seal is the only environmental protection the connectors have, so keeping it closed when not in use is important, especially in damp or dusty conditions.
+
+If the cover is damaged or torn, replacement covers are available as Olympus service parts.`,
+  },
+  {
+    id: "tripod-socket",
+    title: "Tripod Socket",
+    description: `A standard 1/4"-20 UNC threaded socket on the base of the camera for attaching to tripods, monopods, or any other accessory with a standard 1/4" screw.
+
+Always tighten the tripod head plate securely before mounting the camera, and periodically check that the screw hasn't worked loose during a shoot — vibration from movement can cause gradual loosening.
+
+When using the E-M5 III's in-body image stabilisation with a supported lens, consider turning off IS or switching to a tripod-specific IS mode when the camera is mounted on a tripod, to avoid the IS system fighting the fixed mount.`,
+  },
+  {
+    id: "battery-cover",
+    title: "Battery Compartment Cover",
+    description: `The hinged door on the base of the camera that opens to give access to the battery compartment. Slide the battery compartment lock to the open position and the cover springs open.
+
+Always power the camera off before opening the battery compartment. Check that the card access indicator in the monitor or EVF is not active before opening, as opening the cover during a write operation can corrupt image files.
+
+Insert the battery with the contacts leading in, oriented as shown by the diagram inside the compartment. The battery clicks into place and a small latch holds it secure.`,
+  },
+  {
+    id: "battery-lock",
+    title: "Battery Compartment Lock",
+    description: `A sliding latch on the base of the camera that locks the battery compartment cover closed. Slide it in the direction of the arrow to unlock the cover, then slide it back to lock after closing.
+
+The lock requires deliberate force to operate, which prevents the battery compartment from opening accidentally if the camera is dropped or handled roughly.
+
+If you are storing the camera for an extended period, remove the battery to prevent slow discharge and potential corrosion. Store the battery in a cool, dry place at approximately 50% charge for best long-term health.`,
+  },
+  {
+    id: "card-cover",
+    title: "Card Compartment Cover",
+    description: `The hinged door on the base panel that protects the SD card slot. Open it to insert or remove the memory card.
+
+Always power the camera off before opening the card compartment. Confirm the card access indicator is off before opening — data is being written to the card if it is active, and interrupting this will corrupt the files being saved.
+
+Push the card in gently until it clicks into place (label facing the back of the camera). To eject, press the card inward slightly; it springs out enough to grip.
+
+Periodically formatting the card in-camera (Setup Menu → Card Setup → Format) keeps the file system clean and reduces the risk of write errors. Always back up your images before formatting.`,
+  },
+  {
+    id: "card-slot",
+    title: "Card Slot",
+    description: `Accepts a single SD/SDHC/SDXC memory card. For best performance, use a UHS-I Speed Class 3 (U3) or higher card — this is the minimum recommended rating for 4K video recording and high-speed burst shooting.
+
+Card speed matters for burst photography: a fast card allows the buffer to clear more quickly, letting you resume shooting sooner after a burst sequence. For stills-only shooting, a UHS-I Class 10 card is generally sufficient.
+
+For long video recordings, a high-endurance card designed for continuous writing (rather than a standard photo card) will be more reliable and less prone to write errors over time.`,
+  },
+];
+
+const CircNum = ({ n }: { n: number }) => (
+  <span style={{
+    display:        "inline-flex",
+    alignItems:     "center",
+    justifyContent: "center",
+    width:          "24px",
+    height:         "24px",
+    minWidth:       "24px",
+    borderRadius:   "50%",
+    border:         "1.5px solid #2a5050",
+    color:          "#1a3030",
+    fontSize:       "12px",
+    fontWeight:     700,
+    fontFamily:     "system-ui",
+    lineHeight:     1,
+  }}>{n}</span>
+);
+
+export default function CameraInteractive({ chatOpen, onChatClose, children }: {
+  chatOpen: boolean;
+  onChatClose: () => void;
+  children?: React.ReactNode;
+}) {
+  const [tab, setTab]           = useState<"front" | "back">("front");
   const [selected, setSelected] = useState<Part | null>(null);
   const [isOpen, setIsOpen]     = useState(false);
+  const [firstVisit, setFirstVisit] = useState(false);
 
-  // Clear selection and close dropdown when chat opens
+  const parts = tab === "front" ? FRONT_PARTS : BACK_PARTS;
+
   useEffect(() => {
-    if (chatOpen) { setSelected(null); setIsOpen(false); }
+    if (!localStorage.getItem("em5-guide-welcomed")) setFirstVisit(true);
+  }, []);
+
+  const markSeen = () => {
+    localStorage.setItem("em5-guide-welcomed", "1");
+    setFirstVisit(false);
+  };
+
+  useEffect(() => {
+    if (chatOpen) { markSeen(); setSelected(null); setIsOpen(false); }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chatOpen]);
 
   const choose = (part: Part) => {
+    markSeen();
     setSelected(part);
     setIsOpen(false);
     onChatClose();
+  };
+
+  const switchTab = (t: "front" | "back") => {
+    if (t === "back") markSeen();
+    setTab(t);
+    setSelected(null);
+    setIsOpen(false);
   };
 
   return (
@@ -429,17 +604,44 @@ export default function CameraInteractive({ chatOpen, onChatClose, children }: {
 
       {/* Left column — diagram */}
       <div className="camera-diagram-col">
+
+        {/* Tab switcher */}
+        <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>
+          {(["front", "back"] as const).map(t => (
+            <button
+              key={t}
+              onClick={() => switchTab(t)}
+              style={{
+                flex:            1,
+                padding:         "9px 0",
+                backgroundColor: tab === t ? C.teal : C.card,
+                border:          `1px solid ${tab === t ? C.teal : C.border}`,
+                borderRadius:    "8px",
+                color:           tab === t ? C.bg : C.muted,
+                fontSize:        "15px",
+                fontWeight:      tab === t ? 700 : 400,
+                fontFamily:      "system-ui",
+                cursor:          "pointer",
+                transition:      "background 0.15s, color 0.15s, border 0.15s",
+                letterSpacing:   "0.02em",
+              }}
+            >
+              {t === "front" ? "Front" : "Back"}
+            </button>
+          ))}
+        </div>
+
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/camera-diagram.png"
-          alt="Nikon D60 — Parts of the Camera"
+          src={tab === "front" ? "/front-diagram.png" : "/back-diagram.png"}
+          alt={`Olympus E-M5 Mark III — ${tab === "front" ? "Front" : "Back"} of Camera`}
           style={{
             width:        "100%",
             height:       "auto",
             display:      "block",
             borderRadius: "8px",
             marginBottom: "6px",
-            border:       "2px solid #6ee7b7",
+            border:       `2px solid ${C.teal}`,
             boxSizing:    "border-box",
           }}
           draggable={false}
@@ -447,211 +649,218 @@ export default function CameraInteractive({ chatOpen, onChatClose, children }: {
         <p style={{
           margin:        "0",
           fontSize:      "11px",
-          color:         "#3a7a6a",
+          color:         C.faint,
           textAlign:     "center",
           letterSpacing: "0.02em",
         }}>
-          © Nikon D60 Quick Start Guide
+          © Olympus E-M5 Mark III Manual
         </p>
       </div>
 
       {/* Right column — controls */}
       <div className="camera-controls-col">
 
-      {/* Welcome card — shown only when no part is selected and chat is closed */}
-      {!selected && !chatOpen && (
-        <div style={{
-          marginBottom:    "20px",
-          backgroundColor: "#142e2a",
-          border:          "1px solid #1a3530",
-          borderRadius:    "10px",
-          padding:         "20px 22px",
-          animation:       "fadeIn 0.3s ease",
-        }}>
-          <h2 style={{
-            color:      "#6ee7b7",
-            fontSize:   "18px",
-            fontWeight: 700,
-            margin:     "0 0 14px 0",
-            fontFamily: "system-ui",
-          }}>
-            Welcome to Your D60 Guide
-          </h2>
-          <p style={{ color: "#e8f8f2", fontSize: "17px", margin: "0 0 10px 0", lineHeight: 1.6 }}>
-            Select a camera part from the menu below to learn exactly what it does and how to use it.
-          </p>
-          <p style={{ color: "#e8f8f2", fontSize: "17px", margin: 0, lineHeight: 1.6 }}>
-            Tap the <strong style={{ color: "#6ee7b7" }}>?</strong> button in the corner to ask your Photo Assistant anything about your camera or photography.
-          </p>
-        </div>
-      )}
-
-      {/* Dropdown label */}
-      <p style={{
-        color:       "#6ee7b7",
-        fontSize:    "16px",
-        margin:      "0 0 8px 0",
-        fontWeight:  700,
-        paddingLeft: "22px",
-      }}>
-        Select a camera part
-      </p>
-
-      {/* Custom dropdown */}
-      <div style={{ position: "relative" }}>
-
-        {/* Trigger button */}
-        <button
-          onClick={() => setIsOpen(o => !o)}
-          style={{
-            width:           "100%",
-            padding:         "14px 16px",
-            backgroundColor: isOpen ? "#112824" : "#142e2a",
-            border:          isOpen ? "1px solid #6ee7b7" : "1px solid #1a3530",
-            borderRadius:    isOpen ? "10px 10px 0 0" : "10px",
-            color:           selected ? "#e8f8f2" : "#a8d4c4",
-            fontSize:        "17px",
-            fontFamily:      "system-ui",
-            display:         "flex",
-            alignItems:      "center",
-            justifyContent:  "space-between",
-            cursor:          "pointer",
-            textAlign:       "left",
-            transition:      "border 0.15s, background 0.15s",
-          }}
-        >
-          <span>{selected ? selected.title : "Choose a part to learn about it…"}</span>
-          <span style={{
-            display:    "inline-block",
-            fontSize:   "28px",
-            color:      "#6ee7b7",
-            marginLeft: "8px",
-            flexShrink: 0,
-            lineHeight: 1,
-          }}>
-            {isOpen ? "▴" : "▾"}
-          </span>
-        </button>
-
-        {/* Dropdown list */}
-        {isOpen && (
+        {/* Welcome card — first visit, front tab only */}
+        {firstVisit && tab === "front" && !selected && !chatOpen && (
           <div style={{
-            position:        "absolute",
-            top:             "100%",
-            left:            0,
-            right:           0,
-            backgroundColor: "#142e2a",
-            border:          "1px solid #6ee7b7",
-            borderTop:       "1px solid #1a3530",
-            borderRadius:    "0 0 10px 10px",
-            zIndex:          200,
-            maxHeight:       "320px",
-            overflowY:       "auto",
-            boxShadow:       "0 12px 40px rgba(0,0,0,0.7)",
+            marginBottom:    "20px",
+            backgroundColor: C.card,
+            border:          `1px solid ${C.border}`,
+            borderRadius:    "10px",
+            padding:         "20px 22px",
+            animation:       "fadeIn 0.3s ease",
           }}>
-            {SORTED_PARTS.map((part, i) => {
-              const isSelected = selected?.id === part.id;
-              const isLast     = i === SORTED_PARTS.length - 1;
-              return (
-                <button
-                  key={part.id}
-                  onClick={() => choose(part)}
-                  style={{
-                    width:           "100%",
-                    padding:         "13px 16px",
-                    backgroundColor: isSelected ? "rgba(110,231,183,0.12)" : "transparent",
-                    border:          "none",
-                    borderBottom:    isLast ? "none" : "1px solid #112824",
-                    borderRadius:    isLast ? "0 0 10px 10px" : 0,
-                    color:           isSelected ? "#6ee7b7" : "#a8d4c4",
-                    fontSize:        "17px",
-                    fontFamily:      "system-ui",
-                    fontWeight:      isSelected ? 600 : 400,
-                    textAlign:       "left",
-                    cursor:          "pointer",
-                    display:         "flex",
-                    alignItems:      "center",
-                    justifyContent:  "space-between",
-                    transition:      "background 0.1s",
-                  }}
-                >
-                  {part.title}
-                  {isSelected && (
-                    <span style={{ color: "#6ee7b7", fontSize: "16px", flexShrink: 0 }}>✓</span>
-                  )}
-                </button>
-              );
-            })}
+            <h2 style={{
+              color:      C.teal,
+              fontSize:   "18px",
+              fontWeight: 700,
+              margin:     "0 0 14px 0",
+              fontFamily: "system-ui",
+            }}>
+              Welcome to Your E-M5 III Guide
+            </h2>
+            <p style={{ color: C.heading, fontSize: "17px", margin: "0 0 10px 0", lineHeight: 1.6 }}>
+              Switch between the Front and Back tabs to view each diagram, then choose a part from the menu to learn what it does.
+            </p>
+            <p style={{ color: C.heading, fontSize: "17px", margin: 0, lineHeight: 1.6 }}>
+              Tap the <strong style={{ color: C.teal }}>?</strong> button to ask your Photo Assistant anything about the camera or photography.
+            </p>
           </div>
         )}
-      </div>
 
-      {/* Invisible backdrop to close dropdown on outside click */}
-      {isOpen && (
-        <div
-          onClick={() => setIsOpen(false)}
-          style={{ position: "fixed", inset: 0, zIndex: 199 }}
-        />
-      )}
+        {/* Dropdown label */}
+        <p style={{
+          color:       C.teal,
+          fontSize:    "16px",
+          margin:      "0 0 8px 0",
+          fontWeight:  700,
+          paddingLeft: "2px",
+        }}>
+          {tab === "front" ? "Front of camera — " : "Back of camera — "}select a part
+        </p>
 
-      {/* Description panel */}
-      {selected && (
-        <div
-          key={selected.id}
-          style={{
-            marginTop:       "16px",
-            backgroundColor: "#142e2a",
-            border:          "1px solid #1a3530",
-            borderLeft:      "3px solid #6ee7b7",
-            borderRadius:    "10px",
-            padding:         "20px",
-            animation:       "fadeIn 0.2s ease",
-            position:        "relative",
-          }}
-        >
+        {/* Custom dropdown */}
+        <div style={{ position: "relative" }}>
+
+          {/* Trigger button */}
           <button
-            onClick={() => setSelected(null)}
-            title="Close"
+            onClick={() => setIsOpen(o => !o)}
             style={{
-              position:        "absolute",
-              top:             "12px",
-              right:           "12px",
-              background:      "none",
-              border:          "none",
-              color:           "#3a7a6a",
-              fontSize:        "18px",
+              width:           "100%",
+              padding:         "14px 16px",
+              backgroundColor: isOpen ? C.cardHead : C.card,
+              border:          `1px solid ${isOpen ? C.teal : C.border}`,
+              borderRadius:    isOpen ? "10px 10px 0 0" : "10px",
+              color:           selected ? C.heading : C.muted,
+              fontSize:        "17px",
+              fontFamily:      "system-ui",
+              display:         "flex",
+              alignItems:      "center",
+              justifyContent:  "space-between",
               cursor:          "pointer",
-              lineHeight:      1,
-              padding:         "2px 6px",
-              borderRadius:    "6px",
+              textAlign:       "left",
+              transition:      "border 0.15s, background 0.15s",
             }}
           >
-            ✕
+            <span style={{ display: "flex", alignItems: "center", gap: "9px" }}>
+              {selected
+                ? <><CircNum n={parts.findIndex(p => p.id === selected.id) + 1} />{selected.title}</>
+                : "Choose a part to learn about it…"}
+            </span>
+            <span style={{
+              display:    "inline-block",
+              fontSize:   "24px",
+              color:      C.teal,
+              marginLeft: "8px",
+              flexShrink: 0,
+              lineHeight: 1,
+            }}>
+              {isOpen ? "▴" : "▾"}
+            </span>
           </button>
-          <h2 style={{
-            color:      "#6ee7b7",
-            fontSize:   "21px",
-            fontWeight: 700,
-            margin:     "0 0 10px 0",
-            fontFamily: "system-ui",
-            paddingRight: "28px",
-          }}>
-            {selected.title}
-          </h2>
-          <p style={{
-            color:      "#a8d4c4",
-            lineHeight: 1.75,
-            margin:     0,
-            fontSize:   "17px",
-            whiteSpace: "pre-line",
-            fontFamily: "system-ui",
-          }}>
-            {selected.description}
-          </p>
-        </div>
-      )}
 
-      {children}
+          {/* Dropdown list */}
+          {isOpen && (
+            <div style={{
+              position:        "absolute",
+              top:             "100%",
+              left:            0,
+              right:           0,
+              backgroundColor: C.card,
+              border:          `1px solid ${C.teal}`,
+              borderTop:       `1px solid ${C.border}`,
+              borderRadius:    "0 0 10px 10px",
+              zIndex:          200,
+              maxHeight:       "320px",
+              overflowY:       "auto",
+              boxShadow:       "0 12px 40px rgba(0,0,0,0.15)",
+            }}>
+              {parts.map((part, i) => {
+                const isSel  = selected?.id === part.id;
+                const isLast = i === parts.length - 1;
+                return (
+                  <button
+                    key={part.id}
+                    onClick={() => choose(part)}
+                    style={{
+                      width:           "100%",
+                      padding:         "13px 16px",
+                      backgroundColor: isSel ? "rgba(45,100,100,0.1)" : "transparent",
+                      border:          "none",
+                      borderBottom:    isLast ? "none" : `1px solid ${C.border}`,
+                      borderRadius:    isLast ? "0 0 10px 10px" : 0,
+                      color:           isSel ? C.teal : C.body,
+                      fontSize:        "17px",
+                      fontFamily:      "system-ui",
+                      fontWeight:      isSel ? 600 : 400,
+                      textAlign:       "left",
+                      cursor:          "pointer",
+                      display:         "flex",
+                      alignItems:      "center",
+                      justifyContent:  "space-between",
+                      transition:      "background 0.1s",
+                    }}
+                  >
+                    <span style={{ display: "flex", alignItems: "center", gap: "9px", flex: 1, minWidth: 0 }}>
+                      <CircNum n={i + 1} />
+                      {part.title}
+                    </span>
+                    {isSel && (
+                      <span style={{ color: C.teal, fontSize: "16px", flexShrink: 0 }}>✓</span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Invisible backdrop */}
+        {isOpen && (
+          <div
+            onClick={() => setIsOpen(false)}
+            style={{ position: "fixed", inset: 0, zIndex: 199 }}
+          />
+        )}
+
+        {/* Description panel */}
+        {selected && (
+          <div
+            key={selected.id}
+            style={{
+              marginTop:       "16px",
+              backgroundColor: C.card,
+              border:          `1px solid ${C.border}`,
+              borderLeft:      `3px solid ${C.teal}`,
+              borderRadius:    "10px",
+              padding:         "20px",
+              animation:       "fadeIn 0.2s ease",
+              position:        "relative",
+            }}
+          >
+            <button
+              onClick={() => setSelected(null)}
+              title="Close"
+              style={{
+                position:     "absolute",
+                top:          "12px",
+                right:        "12px",
+                background:   "none",
+                border:       "none",
+                color:        C.faint,
+                fontSize:     "18px",
+                cursor:       "pointer",
+                lineHeight:   1,
+                padding:      "2px 6px",
+                borderRadius: "6px",
+              }}
+            >
+              ✕
+            </button>
+            <h2 style={{
+              color:        C.teal,
+              fontSize:     "21px",
+              fontWeight:   700,
+              margin:       "0 0 10px 0",
+              fontFamily:   "system-ui",
+              paddingRight: "28px",
+            }}>
+              {selected.title}
+            </h2>
+            <p style={{
+              color:      C.body,
+              lineHeight: 1.75,
+              margin:     0,
+              fontSize:   "17px",
+              whiteSpace: "pre-line",
+              fontFamily: "system-ui",
+            }}>
+              {selected.description}
+            </p>
+          </div>
+        )}
+
+        {children}
 
       </div>
     </div>

@@ -1,13 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import PasswordGate from "@/components/PasswordGate";
 
 export const viewport: Viewport = {
-  themeColor: "#0e2420",
+  themeColor: "#2d6464",
 };
 
 export const metadata: Metadata = {
-  title: "Nikon D60 Photography Guide",
-  description: "Interactive camera reference and photography assistant for the Nikon D60",
+  title: "Olympus E-M5 Mark III Guide",
+  description: "Interactive camera reference and photography assistant for the Olympus E-M5 Mark III",
   icons: {
     apple: "/icon-192.png",
   },
@@ -17,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        {children}
+        <PasswordGate>{children}</PasswordGate>
       </body>
     </html>
   );
