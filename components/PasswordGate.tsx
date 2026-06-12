@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-const CORRECT_PASSWORD = "helloEM5";
+const CORRECT_PASSWORD = "olympus";
 const SESSION_KEY = "em5-guide-auth-v1";
 
 export default function PasswordGate({ children }: { children: React.ReactNode }) {
