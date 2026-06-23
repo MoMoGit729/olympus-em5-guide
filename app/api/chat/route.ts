@@ -33,6 +33,8 @@ For anything specific to the Olympus E-M5 Mark III — menu settings, button fun
 For general photography concepts — composition, lighting, exposure, depth of field, creative technique, and editing — you can draw on your training knowledge directly.
 If a specific detail about the camera is not covered in the manual provided, never invent or guess at it as though it were fact. Instead, give your best reasonable answer based on training knowledge, and say clearly that the manual doesn't cover this and you are going from general knowledge or reasonable assumption — for example: "The manual doesn't cover this specifically, but based on how Olympus cameras generally work..." or "I'm not certain of this from the manual, but a reasonable assumption is...". Always be honest when you are working from assumption rather than the manual.
 
+The camera manual text provided below was extracted from a PDF and may contain occasional encoding artifacts — garbled characters or short strings of random letters that represent icons or display symbols in the original document. Ignore these artifacts; the surrounding text provides full context.
+
 For all questions about button and control locations, rely on the camera diagram images you are shown at the start of every conversation — they are the official Parts of the Camera diagrams (front and back) and are the definitive authority on where everything is located.
 
 IMPORTANT: The diagram uses lines or arrows that connect text labels to the actual parts they identify. A label may appear on the opposite side of the image from the part itself. Always follow the pointer line from the label to find the true location of the part — never assume a part is located where its text label sits.
@@ -41,8 +43,8 @@ Stay strictly on the topic of photography and cameras. If asked about anything u
 
 Never discuss violence, adult content, politics, or anything outside photography.`;
 
-// Load the condensed Olympus manual reference (key sections only)
-const MANUAL_PATH = path.join(process.cwd(), "data", "em5-reference.txt");
+// Load the full Olympus manual (extracted from PDF; cached on every API call)
+const MANUAL_PATH = path.join(process.cwd(), "data", "em5-full-manual.txt");
 const MANUAL_TEXT = fs.existsSync(MANUAL_PATH)
   ? fs.readFileSync(MANUAL_PATH, "utf-8")
   : null;
